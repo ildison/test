@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 13:38:41 by cormund           #+#    #+#             */
-/*   Updated: 2019/07/26 15:20:09 by cormund          ###   ########.fr       */
+/*   Updated: 2019/07/31 17:08:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ int			interpretation(char *operator, char *bf)
 			++bf;
 		else if (*operator == '<')
 			--bf;
-		else if (*operator == ']' && *bf)
-			return (1);
-		else if (*operator == ']' && !*bf)
-			return (0);
+		else if (*operator == ']')
+			return (*bf);
 		else if (*operator == '[')
 		{
 			if (*bf)
