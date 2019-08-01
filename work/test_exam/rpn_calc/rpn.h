@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   rpn.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/30 11:44:48 by cormund           #+#    #+#             */
-/*   Updated: 2019/07/31 15:12:49 by cormund          ###   ########.fr       */
+/*   Created: 2019/07/31 16:52:41 by cormund           #+#    #+#             */
+/*   Updated: 2019/08/01 18:42:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-#define LIST_H
+#ifndef RPN_H
+#define RPN_H
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-int					ascending(int a, int b)
+#define error()		printf("Error\n")
+#define is_digit(a)	(a >= 48 && a <= 57)
+#define is_oper(a)	(a == 37 || a == 42 || a == 43 || a == 45 || a == 47)
+
+typedef struct		s_rpn
 {
-	return (a <= b);
-}
+	int				num;
+	char			oper;
+	struct s_rpn	*prev;
+	struct s_rpn	*next;
+}					t_rpn;
 
-typedef struct		s_list
-{
-	int				data;
-	struct s_list	*next;
-}					t_list;
-
-t_list				*sort_list(t_list* lst, int (*cmp)(int, int));
 
 #endif
