@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:44:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/01 18:56:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/02 15:29:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,33 @@ void		add_elem_end_lst(t_rpn **beg, t_rpn *new_lst)
 	}
 }
 
-void		collect_elems(t_rpn **beg, char *av)
+int		collect_elems(t_rpn **beg, char *av)
 {
 	t_rpn	*rpn;
+	int		n_num;
+	int		n_op;
 
+	n_num = 0;
+	n_op = 0;
 	rpn = *beg;
 	while (*av)
 	{
-		while(*av == ' ')
-			++av;
 		if ((is_oper(*av) && is_digit(*(av + 1))) || is_digit(*av))
+		{
 			rpn = new_elem(atoi(av), 0);
+			++n_num;
+		}
 		else if (is_oper(*av))
+		{
 			rpn = new_elem(0, *av);
+			++n_op;
+		}
 		add_elem_end_lst(beg, rpn);
-		while (*av && *av != ' ')
-			++av;
+		while (*av && *av++ != ' ')
+			;
 		rpn = rpn->next;
 	}
+	return (n_num - n_op);
 }
 
 int		operation(char op, int a, int b)
@@ -77,29 +86,32 @@ int		operation(char op, int a, int b)
 	return(a % b);
 }
 
-void		delete_lst(t_rpn *rpn1, t_rpn *rpn2)
+void		delete_lst(t_rpn **beg, t_rpn *rpn)
 {
-	if (rpn2->prev)
-		rpn2->prev->next = rpn1;
-	rpn1->prev = rpn2->prev;
+	if (rpn->prev->prev == *beg)
+	{
+		*beg = rpn;
+		rpn->prev = NULL;
+	}
+	else
+	{
+		rpn->prev->prev->prev->next = rpn;
+		rpn->prev = rpn->prev->prev->prev;
+	}
 }
 
-void		calc(t_rpn *rpn)
+void		calc(t_rpn **beg)
 {
+	t_rpn	*rpn;
+
+	rpn = *beg;
 	while (rpn)
 	{
-		if (rpn->oper && rpn->prev && rpn->prev->prev)
+		if (rpn->oper && rpn->prev && rpn->prev->prev &&\
+		((!rpn->prev->num && rpn->oper != '/' && rpn->oper != '%') || rpn->prev->num))
 		{
-			if ((!rpn->num && rpn->oper != '/' && rpn->oper != '%') || rpn->num)
-			{
-				rpn->num = operation(rpn->oper, rpn->prev->num, rpn->prev->prev->num);
-				delete_lst(rpn, rpn->prev->prev);
-			}
-			else
-			{
-				error();
-				break;
-			}
+			rpn->num = operation(rpn->oper, rpn->prev->num, rpn->prev->prev->num);
+			delete_lst(beg, rpn);
 		}
 		else if (rpn->oper)
 		{
@@ -121,9 +133,13 @@ void		rpn_calc(char *av)
 	t_rpn	*rpn;
 
 	rpn = NULL;
-	collect_elems(&rpn, av);
-	calc(rpn);
-	print_cal(rpn);
+	if (collect_elems(&rpn, av) == 1)
+	{
+		calc(&rpn);
+		print_cal(rpn);
+	}
+	else
+		error();
 }
 
 
