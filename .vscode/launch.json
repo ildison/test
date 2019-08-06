@@ -8,7 +8,7 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/work/test_exam/check_mate/a.out",
+			"program": "${workspaceFolder}/work/test_exam/print_memory/a.out",
 			"args": ["R...", "iheK", "....", "jeiR"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
