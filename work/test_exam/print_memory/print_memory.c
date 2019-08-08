@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 16:07:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/06 14:11:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/08 10:10:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ void				print_hex(unsigned char byte)
 
 void				print_space(int count_space)
 {
-	while (count_space--)
-		ft_putchar(' ');
+	while (count_space)
+	{
+		write(1, "  ", 2);
+		if (count_space % 2)
+			ft_putchar(' ');
+		--count_space;
+	}
 }
 
 void				print_ascii(unsigned char *bytes, int i)
@@ -42,7 +47,7 @@ void				print_ascii(unsigned char *bytes, int i)
 	if (!i)
 		i = 16;
 	else
-		print_space((16 - i) / 2 * 5);
+		print_space(16 - i);
 	while (index != i)
 	{
 		if (is_print(*(bytes + index)))
