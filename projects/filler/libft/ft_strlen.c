@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 11:56:34 by cormund           #+#    #+#             */
-/*   Updated: 2019/05/22 12:37:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/13 15:00:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t			ft_strlen(const char *s)
 	const char	*l;
 
 	l = s;
-	while (*l++)
+	while (*l)
 		l++;
 	return (l - s);
 }
