@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 17:54:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/14 19:43:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,30 @@ void		print_piece(t_fl *fl)
 		++fl->piece;
 	}
 }
+
 void		filler()
 {
 	t_fl	*fl;
+	char	b[1];
 
 	fl = (t_fl *)malloc(sizeof(t_fl));
 	fl->plr_letter = 0;
-	fd = open("testmap", O_RDONLY); //! delete after
-	read_board(fl);
-	heat_map(fl);
-	sort(fl);
-
-	print_board(fl);
-	print_heatmap(fl);
+	// fd = open("testmap", O_RDONLY); //! delete after
+	fd = FL_FD;
+	while (1)
+	{
+		if (read(0, b, 1))
+		{
+			read_board(fl);
+			heat_map(fl);
+			sort(fl);
+			printf("%d %d\n", fl->place.y, fl->place.x);
+			// write(1, "8 2\n", 4);
+		}
+	}
+	// sleep(1);
+	// print_board(fl);
+	// print_heatmap(fl);
 	// print_piece(fl);
 }
 

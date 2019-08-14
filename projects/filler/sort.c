@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:48:46 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 18:36:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/14 19:05:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void		check_piece(t_fl *fl, int y, int x)
 	while (n < fl->n_piece)
 	{
 		if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] == -1)
-		{
 			++covers;
-			printf("here\n");
-		}
 		else if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] == -2 || covers > 1)
 			return ;
 		else
