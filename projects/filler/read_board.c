@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 15:14:20 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/14 19:49:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	parsing_plr(t_fl *fl)
 
 	while (get_next_line(fd, &line) != -1 && *line != '$')
 		free(line);
-	if (ft_strstr(line, FL_PLAYER_NAME))
+	if (ft_strstr(line, "p1"))
 		fl->plr_letter = 'o';
 	else
 		fl->plr_letter = 'i';
@@ -80,8 +80,9 @@ static void	parsing_piece(t_fl *fl)
 	fl->n_piece = 0;
 	parsing_size(&fl->size_piece);
 	y = 0;
-	while(get_next_line(fd, &line) > 0)
+	while(y < fl->size_piece.y)
 	{
+		get_next_line(fd, &line);
 		x = 0;
 		while(line[x])
 		{
@@ -105,5 +106,6 @@ void		read_board(t_fl *fl)
 		malloc_board_heat_map_and_piece(fl);
 	}
 		parsing_board(fl);
+		// write(1, "8 2\n", 4);
 		parsing_piece(fl);
 }

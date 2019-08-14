@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 17:16:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/14 18:53:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft.h"
 
 #define FL_PLAYER_NAME "cormund"
+#define FL_FD 0
 
 #define check_size(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
 
