@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:17:44 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/08/05 14:05:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/15 11:04:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <assert.h>
+# include <limits.h>
 # include "ft_printf.h"
 # include "ft_getopt.h"
 

@@ -14,7 +14,10 @@
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "lldb"
+			"MIMode": "lldb",
+			"sourceFileMap": {
+				"${workspaceFolder}/projects/filler/testmap": "${workspaceFolder}"
+			}
 		}
 	]
 }

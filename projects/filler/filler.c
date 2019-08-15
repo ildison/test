@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 19:43:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/15 11:16:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ void		print_heatmap(t_fl *fl)
 
 void		print_board(t_fl *fl)
 {
-	printf("plr_letter - %c\n", fl->plr_letter);
+	int y;
+
+	printf("plr_letter - %c\n", fl->plr);
 	printf("size_board %d %d\n", fl->size_board.y, fl->size_board.x);
 	printf("place %d %d\n", fl->place.y, fl->place.x);
 	while (fl->n_piece--)
 	{
-		fl->board[fl->piece->y + fl->place.y][fl->piece->x + fl->place.x] = fl->plr_letter;
+		fl->board[fl->piece->y + fl->place.y][fl->piece->x + fl->place.x] = fl->plr;
 		++fl->piece;
 	}
-	while(*fl->board)
+	y = 0;
+	while(fl->board[y])
 	{
-		ft_putendl(*fl->board);
-		++fl->board;
+		ft_putendl(fl->board[y]);
+		++y;
 	}
 }
 
@@ -66,23 +69,26 @@ void		filler()
 	char	b[1];
 
 	fl = (t_fl *)malloc(sizeof(t_fl));
-	fl->plr_letter = 0;
-	// fd = open("testmap", O_RDONLY); //! delete after
+	fl->plr = 0;
+	// fd = open("testmap", O_RDONLY);
 	fd = FL_FD;
 	while (1)
 	{
-		if (read(0, b, 1))
+		if (read(fd, b, 1))
 		{
+			fl->fl_exit = 1;
 			read_board(fl);
 			heat_map(fl);
+			print_heatmap(fl);
 			sort(fl);
-			printf("%d %d\n", fl->place.y, fl->place.x);
-			// write(1, "8 2\n", 4);
+			print_board(fl);
+			ft_printf("%d %d\n", fl->place.y, fl->place.x);
+			if (fl->fl_exit)
+				exit(0);
 		}
 	}
+
 	// sleep(1);
-	// print_board(fl);
-	// print_heatmap(fl);
 	// print_piece(fl);
 }
 
