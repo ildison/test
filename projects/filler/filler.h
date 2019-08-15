@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/14 18:53:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/15 11:12:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define check_size(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
 
-int fd;
+int fd; //!delete after
 
 typedef struct		s_pnt
 {
@@ -31,7 +31,7 @@ typedef struct		s_pnt
 
 typedef struct		s_fl
 {
-	char			plr_letter;
+	char			plr;
 	char			**board;
 	int				**heat_map;
 	int				n_piece;
@@ -40,6 +40,7 @@ typedef struct		s_fl
 	t_pnt			size_piece;
 	t_pnt			*piece;
 	t_pnt			place;
+	short			fl_exit;
 }					t_fl;
 
 void				read_board(t_fl *fl);
