@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "/Users/cormund/git_clones/git_ildison"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"__tuple": "c",
+			"ios": "c"
+		}
+	}
+}
