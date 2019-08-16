@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/15 13:34:17 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:02:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		print_board(t_fl *fl)
 		++fl->piece;
 	}
 	y = 0;
-	while(fl->board[y])
+	while(y < fl->size_board.y)
 	{
 		ft_putendl(fl->board[y]);
 		++y;
@@ -79,17 +79,15 @@ void		filler()
 			fl->fl_exit = 1;
 			read_board(fl);
 			heat_map(fl);
-			// print_heatmap(fl);
 			sort(fl);
+			// print_piece(fl);
 			// print_board(fl);
+			// print_heatmap(fl);
 			ft_printf("%d %d\n", fl->place.y, fl->place.x);
 			if (fl->fl_exit)
 				exit(0);
 		}
 	}
-
-//			printf("HERE\n");
-	// print_piece(fl);
 }
 
 int			main()
