@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:33:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/15 11:09:51 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/16 18:03:43 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
 	int		y;
 
 	y = 0;
-	while(fl->board[y])
+	while(y < fl->size_board.y)
 	{
 		x = 0;
 		while(fl->board[y][x])
@@ -32,6 +32,7 @@ static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
 				fl->heat_map[y][x] = 0;
 				beg->x = x;
 				beg->y = y;
+				// H;
 			}
 			++x;
 		}
@@ -66,9 +67,15 @@ void		heat_map(t_fl *fl)
 {
 	t_pnt	begin;
 
+	// printf("size %d %d\n", fl->size_board.y, fl->size_board.x);
 	preparation_heat_map(fl, &begin);
+	fl->heat_map[begin.y][begin.x] = -2;
 	heating(fl, begin.y - 1, begin.x - 1, 1);
 	heating(fl, begin.y - 1, begin.x + 1, 1);
 	heating(fl, begin.y + 1, begin.x + 1, 1);
 	heating(fl, begin.y + 1, begin.x - 1, 1);
+	heating(fl, begin.y - 1, begin.x, 1);
+	heating(fl, begin.y, begin.x + 1, 1);
+	heating(fl, begin.y + 1, begin.x + 1, 1);
+	heating(fl, begin.y, begin.x - 1, 1);
 }
