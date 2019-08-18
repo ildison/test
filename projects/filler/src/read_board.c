@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 21:46:58 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 21:54:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	parsing_board(t_fl *fl)
 	y = 0;
 	while(y < fl->size_board.y && get_next_line(FL_FD, &line) > 0)
 	{
-		prep_heat_map(fl->heat_map[y], line + 4, y);
+		prep_heat_map(fl, line + 4, y);
 		// ft_strcpy(fl->board[y], line + 4);
 		free(line);
 		++y;

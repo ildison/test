@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 21:38:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 21:55:23 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_fl
 }					t_fl;
 
 void				read_board(t_fl *fl);
+void		prep_heat_map(t_fl *fl, char *line, int y);
 void				heat_map(t_fl *fl);
 void				sort(t_fl *fl);
 
