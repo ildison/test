@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 17:02:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 18:39:15 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 
 #define H printf("HERE\n")
-int fd; //!delete after
 
 typedef struct		s_pnt
 {
