@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 18:02:46 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 20:57:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,13 @@ void		print_piece(t_fl *fl)
 void		filler()
 {
 	t_fl	*fl;
-	char	b[1];
+	char	b;
 
 	fl = (t_fl *)malloc(sizeof(t_fl));
 	fl->plr = 0;
-	// fd = open("testmap", O_RDONLY);
-	fd = FL_FD;
 	while (1)
 	{
-		if (read(fd, b, 1))
+		if (read(FL_FD, &b, 1))
 		{
 			fl->fl_exit = 1;
 			read_board(fl);

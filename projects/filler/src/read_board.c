@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 18:09:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 18:39:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	parsing_size(t_pnt *size)
 	char	*line;
 	char	*s;
 
-	while (get_next_line(fd, &line) > 0 && *line != 'P')
+	while (get_next_line(FL_FD, &line) > 0 && *line != 'P')
 		free(line);
 	s = line;
 	while (!ft_isdigit(*s))
@@ -33,7 +33,7 @@ static void	parsing_plr(t_fl *fl)
 {
 	char	*line;
 
-	while (get_next_line(fd, &line) > 0 && *line != '$')
+	while (get_next_line(FL_FD, &line) > 0 && *line != '$')
 		free(line);
 	if (ft_strstr(line, "p1"))
 		fl->plr = 'o';
@@ -65,11 +65,11 @@ static void	parsing_board(t_fl *fl)
 	char	*line;
 	int		y;
 
-	while (get_next_line(fd, &line) > 0 && *line != ' ')
+	while (get_next_line(FL_FD, &line) > 0 && *line != ' ')
 		free(line);
 	free(line);
 	y = 0;
-	while(y < fl->size_board.y && get_next_line(fd, &line) > 0)
+	while(y < fl->size_board.y && get_next_line(FL_FD, &line) > 0)
 	{
 		ft_strcpy(fl->board[y], line + 4);
 		free(line);
@@ -86,7 +86,7 @@ static void	parsing_piece(t_fl *fl)
 	fl->n_piece = 0;
 	parsing_size(&fl->size_piece);
 	y = 0;
-	while(y < fl->size_piece.y && get_next_line(fd, &line) > 0)
+	while(y < fl->size_piece.y && get_next_line(FL_FD, &line) > 0)
 	{
 		x = 0;
 		while(line[x])
