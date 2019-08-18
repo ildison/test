@@ -6,39 +6,62 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:33:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 18:03:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 23:43:36 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
+void		prep_heat_map(t_fl *fl, char *line, int y)
 {
-	int		x;
-	int		y;
+	int 	x;
 
-	y = 0;
-	while(y < fl->size_board.y)
+	x = 0;
+	while(line[x])
 	{
-		x = 0;
-		while(fl->board[y][x])
+		if (line[x] == '.' && fl->board[y][x] != '.')
+			fl->heat_map[y][x] = SHRT_MAX;
+		else if (line[x] == fl->plr || line[x] == ft_toupper(fl->plr))
+			fl->heat_map[y][x] = -1;
+		else if (line[x] != '.' && line[x] != fl->plr && line[x] != ft_toupper(fl->plr))
 		{
-			if (fl->board[y][x] == '.')
-				fl->heat_map[y][x] = SHRT_MAX;
-			else if (fl->board[y][x] == fl->plr || fl->board[y][x] == ft_toupper(fl->plr))
-				fl->heat_map[y][x] = -1;
-			else
-			{
-				fl->heat_map[y][x] = 0;
-				beg->x = x;
-				beg->y = y;
-				// H;
-			}
-			++x;
+			fl->heat_map[y][x] = 0;
+			fl->begin.x = x;
+			fl->begin.y = y;
 		}
-		++y;
+		fl->board[y][x] = line[x];
+		++x;
 	}
+	fl->board[y][x] = '\0';
 }
+
+// static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
+// {
+// 	int		x;
+// 	int		y;
+
+// 	y = 0;
+// 	while(y < fl->size_board.y)
+// 	{
+// 		x = 0;
+// 		while(fl->board[y][x])
+// 		{
+// 			if (fl->board[y][x] == '.')
+// 				fl->heat_map[y][x] = SHRT_MAX;
+// 			else if (fl->board[y][x] == fl->plr || fl->board[y][x] == ft_toupper(fl->plr))
+// 				fl->heat_map[y][x] = -1;
+// 			else
+// 			{
+// 				fl->heat_map[y][x] = 0;
+// 				beg->x = x;
+// 				beg->y = y;
+// 				// H;
+// 			}
+// 			++x;
+// 		}
+// 		++y;
+// 	}
+// }
 
 static void	heating(t_fl *fl, int y, int x, int cold)
 {
@@ -67,8 +90,8 @@ void		heat_map(t_fl *fl)
 {
 	t_pnt	begin;
 
-	// printf("size %d %d\n", fl->size_board.y, fl->size_board.x);
-	preparation_heat_map(fl, &begin);
+	begin = fl->begin;
+	// preparation_heat_map(fl, &begin);
 	fl->heat_map[begin.y][begin.x] = -2;
 	heating(fl, begin.y - 1, begin.x - 1, 1);
 	heating(fl, begin.y - 1, begin.x + 1, 1);
