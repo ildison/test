@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 20:57:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 21:12:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		filler()
 			// print_board(fl);
 			// print_heatmap(fl);
 			ft_printf("%d %d\n", fl->place.y, fl->place.x);
-			if (fl->fl_exit)
+			// if (fl->fl_exit)
 				exit(0);
 		}
 	}
