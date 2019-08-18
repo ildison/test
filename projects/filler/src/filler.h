@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 18:39:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 21:38:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 typedef struct		s_pnt
 {
-	int				y;
-	int				x;
+	short				y;
+	short				x;
 }					t_pnt;
 
 
@@ -41,6 +41,7 @@ typedef struct		s_fl
 	t_pnt			size_piece;
 	t_pnt			*piece;
 	t_pnt			place;
+	t_pnt			begin;
 	short			fl_exit;
 }					t_fl;
 

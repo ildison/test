@@ -6,11 +6,32 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:33:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 18:03:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/18 21:46:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void		prep_heat_map(char *line, int *heat_map, int y)
+{
+	int 	x;
+
+	x = 0;
+	while(line[x])
+	{
+		if (line[x] == '.')
+			heat_map[x] = SHRT_MAX;
+		else if (line[x] == fl->plr || line[x] == ft_toupper(fl->plr))
+			heat_map[x] = -1;
+		else
+		{
+			heat_map[x] = 0;
+			fl->begin->x = x;
+			fl->begin->y = y;
+		}
+		++x;
+	}
+}
 
 static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
 {
@@ -67,8 +88,8 @@ void		heat_map(t_fl *fl)
 {
 	t_pnt	begin;
 
-	// printf("size %d %d\n", fl->size_board.y, fl->size_board.x);
-	preparation_heat_map(fl, &begin);
+	begin = fl->begin;
+	// preparation_heat_map(fl, &begin);
 	fl->heat_map[begin.y][begin.x] = -2;
 	heating(fl, begin.y - 1, begin.x - 1, 1);
 	heating(fl, begin.y - 1, begin.x + 1, 1);
