@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 23:42:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/19 17:29:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		malloc_board_heat_map_and_piece(t_fl *fl)
 	i = 0;
 	while (i < fl->size_board.y)
 	{
-		fl->board[i] = (char *)malloc(fl->size_board.x + 1);
+		fl->board[i] = ft_strnew(fl->size_board.x);
 		fl->heat_map[i] = (int *)malloc(sizeof(int) *fl->size_board.x);
 		++i;
 	}
@@ -73,9 +73,9 @@ static void	parsing_board(t_fl *fl)
 	{
 		if (ft_strcmp(line + 4, fl->board[y]))
 		{
-			ft_putendl(line + 4);
-			ft_putendl(fl->board[y]);
-			ft_putendl(0);
+			// ft_putendl(line + 4);
+			// ft_putendl(fl->board[y]);
+			// ft_putendl(0);
 			prep_heat_map(fl, line + 4, y);
 		}
 		// ft_strcpy(fl->board[y], line + 4);

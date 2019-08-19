@@ -6,11 +6,24 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:33:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/18 23:43:36 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/19 18:49:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+int			ismybot(char plr, char c)
+{
+	return (ft_toupper(plr) == ft_toupper(c));
+}
+
+int			isopponent(char plr, char c)
+{
+	if (c == '.')
+		return (0);
+	else
+		return (!ismybot(plr, c));
+}
 
 void		prep_heat_map(t_fl *fl, char *line, int y)
 {
@@ -21,18 +34,18 @@ void		prep_heat_map(t_fl *fl, char *line, int y)
 	{
 		if (line[x] == '.' && fl->board[y][x] != '.')
 			fl->heat_map[y][x] = SHRT_MAX;
-		else if (line[x] == fl->plr || line[x] == ft_toupper(fl->plr))
+		else if (ismybot(fl->plr, line[x]))
 			fl->heat_map[y][x] = -1;
-		else if (line[x] != '.' && line[x] != fl->plr && line[x] != ft_toupper(fl->plr))
+		else if (isopponent(fl->plr, line[x]) && (fl->board[y][x] == '.' || !fl->board[y][x])) //! or line[x] != fl->board[y][x]
 		{
 			fl->heat_map[y][x] = 0;
 			fl->begin.x = x;
 			fl->begin.y = y;
+			printf("begin %d %d\n", fl->begin.y, fl->begin.x);
 		}
 		fl->board[y][x] = line[x];
 		++x;
 	}
-	fl->board[y][x] = '\0';
 }
 
 // static void	preparation_heat_map(t_fl *fl, t_pnt *beg)
