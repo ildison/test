@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/19 17:29:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/08/29 16:07:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,19 @@ static void	parsing_plr(t_fl *fl)
 	free(line);
 }
 
-void		malloc_board_heat_map_and_piece(t_fl *fl)
+void		malloc_heat_map_and_piece(t_fl *fl)
 {
 	int		i;
 
 	fl->piece = (t_pnt *)malloc(sizeof(t_pnt) * fl->size_board.y * fl->size_board.x);
 	fl->heat_map = (int **)malloc(sizeof(int *) * (fl->size_board.y + 1));
-	fl->board = (char **)malloc(sizeof(char *) * (fl->size_board.y + 1));
 	i = 0;
 	while (i < fl->size_board.y)
 	{
-		fl->board[i] = ft_strnew(fl->size_board.x);
 		fl->heat_map[i] = (int *)malloc(sizeof(int) *fl->size_board.x);
+		ft_bzero(fl->heat_map[i], sizeof(int) *fl->size_board.x);
 		++i;
 	}
-	fl->board[fl->size_board.y] = NULL;
 	fl->heat_map[fl->size_board.y] = NULL;
 }
 
@@ -71,14 +69,7 @@ static void	parsing_board(t_fl *fl)
 	y = 0;
 	while(y < fl->size_board.y && get_next_line(FL_FD, &line) > 0)
 	{
-		if (ft_strcmp(line + 4, fl->board[y]))
-		{
-			// ft_putendl(line + 4);
-			// ft_putendl(fl->board[y]);
-			// ft_putendl(0);
-			prep_heat_map(fl, line + 4, y);
-		}
-		// ft_strcpy(fl->board[y], line + 4);
+		prep_heat_map(fl, line + 4, y);
 		free(line);
 		++y;
 	}
@@ -115,7 +106,7 @@ void		read_board(t_fl *fl)
 	{
 		parsing_plr(fl);
 		parsing_size(&fl->size_board);
-		malloc_board_heat_map_and_piece(fl);
+		malloc_heat_map_and_piece(fl);
 	}
 		parsing_board(fl);
 		parsing_piece(fl);
