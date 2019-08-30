@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 11:31:00 by cormund           #+#    #+#              #
-#    Updated: 2019/08/16 17:04:30 by cormund          ###   ########.fr        #
+#    Updated: 2019/08/30 15:55:07 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,11 @@ DIR_INCLUDE := -I libft/include/
 DIR_LIBFT := libft/
 DIR_SRC := src/
 
+NAMESDL := rending
+LIBSDL := libSDL2-2.0.0.dylib
+DIR_INCLUDE_SDL := -I libSDL2/include/SDL2/
+DIR_LIBSDL := libSDL2/lib/
+
 vpath %.c $(DIR_SRC)
 vpath %.o $(DIR_BIN)
 vpath %.h $(DIR_INCLUDE)
@@ -34,6 +39,9 @@ OBJ := $(SRC:.c=.o)
 
 all:
 	$(CC) -o $(NAME) $(CFLAGS) $(addprefix $(DIR_SRC), $(SRC)) $(DIR_INCLUDE) $(DIR_LIBFT)$(LIBFT)
+
+sdl:
+	$(CC) -o testsdl testsdl.c $(DIR_INCLUDE_SDL) $(DIR_LIBSDL)$(LIBSDL)
 
 clean:
 	$(REMOVE) $(OBJ)
