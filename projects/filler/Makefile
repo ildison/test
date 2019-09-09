@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 11:31:00 by cormund           #+#    #+#              #
-#    Updated: 2019/09/06 12:19:05 by cormund          ###   ########.fr        #
+#    Updated: 2019/09/09 12:35:29 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 REMOVE := /bin/rm -rf
 DIR_BIN := bin/
-DIR_INCLUDE := -I libft/include/
+DIR_INCLUDE := -I include/
 DIR_LIBFT := libft/
 DIR_SRC := src/
 

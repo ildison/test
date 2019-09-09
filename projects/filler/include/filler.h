@@ -6,22 +6,19 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/29 16:22:45 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/09 17:58:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
-#define FILLER_H
+# define FILLER_H
 
-#include "libft.h"
+# include "libft.h"
 
-#define FL_PLAYER_NAME "cormund"
-#define FL_FD 0
+# define FL_PLAYER_NAME "cormund"
+# define FL_FD 0
 
-#define check_size(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
-
-
-#define H printf("HERE\n")
+# define check_size(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
 
 typedef struct		s_pnt
 {
@@ -33,7 +30,6 @@ typedef struct		s_pnt
 typedef struct		s_fl
 {
 	char			plr;
-	char			**board;
 	int				**heat_map;
 	int				n_piece;
 	int				sum_cold;

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/29 16:07:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/09 18:27:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	parsing_board(t_fl *fl)
 		free(line);
 	free(line);
 	y = 0;
-	while(y < fl->size_board.y && get_next_line(FL_FD, &line) > 0)
+	while (y < fl->size_board.y && get_next_line(FL_FD, &line) > 0)
 	{
 		prep_heat_map(fl, line + 4, y);
 		free(line);
@@ -84,10 +84,10 @@ static void	parsing_piece(t_fl *fl)
 	fl->n_piece = 0;
 	parsing_size(&fl->size_piece);
 	y = 0;
-	while(y < fl->size_piece.y && get_next_line(FL_FD, &line) > 0)
+	while (y < fl->size_piece.y && get_next_line(FL_FD, &line) > 0)
 	{
 		x = 0;
-		while(line[x])
+		while (line[x])
 		{
 			if (line[x] == '*')
 			{
