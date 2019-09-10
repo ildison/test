@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 11:31:00 by cormund           #+#    #+#              #
-#    Updated: 2019/09/09 12:35:29 by cormund          ###   ########.fr        #
+#    Updated: 2019/09/10 12:03:54 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ DIR_BIN := bin/
 DIR_INCLUDE := -I include/
 DIR_LIBFT := libft/
 DIR_SRC := src/
+
+DIR_VIS_SRC := src/visualizer/
 
 NAMESDL := rending
 LIBSDL := libSDL2-2.0.0.dylib
@@ -37,6 +39,9 @@ SRC :=	filler.c\
 			heat_map.c\
 			read_board.c
 
+VIS_SRC := main_vis.c\
+			parsing_board.c
+
 OBJ := $(SRC:.c=.o)
 
 all:
@@ -44,6 +49,9 @@ all:
 
 sdl:
 	$(CC) -o testsdl testsdl.c $(DIR_INCLUDE_SDL) $(DIR_LIBSDL)$(LIBSDL) $(DIR_LIBSDL_TTF)$(LIBSDL_TTF) $(DIR_INCLUDE) $(DIR_LIBFT)$(LIBFT)
+
+visual:
+	$(CC) -o vis $(addprefix $(DIR_VIS_SRC), $(VIS_SRC)) $(DIR_INCLUDE_SDL) $(DIR_LIBSDL)$(LIBSDL) $(DIR_LIBSDL_TTF)$(LIBSDL_TTF) $(DIR_INCLUDE) $(DIR_LIBFT)$(LIBFT)
 
 clean:
 	$(REMOVE) $(OBJ)

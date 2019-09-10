@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/06 14:32:05 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/03 11:18:14 by cormund          ###   ########.fr        #
+#    Updated: 2019/09/10 11:54:22 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRC_LIBFT := ft_arrfind.c\
 				ft_strcpy.c\
 				ft_strdel.c\
 				ft_strdup.c\
+				ft_strndup.c\
 				ft_strequ.c\
 				ft_striter.c\
 				ft_striteri.c\

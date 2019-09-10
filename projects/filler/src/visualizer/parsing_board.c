@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/09 19:47:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/10 16:47:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static void	parsing_plrs(t_game *game)
 	while(get_next_line(STD_OUT, &line) && *line != '$')
 		free(line);
 	tmp = ft_strchr(line, '/');
-	game->p1 = ft_strcut(tmp, '.');
+	game->p1 = ft_strcut(tmp + 1, '.');
 	free(line);
 	get_next_line(STD_OUT, &line);
 	tmp = ft_strchr(line, '/');
-	game->p2 = ft_strcut(tmp, '.');
+	game->p2 = ft_strcut(tmp + 1, '.');
 	free(line);
+	printf("%s\n%s\n", game->p1, game->p2);
 }
 
 static void	parsing_size(t_pnt *size)
@@ -45,45 +46,46 @@ static void	parsing_size(t_pnt *size)
 	free(line);
 }
 
-static void	malloc_board(t_game *game)
+SDL_Rect		*malloc_rect(size_t size)
 {
-	int		i;
+	SDL_Rect	*rect;
 
-	game->board = (char **)malloc(sizeof(char *) * (game->size_board.y + 1));
-	if (!game->board)
+	if (!(rect = (SDL_Rect *)malloc(size)))
 		error();
-	i = 0;
-	while (i < game->size_board.y)
-	{
-		game->board[i] = (char *)malloc(sizeof(char) *game->size_board.x);
-		if (!game->board[i])
-			error();
-		ft_bzero(game->board[i], sizeof(char) *game->size_board.x);
-		++i;
-	}
-	game->board[game->size_board.y] = NULL;
+	//memset for w, h
 }
 
-void 		parsing_move(char *fresh_board, char *board, int y)
+void 		parsing_step(char *board, int y)
 {
 	int		x;
 	int		token_flag;
 
 	x = 0;
 	token_flag = 0;
-	while (fresh_board[x])
+	while (board[x])
 	{
-		if (fresh_board[x] != board[x])
+		if (ft_isupper(board[x]))
 		{
-			board[x] = fresh_board[x];
-			if (ft_isalpha(board[x]))
+			if (board[x] == P1)
 			{
-				if (ft_islower(board[x]))
-				{
-					//? !flag ? p1/p2_tokens++;
-					//? add_in_rec or add in mas_piece
-				}
+				p1.x = x;
+				p1.y = y;
+				++n_p1;
 			}
+			else
+			{
+				p2.x = x;
+				p2.y = y;
+				++n_p2;
+			}
+		}
+		else if (ft_islower(board[x]))
+		{
+			piece.x = x;
+			piece.y = y;
+			++n_piece;
+			if (!token_flag && ++token_flag)
+				board[x] == LOWER_P1 ? ++p1_tokens : ++p2_tokens;
 		}
 		++x;
 	}
@@ -100,8 +102,8 @@ static void	parsing_board(t_game *game)
 	free(line);
 	while (y < game->size_board.y && get_next_line(STD_OUT, &line))
 	{
-		if (ft_strcmp(line, game->board[y]))
-			parsing_move(line, game->board[y], y)
+		parsing_step(line, y);
+		++y;
 	}
 }
 
@@ -111,7 +113,7 @@ void		read_board(t_game *game)
 	{
 		parsing_plrs(game);
 		parsing_size(&game->size_board);
-		malloc_board(game);
+		malloc_rect(game);
 	}
 		parsing_board(game);
 }
