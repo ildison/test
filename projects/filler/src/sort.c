@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:48:46 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/16 17:49:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/11 09:34:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void		check_piece(t_fl *fl, int y, int x)
 	{
 		if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] == -1)
 			++covers;
-		if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] == -2 || covers > 1)
+		if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] == -2 ||\
+																covers > 1)
 			return ;
 		else if (fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x] != -1)
 			sum_cold += fl->heat_map[y + fl->piece[n].y][x + fl->piece[n].x];
 		++n;
 	}
-	if (covers && ((sum_cold <= fl->sum_cold && fl->plr == 'o') || sum_cold < fl->sum_cold))
+	if (covers && sum_cold < fl->sum_cold)
 	{
 		fl->sum_cold = sum_cold;
 		fl->place.x = x;
