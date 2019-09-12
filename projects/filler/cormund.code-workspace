@@ -10,7 +10,8 @@
 	"settings": {
 		"files.associations": {
 			"__tuple": "c",
-			"ios": "c"
+			"ios": "c",
+			"algorithm": "c"
 		}
 	}
 }

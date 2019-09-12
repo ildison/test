@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/11 18:05:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/12 16:36:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ SDL_Rect		*malloc_rect(size_t size)
 	SDL_Rect	*rect;
 
 	if (!(rect = (SDL_Rect *)malloc(size)))
-		error();
+		error(strerror(errno));
 	//memset for w, h
 	return (rect);
 }
@@ -63,7 +63,7 @@ t_step		*new_lst_step(t_game *game)
 
 	new_step = (t_step *)malloc(sizeof(t_step));
 	if (!new_step)
-		error();
+		error(strerror(errno));
 	new_step->n_p1 = 0;
 	new_step->n_p2 = 0;
 	new_step->n_pc = 0;
