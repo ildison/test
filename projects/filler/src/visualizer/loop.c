@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_vis.c                                         :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/09 15:16:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/12 19:36:24 by cormund          ###   ########.fr       */
+/*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
+/*   Updated: 2019/09/12 20:40:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fl_visualizer.h"
 
-void			error(const char *err_msg)
+void		loop(t_game *game, t_vis *vis)
 {
-	if (err_msg)
-		ft_putstr(err_msg);
-	exit(-1);
-}
+	char	b;
 
-void			visualizer()
-{
-	t_step		*step;
-	t_game		*game;
-
-	step = NULL;
-	if (!(game = (t_game*)ft_memalloc(sizeof(t_game))))
-		error(strerror(errno));
-	game->start_step = &step;
-	init(game);
-	background(game, game->vis);
-	loop(game, game->vis);
-	destroy_init(game->vis);
-}
-
-int				main()
-{
-	visualizer();
-	return (0);
+	if (read(STD_OUT, &b, 1)) //? while || if
+		read_board(game);
 }
