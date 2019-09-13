@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:16:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/12 19:36:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/13 12:26:45 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void			visualizer()
 		error(strerror(errno));
 	game->start_step = &step;
 	init(game);
-	background(game, game->vis);
-	loop(game, game->vis);
+	loop(game, game->vis, step);
 	destroy_init(game->vis);
 }
 

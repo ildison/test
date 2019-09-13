@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/12 20:42:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/13 12:27:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_step
 	int				n_pc;
 	int				p1_tokens;
 	int				p2_tokens;
-	int				fin;
+	SDL_bool		fin;
 	struct s_step	*prev;
 	struct s_step	*next;
 }					t_step;
@@ -67,6 +67,9 @@ typedef struct		s_vis
 	SDL_Event		e;
 	SDL_Rect		bgrnd_board;
 	SDL_Rect		*lattice;
+	SDL_bool		quit;
+	SDL_bool		pause;
+	const Uint8 	*keyState;
 	int				n_ltc;
 }					t_vis;
 
@@ -84,7 +87,7 @@ typedef struct		s_game
 }					t_game;
 
 void				error(const char *err_msg);
-void        		loop(t_game *game, t_vis *vis);
+void        		loop(t_game *game, t_vis *vis, t_step *step);
 t_step				*read_board(t_game *game);
 void        		background(t_game *game, t_vis *vis);
 void				init(t_game *game);

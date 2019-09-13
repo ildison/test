@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/12 20:41:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/13 12:35:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void		bgrnd_lattice(t_vis *vis, t_game *game)
 		x = 0;
 		while (x < game->size_board.x)
 		{
-			vis->lattice[vis->n_ltc].x = x * game->size_rect.x;
-			vis->lattice[vis->n_ltc].y = y * game->size_rect.y;
+			vis->lattice[vis->n_ltc].x = x * game->size_rect.x + BGRND_BOARD_X;
+			vis->lattice[vis->n_ltc].y = y * game->size_rect.y + BGRND_BOARD_Y;
 			vis->lattice[vis->n_ltc].w = game->size_rect.x;
 			vis->lattice[vis->n_ltc].h = game->size_rect.y;
 			++vis->n_ltc;
@@ -40,10 +40,10 @@ static void		bgrnt_board(t_vis *vis, t_game *game)
 {
 	vis->bgrnd_board.x = BGRND_BOARD_X;
 	vis->bgrnd_board.y = BGRND_BOARD_Y;
-	vis->bgrnd_board.w = BGRND_BOARD_X * 4;
-	vis->bgrnd_board.h = BGRND_BOARD_Y * 13;
-	game->size_rect.x = vis->bgrnd_board.w / game->size_board.x;
-	game->size_rect.y = vis->bgrnd_board.h / game->size_board.y;
+	game->size_rect.x = BGRND_BOARD_X * 4 / game->size_board.x;
+	game->size_rect.y = BGRND_BOARD_Y * 13 / game->size_board.y;
+	vis->bgrnd_board.w = game->size_rect.x * game->size_board.x;
+	vis->bgrnd_board.h = game->size_rect.y * game->size_board.y;;
 }
 
 void			background(t_game *game, t_vis *vis)
