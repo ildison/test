@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/12 16:36:07 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/13 12:36:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	parsing_plrs(t_game *game)
 	tmp = ft_strchr(line, '/');
 	game->p2 = ft_strcut(tmp + 1, '.');
 	free(line);
-	// printf("%s\n%s\n", game->p1, game->p2);
 }
 
 static void	parsing_size(t_pnt *size)
@@ -52,7 +51,7 @@ SDL_Rect		*malloc_rect(size_t size)
 
 	if (!(rect = (SDL_Rect *)malloc(size)))
 		error(strerror(errno));
-	//memset for w, h
+	// memset for w, h
 	return (rect);
 }
 
@@ -61,19 +60,13 @@ t_step		*new_lst_step(t_game *game)
 	t_step	*new_step;
 	int		square;
 
-	new_step = (t_step *)malloc(sizeof(t_step));
+	new_step = (t_step *)ft_memalloc(sizeof(t_step));
 	if (!new_step)
 		error(strerror(errno));
-	new_step->n_p1 = 0;
-	new_step->n_p2 = 0;
-	new_step->n_pc = 0;
-	new_step->fin = 0;
 	square = game->size_board.x * game->size_board.y;
 	new_step->p1 = malloc_rect(sizeof(SDL_Rect) * square);
 	new_step->p2 = malloc_rect(sizeof(SDL_Rect) * square);
 	new_step->piece = malloc_rect(sizeof(SDL_Rect) * (square / 2));
-	new_step->next = NULL;
-	new_step->prev = NULL;
 	return (new_step);
 }
 
@@ -104,21 +97,27 @@ void 		parsing_step(t_game *game, t_step *stp, char *board, int y)
 		{
 			if (board[x] == P1)
 			{
-				stp->p1[stp->n_p1].x = x;
-				stp->p1[stp->n_p1].y = y;
+				stp->p1[stp->n_p1].x = x * game->size_rect.x + BGRND_BOARD_X;
+				stp->p1[stp->n_p1].y = y * game->size_rect.y + BGRND_BOARD_Y;
+				stp->p1[stp->n_p1].w = game->size_rect.x;
+				stp->p1[stp->n_p1].h = game->size_rect.y;
 				++stp->n_p1;
 			}
 			else
 			{
-				stp->p2[stp->n_p2].x = x;
-				stp->p2[stp->n_p2].y = y;
+				stp->p2[stp->n_p2].x = x * game->size_rect.x + BGRND_BOARD_X;
+				stp->p2[stp->n_p2].y = y * game->size_rect.y + BGRND_BOARD_Y;
+				stp->p2[stp->n_p2].w = game->size_rect.x;
+				stp->p2[stp->n_p2].h = game->size_rect.y;
 				++stp->n_p2;
 			}
 		}
 		else if (ft_islower(board[x]))
 		{
-			stp->piece[stp->n_pc].x = x;
-			stp->piece[stp->n_pc].y = y;
+			stp->piece[stp->n_pc].x = x * game->size_rect.x + BGRND_BOARD_X;
+			stp->piece[stp->n_pc].y = y * game->size_rect.y + BGRND_BOARD_Y;
+			stp->piece[stp->n_pc].w = game->size_rect.x;
+			stp->piece[stp->n_pc].h = game->size_rect.y;
 			++stp->n_pc;
 			if (!game->token_flag && ++game->token_flag)
 				board[x] == LOWER_P1 ? ++game->p1_tokens : ++game->p2_tokens;
@@ -140,7 +139,7 @@ static t_step	*parsing_board(t_game *game)
 	if (!line)
 	{
 		ft_memcpy(stp, stp->prev, sizeof(t_step) - sizeof(t_step *) * 2);
-		stp->fin = 1;
+		stp->fin = SDL_TRUE;
 		return (stp);
 	}
 	else
@@ -164,7 +163,8 @@ t_step		*read_board(t_game *game)
 	{
 		parsing_plrs(game);
 		parsing_size(&game->size_board);
+		background(game, game->vis);
 	}
 		// H;
-		return (parsing_board(game));
+	return (parsing_board(game));
 }
