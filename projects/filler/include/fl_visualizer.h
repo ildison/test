@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/13 12:27:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/13 14:35:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # define BGRND_BOARD_X SCREEN_WIDTH / 6
 # define BGRND_BOARD_Y SCREEN_HEIGHT / 15
 
-# define COLOR_BGRND_R 20
-# define COLOR_BGRND_G 28
-# define COLOR_BGRND_B 48
+# define COLOR_BGRND_R 19
+# define COLOR_BGRND_G 26
+# define COLOR_BGRND_B 42
 
 #define H printf("HERE\n")
 
