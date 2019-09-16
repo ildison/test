@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 14:48:39 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 18:05:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct		s_vis
 	SDL_Rect		*lattice;
 	SDL_bool		quit;
 	SDL_bool		pause;
+	int				cof;
+	int				delay;
 	const Uint8 	*keyState;
 	int				n_ltc;
 }					t_vis;
@@ -89,7 +91,7 @@ typedef struct		s_game
 
 void				error(const char *err_msg);
 void        		loop(t_game *game, t_vis *vis, t_step *step);
-t_step				*read_board(t_game *game);
+t_step				*next_step(t_game *game, t_step *step);
 void        		background(t_game *game, t_vis *vis);
 void				init(t_game *game);
 void				destroy_init(t_vis *vis);
