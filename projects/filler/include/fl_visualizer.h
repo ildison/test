@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 08:44:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 14:48:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define COLOR_BGRND_G 26
 # define COLOR_BGRND_B 42
 
+# define COLOR_O 0x8afa6c
+# define COLOR_X 0xfe6e7e
+# define COLOR_P 0xd8d8d8
+# define COLOR_BGRND 0x1b2437
+
 #define H printf("HERE\n")
 
 typedef struct		s_pnt
@@ -43,12 +48,8 @@ typedef struct		s_pnt
 
 typedef struct		s_step
 {
-	SDL_Rect		*p1;
-	int				n_p1;
-	SDL_Rect		*p2;
-	int				n_p2;
-	SDL_Rect		*piece;
-	int				n_pc;
+	SDL_Color		*colors;
+	int				n_colors;
 	int				p1_tokens;
 	int				p2_tokens;
 	SDL_bool		fin;

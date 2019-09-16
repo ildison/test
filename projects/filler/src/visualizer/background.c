@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/13 12:35:16 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 12:22:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static void		bgrnt_board(t_vis *vis, t_game *game)
 	game->size_rect.x = BGRND_BOARD_X * 4 / game->size_board.x;
 	game->size_rect.y = BGRND_BOARD_Y * 13 / game->size_board.y;
 	vis->bgrnd_board.w = game->size_rect.x * game->size_board.x;
-	vis->bgrnd_board.h = game->size_rect.y * game->size_board.y;;
+	vis->bgrnd_board.h = game->size_rect.y * game->size_board.y;
 }
 
 void			background(t_game *game, t_vis *vis)
 {
 	bgrnt_board(vis, game);
-	bgrnd_lattice(vis, game);
+	// bgrnd_lattice(vis, game);
 }
