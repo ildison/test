@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:16 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 10:10:31 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 18:09:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void		init(t_game *game)
 	if (!(vis->ren = SDL_CreateRenderer(vis->win, -1, 0)))
 		error(TTF_GetError());
 	vis->keyState = SDL_GetKeyboardState(NULL);
+	vis->cof = 1;
 	game->vis = vis;
 }

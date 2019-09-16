@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 14:44:58 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 17:49:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ static void	parsing_size(t_pnt *size)
 		++tmp;
 	size->x = ft_atoi(tmp + 1);
 	free(line);
-}
-
-SDL_Rect		*malloc_rect(size_t size)
-{
-	SDL_Rect	*rect;
-
-	if (!(rect = (SDL_Rect *)malloc(size)))
-		error(strerror(errno));
-	// memset for w, h
-	return (rect);
 }
 
 t_step		*new_lst_step(t_game *game)
@@ -151,13 +141,21 @@ static t_step	*parsing_board(t_game *game)
 	return(stp);
 }
 
-t_step		*read_board(t_game *game)
+t_step		*next_step(t_game *game, t_step *step)
 {
+	char	b;
+
+	if (step && step->next && !step->fin)
+		return (step->next);
+	if (step && step->fin)
+		return (step);
 	if (!game->p1)
 	{
 		parsing_plrs(game);
 		parsing_size(&game->size_board);
 		background(game, game->vis);
 	}
-	return (parsing_board(game));
+	if (read(STD_OUT, &b, 1) > 0)
+		return (parsing_board(game));
+	return (step);
 }
