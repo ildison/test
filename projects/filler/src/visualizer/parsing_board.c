@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 10:35:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 14:44:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ t_step		*new_lst_step(t_game *game)
 	if (!new_step)
 		error(strerror(errno));
 	square = game->size_board.x * game->size_board.y;
-	// printf("%d\n", square);
-	new_step->p1 = malloc_rect(sizeof(SDL_Rect) * square);
-	new_step->p2 = malloc_rect(sizeof(SDL_Rect) * square);
-	new_step->piece = malloc_rect(sizeof(SDL_Rect) * (square / 2));
+	new_step->colors = (SDL_Color *)ft_memalloc(sizeof(SDL_Color) * square);
+	if (!new_step->colors)
+		error(strerror(errno));
 	return (new_step);
 }
 
@@ -89,42 +88,35 @@ void		add_top_step(t_step **beg, t_step *step)
 
 void 		parsing_step(t_game *game, t_step *stp, char *board, int y)
 {
-	int		x;
-
-	x = 0;
-	// printf("%d %d %d\n", stp->n_p1, stp->n_p2, stp->n_pc);
-	while (board[x])
+	while (*board)
 	{
-		if (ft_isupper(board[x]))
+
+		if (*board == P1)
 		{
-			if (board[x] == P1)
-			{
-				stp->p1[stp->n_p1].x = x * game->size_rect.x + BGRND_BOARD_X;
-				stp->p1[stp->n_p1].y = y * game->size_rect.y + BGRND_BOARD_Y;
-				stp->p1[stp->n_p1].w = game->size_rect.x;
-				stp->p1[stp->n_p1].h = game->size_rect.y;
-				++stp->n_p1;
-			}
-			else
-			{
-				stp->p2[stp->n_p2].x = x * game->size_rect.x + BGRND_BOARD_X;
-				stp->p2[stp->n_p2].y = y * game->size_rect.y + BGRND_BOARD_Y;
-				stp->p2[stp->n_p2].w = game->size_rect.x;
-				stp->p2[stp->n_p2].h = game->size_rect.y;
-				++stp->n_p2;
-			}
+			stp->colors[stp->n_colors].r = (COLOR_O >> 16) & 0xff;
+			stp->colors[stp->n_colors].g = (COLOR_O >> 8) & 0xff;
+			stp->colors[stp->n_colors].b = COLOR_O & 0xff;
 		}
-		else if (ft_islower(board[x]))
+		else if (*board == P2)
 		{
-			stp->piece[stp->n_pc].x = x * game->size_rect.x + BGRND_BOARD_X;
-			stp->piece[stp->n_pc].y = y * game->size_rect.y + BGRND_BOARD_Y;
-			stp->piece[stp->n_pc].w = game->size_rect.x;
-			stp->piece[stp->n_pc].h = game->size_rect.y;
-			++stp->n_pc;
-			if (!game->token_flag && ++game->token_flag)
-				board[x] == LOWER_P1 ? ++game->p1_tokens : ++game->p2_tokens;
+			stp->colors[stp->n_colors].r = (COLOR_X >> 16) & 0xff;
+			stp->colors[stp->n_colors].g = (COLOR_X >> 8) & 0xff;
+			stp->colors[stp->n_colors].b = COLOR_X & 0xff;
 		}
-		++x;
+		else if (ft_islower(*board))
+		{
+			stp->colors[stp->n_colors].r = (COLOR_P >> 16) & 0xff;
+			stp->colors[stp->n_colors].g = (COLOR_P >> 8) & 0xff;
+			stp->colors[stp->n_colors].b = COLOR_P & 0xff;
+		}
+		else
+		{
+			stp->colors[stp->n_colors].r = (COLOR_BGRND >> 16) & 0xff;
+			stp->colors[stp->n_colors].g = (COLOR_BGRND >> 8) & 0xff;
+			stp->colors[stp->n_colors].b = COLOR_BGRND & 0xff;
+		}
+		++stp->n_colors;
+		++board;
 	}
 }
 
@@ -161,10 +153,6 @@ static t_step	*parsing_board(t_game *game)
 
 t_step		*read_board(t_game *game)
 {
-	char	b;
-
-	while (read(STD_OUT, &b, 1) <= 0)
-		;
 	if (!game->p1)
 	{
 		parsing_plrs(game);
