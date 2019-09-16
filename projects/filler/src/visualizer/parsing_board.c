@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/13 14:46:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 10:35:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_step		*new_lst_step(t_game *game)
 	if (!new_step)
 		error(strerror(errno));
 	square = game->size_board.x * game->size_board.y;
+	// printf("%d\n", square);
 	new_step->p1 = malloc_rect(sizeof(SDL_Rect) * square);
 	new_step->p2 = malloc_rect(sizeof(SDL_Rect) * square);
 	new_step->piece = malloc_rect(sizeof(SDL_Rect) * (square / 2));
@@ -91,6 +92,7 @@ void 		parsing_step(t_game *game, t_step *stp, char *board, int y)
 	int		x;
 
 	x = 0;
+	// printf("%d %d %d\n", stp->n_p1, stp->n_p2, stp->n_pc);
 	while (board[x])
 	{
 		if (ft_isupper(board[x]))
@@ -134,7 +136,7 @@ static t_step	*parsing_board(t_game *game)
 
 	stp = new_lst_step(game);
 	add_top_step(game->start_step, stp);
-	while (get_next_line(STD_OUT, &line) && (*line != ' ' || *line == '='))
+	while (get_next_line(STD_OUT, &line) > 0 && (*line != ' ' || *line == '='))
 		ft_memdel((void *)&line);
 	if (!line)
 	{
@@ -146,10 +148,10 @@ static t_step	*parsing_board(t_game *game)
 		free(line);
 	y = 0;
 	game->token_flag = 0;
-	while (y < game->size_board.y && get_next_line(STD_OUT, &line))
+	while (y < game->size_board.y && get_next_line(STD_OUT, &line) > 0)
 	{
 		parsing_step(game, stp, line + 4, y);
-		free(line);
+		ft_memdel((void *)&line);
 		++y;
 	}
 	stp->p1_tokens = game->p1_tokens;
@@ -159,6 +161,10 @@ static t_step	*parsing_board(t_game *game)
 
 t_step		*read_board(t_game *game)
 {
+	char	b;
+
+	while (read(STD_OUT, &b, 1) <= 0)
+		;
 	if (!game->p1)
 	{
 		parsing_plrs(game);

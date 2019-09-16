@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/13 14:56:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 10:40:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void		loop(t_game *game, t_vis *vis, t_step *step)
 
 	while(!vis->quit)
 	{
+		SDL_Delay(2);
 		if (step && !step->fin && !vis->pause)
 			step = step->next;
-		if (!vis->pause && !step && read(STD_OUT, &b, 1))
+		if (!vis->pause && !step)
 			step = read_board(game);
 		while (SDL_PollEvent(&vis->e))
 			events(vis);
+		// H;
 		render_update(game, vis, step);
-		// SDL_Delay(1000);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:16:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/13 12:26:45 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/16 10:06:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void			error(const char *err_msg)
 {
 	if (err_msg)
 		ft_putstr(err_msg);
+	H;
 	exit(-1);
 }
 
