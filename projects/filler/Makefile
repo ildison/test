@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 11:31:00 by cormund           #+#    #+#              #
-#    Updated: 2019/09/12 19:38:49 by cormund          ###   ########.fr        #
+#    Updated: 2019/09/17 14:39:59 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ VIS_SRC := main_vis.c\
 			parsing_board.c\
 			init.c\
 			loop.c\
-			background.c
+			background.c\
+			render_bgrnd.c
 
 OBJ := $(SRC:.c=.o)
 

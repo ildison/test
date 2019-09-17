@@ -59,10 +59,10 @@ void increment_dicrement_count(SDL_Texture **tex_count, TTF_Font *font, int *cou
 	else
 		--*count;
 	// printf("%d\n", *count);
-	TTF_SizeText(font,ft_itoa(*count),&w,&h);
+	TTF_SizeText(font,"ft_itoa\n(*cou\n\nnt)",&w,&h);
 	text_Rect->w = w;
 	text_Rect->h = h;
-	text_surface = TTF_RenderText_Blended(font, ft_itoa(*count), color);
+	text_surface = TTF_RenderText_Blended(font, "ft_itoa\n(*cou\n\nnt)", color);
 	*tex_count = SDL_CreateTextureFromSurface(ren, text_surface);
 	SDL_FreeSurface(text_surface);
 }
@@ -118,7 +118,7 @@ int main( int argc, char* args[] )
 			SDL_FreeSurface(bmp);
 			SDL_SetRenderDrawColor(ren, 0, 255, 255, SDL_ALPHA_OPAQUE);
 
-			font = TTF_OpenFont("FuturaPT-Light.ttf", 40);
+			font = TTF_OpenFont("/font/FuturaPT-Light.ttf", 40);
 			// text_surface = TTF_RenderText_Blended(font,ft_itoa(count),color);
 			// tex_count = SDL_CreateTextureFromSurface(ren, text_surface);
 			// SDL_FreeSurface(text_surface);
