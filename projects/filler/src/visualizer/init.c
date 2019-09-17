@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:16 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 18:09:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/17 17:01:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 void		destroy_init(t_vis *vis)
 {
-	// TTF_CloseFont(font);
-	// TTF_CloseFont(font);
-	// SDL_DestroyTexture(tex);
-	// SDL_DestroyTexture(tex_count);
+	TTF_CloseFont(vis->font_logo);
+	TTF_CloseFont(vis->font_text);
+	SDL_DestroyTexture(vis->logo);
+	SDL_DestroyTexture(vis->text);
 	SDL_DestroyRenderer(vis->ren);
 	SDL_DestroyWindow(vis->win);
 	SDL_Quit();
 	TTF_Quit();
+}
+
+static void	open_font(t_vis *vis)
+{
+	vis->font_logo = TTF_OpenFont("/font/filler_logo.ttf", 40);
+	if (!vis->font_logo)
+		error(TTF_GetError());
+	vis->font_text = TTF_OpenFont("/font/FuturaPT-Light.ttf", 20);
+	if (!vis->font_logo)
+		error(TTF_GetError());
 }
 
 void		init(t_game *game)
@@ -40,6 +50,7 @@ void		init(t_game *game)
 		error(TTF_GetError());
 	if (!(vis->ren = SDL_CreateRenderer(vis->win, -1, 0)))
 		error(TTF_GetError());
+	open_font(vis);
 	vis->keyState = SDL_GetKeyboardState(NULL);
 	vis->cof = 1;
 	game->vis = vis;

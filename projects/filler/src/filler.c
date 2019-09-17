@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:56:19 by cormund           #+#    #+#             */
-/*   Updated: 2019/08/29 17:48:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/17 16:54:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ void		filler()
 {
 	t_fl	*fl;
 	char	b;
+	int		delay;
 
+	delay = 10000;
 	fl = (t_fl *)malloc(sizeof(t_fl));
 	fl->plr = 0;
-	while (1)
-		if (read(FL_FD, &b, 1))
+	while (1 && delay--)
+		if (read(FL_FD, &b, 1)
 		{
 			fl->fl_exit = 1;
 			read_board(fl);
@@ -63,6 +65,7 @@ void		filler()
 			ft_printf("%d %d\n", fl->place.y, fl->place.x);
 			if (fl->fl_exit)
 				exit(0);
+			delay = 10000;
 		}
 }
 

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/16 18:51:55 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/17 18:04:55 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,33 +45,39 @@ void		render_rects(t_game *game, t_vis *vis, t_step *stp)
 
 	rect.h = game->size_rect.y - 1;
 	rect.w = game->size_rect.x - 1;
-	rect.y = BGRND_BOARD_Y;
-	rect.x = BGRND_BOARD_X;
+	rect.y = BG_BOARD_Y;
+	rect.x = BG_BOARD_X;
 	n = 0;
-	while (rect.y < (vis->bgrnd_board.h + BGRND_BOARD_Y))
+	while (rect.y < (vis->bgrnd_board.h + BG_BOARD_Y))
 	{
-		rect.x = BGRND_BOARD_X;
-		while (rect.x < (vis->bgrnd_board.w + BGRND_BOARD_X))
+		color.r = stp->clrs[n].r * (stp->clrs[n].r != (CLR_BG >> 16\
+						& 0xff) && stp->clrs[n].r != 216 ? vis->cof : 1);
+		color.g = stp->clrs[n].g * (stp->clrs[n].g != (CLR_BG >> 8\
+						& 0xff) && stp->clrs[n].g != 216 ? vis->cof : 1);
+		color.b = stp->clrs[n].b * (stp->clrs[n].b != (CLR_BG\
+						& 0xff) && stp->clrs[n].b != 216 ? vis->cof : 1);
+		SDL_SetRenderDrawColor(vis->ren, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
+		SDL_RenderFillRect(vis->ren, &rect);
+		++n;
+		rect.x += game->size_rect.x;
+		if (rect.x >= (vis->bgrnd_board.w + BG_BOARD_X))
 		{
-			color.r = stp->colors[n].r * (stp->colors[n].r != (COLOR_BGRND >> 16 & 0xff) && stp->colors[n].r != 216 ? vis->cof : 1);
-			color.g = stp->colors[n].g * (stp->colors[n].g != (COLOR_BGRND >> 8 & 0xff) && stp->colors[n].g != 216 ? vis->cof : 1);
-			color.b = stp->colors[n].b * (stp->colors[n].b != (COLOR_BGRND & 0xff) && stp->colors[n].b != 216 ? vis->cof : 1);
-			SDL_SetRenderDrawColor(vis->ren, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
-			SDL_RenderFillRect(vis->ren, &rect);
-			rect.x += game->size_rect.x;
-			++n;
+			rect.y += game->size_rect.y;
+			rect.x = BG_BOARD_X;
 		}
-		rect.y += game->size_rect.y;
 	}
 }
 
 void		render_update(t_game *game, t_vis *vis, t_step *step)
 {
-	SDL_SetRenderDrawColor(vis->ren, COLOR_BGRND_R, COLOR_BGRND_G,\
-									COLOR_BGRND_B, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(vis->ren, CLR_BG_R, CLR_BG_G, CLR_BG_B,\
+													SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
 	if (step)
+	{
+		render_bgrnd(game, vis, step);
 		render_rects(game, vis, step);
+	}
 	SDL_RenderPresent(vis->ren);
 }
 
