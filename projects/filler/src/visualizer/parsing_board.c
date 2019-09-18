@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/17 14:39:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/18 15:40:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	parsing_plrs(t_game *game)
 	game->p1 = ft_strcut(tmp + 1, '.');
 	free(line);
 	get_next_line(STD_OUT, &line);
-	tmp = ft_strchr(line, '/');
+	tmp = ft_strrchr(line, '/');
 	game->p2 = ft_strcut(tmp + 1, '.');
 	free(line);
 }
