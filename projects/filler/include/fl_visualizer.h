@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/17 19:08:55 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/18 16:47:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,17 @@
 # define P2 'X'
 # define LOWER_P1 'o'
 # define LOWER_P2 'x'
+
 # define LOGO "FILLER"
+# define INFO "INFORMATION"
+# define KEYS "CONTROL KEYS"
+# define PROGRESS "PROGRESSION"
+# define SCORE "SCORE"
+
+# define PLAY_PAUSE "Play/pause : space"
+# define PREV_NEXT "Prev/next : left/right"
+# define EDIT_CLR "Edir color : up/down"
+# define SPEED "Speed : plus/minus"
 
 # define SCREEN_WIDTH 1420
 # define SCREEN_HEIGHT 800
@@ -40,15 +50,17 @@
 # define CLR_BG 0x1b2437
 
 # define CLR_LOGO 0xb552a8
-# define CLR_INFO 0x1f2640
-# define CLR_UP_INFO 0x262e4a //! подобрать верхние цвета из картинки
+# define CLR_INFO 0x1c243b
+# define CLR_UP_INFO 0x242b47
+
+# define SIZE_MAP(n)
 
 #define H printf("HERE\n")
 
 typedef struct		s_pnt
 {
-	short			y;
-	short			x;
+	int				y;
+	int				x;
 }					t_pnt;
 
 typedef struct		s_step
@@ -69,12 +81,13 @@ typedef struct		s_vis
 	TTF_Font		*font_logo;
 	TTF_Font		*font_text;
 	SDL_Texture		*logo;
-	SDL_Texture		*text;
+	SDL_Texture		*head[4];
+	SDL_Texture		*info[3];
+	SDL_Texture		*cntrl_key[4];
 	SDL_Rect		size_logo;
 	SDL_Rect		size_text;
-	SDL_Rect		up_info[4];
-	SDL_Rect		info[3];
-	SDL_Color		color_logo;
+	SDL_Rect		info_win[4];
+	SDL_Rect		up_win[5];
 	SDL_Color		color_text;
 	SDL_Event		e;
 	SDL_Rect		bgrnd_board;
@@ -106,5 +119,9 @@ void        		background(t_game *game, t_vis *vis);
 void				init(t_game *game);
 void				destroy_init(t_vis *vis);
 void				render_bgrnd(t_game *game, t_vis *vis, t_step *step);
+void				info_win(t_vis *vis, t_game *game);
+void				ren_info(t_vis *vis, t_game *game);
+void				control_keys(t_vis *vis);
+void				ren_cntrl_key(t_vis *vis);
 
 # endif
