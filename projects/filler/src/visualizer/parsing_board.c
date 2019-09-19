@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/18 15:40:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 11:44:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,17 @@ static t_step	*parsing_board(t_game *game)
 	}
 	else
 		free(line);
-	y = 0;
 	game->token_flag = 0;
+	y = 0;
 	while (y < game->size_board.y && get_next_line(STD_OUT, &line) > 0)
 	{
 		parsing_step(game, stp, line + 4, y);
 		ft_memdel((void *)&line);
 		++y;
 	}
+	stp->n_stp = ++game->n_stp;
 	stp->p1_tokens = game->p1_tokens;
-	stp->p1_tokens = game->p1_tokens;
+	stp->p2_tokens = game->p2_tokens;
 	return(stp);
 }
 

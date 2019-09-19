@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:24:43 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/18 16:40:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 11:27:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void		ren_info_win(t_vis *vis)
 {
-	SDL_SetRenderDrawColor(vis->ren, CLR_INFO >> 16 & 0xff, CLR_INFO >> 8 & 0xff, CLR_INFO & 0xff, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(vis->ren, CLR_INFO_WIN >> 16 & 0xff,\
+			CLR_INFO_WIN >> 8 & 0xff, CLR_INFO_WIN & 0xff, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRects(vis->ren, vis->info_win, 4);
-	SDL_SetRenderDrawColor(vis->ren, CLR_UP_INFO >> 16 & 0xff, CLR_UP_INFO >> 8 & 0xff, CLR_UP_INFO & 0xff, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(vis->ren, CLR_UP_WIN >> 16 & 0xff,\
+				CLR_UP_WIN >> 8 & 0xff, CLR_UP_WIN & 0xff, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRects(vis->ren, vis->up_win, 5);
 }
 
-static void		ren_upinfo(t_vis *vis)
+static void		ren_head(t_vis *vis)
 {
 	t_pnt		sz;
 	t_pnt		indent;
@@ -52,8 +54,9 @@ static void		ren_logo(t_vis *vis)
 void		render_bgrnd(t_game *game, t_vis *vis, t_step *step)
 {
 	ren_info_win(vis);
-	ren_upinfo(vis);
+	ren_head(vis);
 	ren_logo(vis);
 	ren_info(vis, game);
 	ren_cntrl_key(vis);
+	ren_progression(vis, game, step);
 }

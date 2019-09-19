@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/18 16:43:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 11:41:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,11 @@ static void		wins_for_info(t_vis *vis)
 	vis->info_win[2].x = vis->info_win[1].x;
 	vis->info_win[2].y = vis->info_win[1].y + vis->info_win[1].h + 30;
 	vis->info_win[2].w = vis->info_win[0].w;
-	vis->info_win[2].h = size_text.y * 5;
+	vis->info_win[2].h = size_text.y * 4;
 	vis->info_win[3].x = vis->info_win[2].x;
 	vis->info_win[3].y = vis->info_win[2].y + vis->info_win[2].h + 30;
 	vis->info_win[3].w = vis->info_win[0].w;
 	vis->info_win[3].h = size_text.y * 4;
-}
-
-void			head(t_vis *vis)
-{
-	SDL_Surface	*text;
-	SDL_Color	color;
-
-	color.r = CLR_P >> 16 & 0xff;
-	color.g = CLR_P >> 8 & 0xff;
-	color.b = CLR_P & 0xff;
-	vis->color_text = color;
-	text = TTF_RenderText_Blended(vis->font_text, INFO, color);
-	vis->head[0] = SDL_CreateTextureFromSurface(vis->ren, text);
-	text = TTF_RenderText_Blended(vis->font_text, KEYS, color);
-	vis->head[1] = SDL_CreateTextureFromSurface(vis->ren, text);
-	text = TTF_RenderText_Blended(vis->font_text, PROGRESS, color);
-	vis->head[2] = SDL_CreateTextureFromSurface(vis->ren, text);
-	text = TTF_RenderText_Blended(vis->font_text, SCORE, color);
-	vis->head[3] = SDL_CreateTextureFromSurface(vis->ren, text);
-	SDL_FreeSurface(text);
 }
 
 void			background(t_game *game, t_vis *vis)
@@ -117,4 +97,5 @@ void			background(t_game *game, t_vis *vis)
 	head(vis);
 	info_win(vis, game);
 	control_keys(vis);
+	progression(vis);
 }
