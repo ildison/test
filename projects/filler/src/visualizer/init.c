@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:16 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/18 14:57:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 11:26:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 void		destroy_init(t_vis *vis)
 {
+	int		i;
+
 	TTF_CloseFont(vis->font_logo);
 	TTF_CloseFont(vis->font_text);
 	SDL_DestroyTexture(vis->logo);
-	// SDL_DestroyTexture(vis->text);
+	SDL_DestroyTexture(vis->progress[0]);
+	SDL_DestroyTexture(vis->progress[1]);
+	i = 3;
+	while (i)
+	{
+		SDL_DestroyTexture(vis->head[i]);
+		SDL_DestroyTexture(vis->cntrl_key[i]);
+		--i;
+		if (i)
+			SDL_DestroyTexture(vis->info[i]);
+	}
 	SDL_DestroyRenderer(vis->ren);
 	SDL_DestroyWindow(vis->win);
 	SDL_Quit();
