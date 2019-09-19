@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:16 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:26:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:18:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		destroy_init(t_vis *vis)
 	TTF_CloseFont(vis->font_logo);
 	TTF_CloseFont(vis->font_text);
 	SDL_DestroyTexture(vis->logo);
-	SDL_DestroyTexture(vis->progress[0]);
-	SDL_DestroyTexture(vis->progress[1]);
+	// SDL_DestroyTexture(vis->progress[0]);
+	// SDL_DestroyTexture(vis->progress[1]);
 	i = 3;
 	while (i)
 	{
@@ -64,6 +64,6 @@ void		init(t_game *game)
 		error(TTF_GetError());
 	open_font(vis);
 	vis->keyState = SDL_GetKeyboardState(NULL);
-	vis->cof = 1;
+	vis->clr_cof = 1;
 	game->vis = vis;
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/17 18:04:55 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:33:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,29 @@ void		events(t_vis *vis, t_step **step)
 	else if (vis->pause && vis->e.type == SDL_KEYDOWN &&\
 		vis->keyState[SDL_SCANCODE_LEFT] && *step && (*step)->prev)
 		*step = (*step)->prev;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_UP] &&\
+	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_PLUS] &&\
 															vis->delay < 100)
 		++vis->delay;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_DOWN] &&\
+	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_MINUS] &&\
 																vis->delay > 0)
 		--vis->delay;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_PLUS])
-		++vis->cof;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_MINUS]
-															&& vis->cof > 1)
-		--vis->cof;
+	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_UP])
+		++vis->clr_cof;
+	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_DOWN]
+															&& vis->clr_cof > 1)
+		--vis->clr_cof;
+}
+
+SDL_Color		get_color(int clr, int clr_cof)
+{
+	SDL_Color	color;
+
+	if (clr != CLR_O && clr != CLR_X)
+		clr_cof = 1;
+	color.r = ((clr >> 16) & 0xff) * clr_cof;
+	color.g = ((clr >> 8) & 0xff) * clr_cof;
+	color.b = (clr & 0xff) * clr_cof;
+	return (color);
 }
 
 void		render_rects(t_game *game, t_vis *vis, t_step *stp)
@@ -50,12 +62,7 @@ void		render_rects(t_game *game, t_vis *vis, t_step *stp)
 	n = 0;
 	while (rect.y < (vis->bgrnd_board.h + BG_BOARD_Y))
 	{
-		color.r = stp->clrs[n].r * (stp->clrs[n].r != (CLR_BG >> 16\
-						& 0xff) && stp->clrs[n].r != 216 ? vis->cof : 1);
-		color.g = stp->clrs[n].g * (stp->clrs[n].g != (CLR_BG >> 8\
-						& 0xff) && stp->clrs[n].g != 216 ? vis->cof : 1);
-		color.b = stp->clrs[n].b * (stp->clrs[n].b != (CLR_BG\
-						& 0xff) && stp->clrs[n].b != 216 ? vis->cof : 1);
+		color = get_color(stp->clrs[n], vis->clr_cof);
 		SDL_SetRenderDrawColor(vis->ren, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 		SDL_RenderFillRect(vis->ren, &rect);
 		++n;

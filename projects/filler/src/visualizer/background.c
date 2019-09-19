@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:41:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 20:07:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void		logo(t_vis *vis)
 	color.g = CLR_LOGO >> 8 & 0xff;
 	color.b = CLR_LOGO & 0xff;
 	TTF_SizeText(vis->font_logo, LOGO, &vis->size_logo.w, &vis->size_logo.h);
-	vis->size_logo.x = 20;
-	vis->size_logo.y = 15;
+	vis->size_logo.x = 30;
+	vis->size_logo.y = 20;
 	text = TTF_RenderText_Blended(vis->font_logo, LOGO, color);
 	vis->logo = SDL_CreateTextureFromSurface(vis->ren, text);
 	SDL_FreeSurface(text);
@@ -71,19 +71,19 @@ static void		wins_for_info(t_vis *vis)
 
 	TTF_SizeText(vis->font_text, INFO, &size_text.x, &size_text.y);
 	vis->info_win[0].x = vis->size_logo.x - 10;
-	vis->info_win[0].y = vis->size_logo.y + vis->size_logo.h + 40;
+	vis->info_win[0].y = vis->size_logo.y + vis->size_logo.h + 50;
 	vis->info_win[0].w = vis->size_logo.w + 20;
 	vis->info_win[0].h = size_text.y * 5;
 	vis->info_win[1].x = vis->info_win[0].x;
-	vis->info_win[1].y = vis->info_win[0].y + vis->info_win[0].h + 30;
+	vis->info_win[1].y = vis->info_win[0].y + vis->info_win[0].h + 40;
 	vis->info_win[1].w = vis->info_win[0].w;
 	vis->info_win[1].h = size_text.y * 6;
 	vis->info_win[2].x = vis->info_win[1].x;
-	vis->info_win[2].y = vis->info_win[1].y + vis->info_win[1].h + 30;
+	vis->info_win[2].y = vis->info_win[1].y + vis->info_win[1].h + 40;
 	vis->info_win[2].w = vis->info_win[0].w;
 	vis->info_win[2].h = size_text.y * 4;
 	vis->info_win[3].x = vis->info_win[2].x;
-	vis->info_win[3].y = vis->info_win[2].y + vis->info_win[2].h + 30;
+	vis->info_win[3].y = vis->info_win[2].y + vis->info_win[2].h + 40;
 	vis->info_win[3].w = vis->info_win[0].w;
 	vis->info_win[3].h = size_text.y * 4;
 }
@@ -98,4 +98,5 @@ void			background(t_game *game, t_vis *vis)
 	info_win(vis, game);
 	control_keys(vis);
 	progression(vis);
+	score(vis, game);
 }
