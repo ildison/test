@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:24:43 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:27:50 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:16:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void		render_bgrnd(t_game *game, t_vis *vis, t_step *step)
 	ren_info(vis, game);
 	ren_cntrl_key(vis);
 	ren_progression(vis, game, step);
+	ren_score(vis, game, step);
 }

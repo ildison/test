@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 15:14:17 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:35:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:58:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,53 @@ void			ren_progression(t_vis *vis, t_game *game, t_step *stp)
 {
 	SDL_Texture	*tex;
 	t_pnt		sz;
-	t_pnt		indent;
 	char		*tmp;
+	char		*text;
 
-	TTF_SizeText(vis->font_text, "Current step  :  ", &sz.x, &sz.y);
-	indent.x = vis->up_win[3].w / 2 - sz.x;
-	SDL_RenderCopy(vis->ren, vis->progress[0], NULL, &(SDL_Rect){vis->up_win[3].x\
-				+ indent.x, vis->up_win[3].y + sz.y * 2 - 5, sz.x, sz.y});
 	tmp = ft_itoa(stp->n_stp);
-	tex = creat_texture(vis->font_text, tmp, vis->ren, vis->color_text);
-	TTF_SizeText(vis->font_text, tmp, &sz.x, &sz.y);
+	text = ft_strjoin("Current step  :  ", tmp);
+	TTF_SizeText(vis->font_text, text, &sz.x, &sz.y);
+	tex = create_texture(vis->font_text, text, vis->ren, vis->color_text);
+	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->progress[0].x,\
+										vis->progress[0].y, sz.x, sz.y});
 	free(tmp);
-	indent.x = vis->up_win[3].w / 2 + 2;
-	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->up_win[3].x\
-				+ indent.x, vis->up_win[3].y + sz.y * 2 - 5, sz.x, sz.y});
-	TTF_SizeText(vis->font_text, "Total step  :  ", &sz.x, &sz.y);
-	indent.x = vis->up_win[2].w / 2 - sz.x;
-	SDL_RenderCopy(vis->ren, vis->progress[1], NULL, &(SDL_Rect){vis->up_win[3].x\
-				+ indent.x, vis->up_win[3].y + sz.y * 3 - 5, sz.x, sz.y});
+	free(text);
 	tmp = ft_itoa(game->n_stp);
-	tex = creat_texture(vis->font_text, tmp, vis->ren, vis->color_text);
-	TTF_SizeText(vis->font_text, tmp, &sz.x, &sz.y);
+	text = ft_strjoin("Total step  :  ", tmp);
+	TTF_SizeText(vis->font_text, text, &sz.x, &sz.y);
+	tex = create_texture(vis->font_text, text, vis->ren, vis->color_text);
+	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->progress[1].x,\
+										vis->progress[1].y, sz.x, sz.y});
 	free(tmp);
-	indent.x = vis->up_win[3].w / 2 + 2;
-	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->up_win[3].x\
-				+ indent.x, vis->up_win[3].y + sz.y * 3 - 5, sz.x, sz.y});
+	free(text);
+	SDL_DestroyTexture(tex);
+}
+
+void			ren_score(t_vis *vis, t_game *game, t_step *stp)
+{
+	SDL_Texture	*tex;
+	t_pnt		sz;
+	char		*tmp;
+	char		*text;
+	SDL_Color	color;
+
+	color = get_color(CLR_O, vis->clr_cof);
+	tmp = ft_itoa(stp->p1_tokens);
+	text = ft_strjoin(game->p1_score, tmp);
+	TTF_SizeText(vis->font_text, text, &sz.x, &sz.y);
+	tex = create_texture(vis->font_text, text, vis->ren, color);
+	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->score[0].x,\
+										vis->score[0].y, sz.x, sz.y});
+	free(tmp);
+	free(text);
+	color = get_color(CLR_X, vis->clr_cof);
+	tmp = ft_itoa(stp->p2_tokens);
+	text = ft_strjoin(game->p2_score, tmp);
+	TTF_SizeText(vis->font_text, text, &sz.x, &sz.y);
+	tex = create_texture(vis->font_text, text, vis->ren, color);
+	SDL_RenderCopy(vis->ren, tex, NULL, &(SDL_Rect){vis->score[1].x,\
+										vis->score[1].y, sz.x, sz.y});
+	free(tmp);
+	free(text);
 	SDL_DestroyTexture(tex);
 }

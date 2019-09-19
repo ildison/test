@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:36:50 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:58:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct		s_pnt
 
 typedef struct		s_step
 {
-	SDL_Color		*clrs;
+	int				*clrs;
 	int				n_clrs;
 	int				p1_tokens;
 	int				p2_tokens;
@@ -85,7 +85,8 @@ typedef struct		s_vis
 	SDL_Texture		*head[4];
 	SDL_Texture		*info[3];
 	SDL_Texture		*cntrl_key[4];
-	SDL_Texture		*progress[2];
+	t_pnt			progress[2];
+	t_pnt			score[2];
 	SDL_Rect		size_logo;
 	SDL_Rect		size_text;
 	SDL_Rect		info_win[4];
@@ -95,7 +96,7 @@ typedef struct		s_vis
 	SDL_Rect		bgrnd_board;
 	SDL_bool		quit;
 	SDL_bool		pause;
-	int				cof;
+	int				clr_cof;
 	int				delay;
 	const Uint8 	*keyState;
 	int				n_ltc;
@@ -105,6 +106,8 @@ typedef struct		s_game
 {
 	char			*p1;
 	char			*p2;
+	char			*p1_score;
+	char			*p2_score;
 	int				p1_tokens;
 	int				p2_tokens;
 	int				n_stp;
@@ -129,7 +132,10 @@ void				control_keys(t_vis *vis);
 void				ren_cntrl_key(t_vis *vis);
 void				progression(t_vis *vis);
 void				ren_progression(t_vis *vis, t_game *game, t_step *stp);
-SDL_Texture			*creat_texture(TTF_Font *font, char *text,\
+SDL_Texture			*create_texture(TTF_Font *font, char *text,\
 										SDL_Renderer *ren, SDL_Color color);
+void				score(t_vis *vis, t_game *game);
+void				ren_score(t_vis *vis, t_game *game, t_step *stp);
+SDL_Color			get_color(int clr, int clr_cof);
 
 # endif

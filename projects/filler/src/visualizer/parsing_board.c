@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 11:44:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/19 19:25:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_step		*new_lst_step(t_game *game)
 	if (!new_step)
 		error(strerror(errno));
 	square = game->size_board.x * game->size_board.y;
-	new_step->clrs = (SDL_Color *)ft_memalloc(sizeof(SDL_Color) * square);
+	new_step->clrs = (int *)ft_memalloc(sizeof(int) * square);
 	if (!new_step->clrs)
 		error(strerror(errno));
 	return (new_step);
@@ -82,29 +82,23 @@ void 		parsing_step(t_game *game, t_step *stp, char *board, int y)
 	{
 
 		if (*board == P1)
-		{
-			stp->clrs[stp->n_clrs].r = (CLR_O >> 16) & 0xff;
-			stp->clrs[stp->n_clrs].g = (CLR_O >> 8) & 0xff;
-			stp->clrs[stp->n_clrs].b = CLR_O & 0xff;
-		}
+			stp->clrs[stp->n_clrs] = CLR_O;
 		else if (*board == P2)
-		{
-			stp->clrs[stp->n_clrs].r = (CLR_X >> 16) & 0xff;
-			stp->clrs[stp->n_clrs].g = (CLR_X >> 8) & 0xff;
-			stp->clrs[stp->n_clrs].b = CLR_X & 0xff;
-		}
+			stp->clrs[stp->n_clrs] = CLR_X;
 		else if (ft_islower(*board))
 		{
-			stp->clrs[stp->n_clrs].r = (CLR_P >> 16) & 0xff;
-			stp->clrs[stp->n_clrs].g = (CLR_P >> 8) & 0xff;
-			stp->clrs[stp->n_clrs].b = CLR_P & 0xff;
+			stp->clrs[stp->n_clrs] = CLR_P;
+			if (!game->token_flag)
+			{
+				if (*board == LOWER_P1)
+					++game->p1_tokens;
+				else
+					++game->p2_tokens;
+				++game->token_flag;
+			}
 		}
 		else
-		{
-			stp->clrs[stp->n_clrs].r = (CLR_BG >> 16) & 0xff;
-			stp->clrs[stp->n_clrs].g = (CLR_BG >> 8) & 0xff;
-			stp->clrs[stp->n_clrs].b = CLR_BG & 0xff;
-		}
+			stp->clrs[stp->n_clrs] = CLR_BG;
 		++stp->n_clrs;
 		++board;
 	}
