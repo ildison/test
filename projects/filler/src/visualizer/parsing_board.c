@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 19:25:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 19:55:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ static void	parsing_plrs(t_game *game)
 	char	*line;
 	char	*tmp;
 
-	while(get_next_line(STD_OUT, &line) && *line != '$')
+	while(get_next_line(STD_OUT, &line) && *line != '$' && *line != 'e')
 		free(line);
+	if (*line == 'e')
+		print_vm_error();
 	tmp = ft_strrchr(line, '/');
 	game->p1 = ft_strcut(tmp + 1, '.');
 	free(line);
 	get_next_line(STD_OUT, &line);
+	if (*line == 'e')
+		print_vm_error();
 	tmp = ft_strrchr(line, '/');
 	game->p2 = ft_strcut(tmp + 1, '.');
 	free(line);
@@ -151,6 +155,10 @@ t_step		*next_step(t_game *game, t_step *step)
 		background(game, game->vis);
 	}
 	if (read(STD_OUT, &b, 1) > 0)
+	{
+		if (b == 'e')
+			print_vm_error();
 		return (parsing_board(game));
+	}
 	return (step);
 }

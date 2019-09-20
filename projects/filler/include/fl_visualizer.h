@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 18:15:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 19:51:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct		s_game
 	t_vis			*vis;
 }					t_game;
 
+void				print_vm_error();
 void				error(const char *err_msg);
 void        		loop(t_game *game, t_vis *vis, t_step *step);
 t_step				*next_step(t_game *game, t_step *step);
