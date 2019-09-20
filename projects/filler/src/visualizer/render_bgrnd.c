@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:24:43 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 19:16:14 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 16:58:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 static void		ren_info_win(t_vis *vis)
 {
-	SDL_SetRenderDrawColor(vis->ren, CLR_INFO_WIN >> 16 & 0xff,\
-			CLR_INFO_WIN >> 8 & 0xff, CLR_INFO_WIN & 0xff, SDL_ALPHA_OPAQUE);
+	SDL_Color	clr;
+
+	clr = get_color(CLR_INFO_WIN, 1, 0);
+	SDL_SetRenderDrawColor(vis->ren, clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRects(vis->ren, vis->info_win, 4);
-	SDL_SetRenderDrawColor(vis->ren, CLR_UP_WIN >> 16 & 0xff,\
-				CLR_UP_WIN >> 8 & 0xff, CLR_UP_WIN & 0xff, SDL_ALPHA_OPAQUE);
+	clr = get_color(CLR_UP_WIN, 1, 0);
+	SDL_SetRenderDrawColor(vis->ren, clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderFillRects(vis->ren, vis->up_win, 5);
 }
 
@@ -60,4 +62,6 @@ void		render_bgrnd(t_game *game, t_vis *vis, t_step *step)
 	ren_cntrl_key(vis);
 	ren_progression(vis, game, step);
 	ren_score(vis, game, step);
+	if (step->fin)
+		ren_fin(vis, game);
 }

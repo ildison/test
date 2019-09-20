@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 19:58:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 18:15:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,14 @@
 # define CLR_BG_G 26
 # define CLR_BG_B 42
 
-# define CLR_O 0x8afa6c
-# define CLR_X 0xfe6e7e
-# define CLR_P 0xd8d8d8
+# define CLR_O 0x039482
+# define CLR_X 0x820199
+# define CLR_P 0xbebebe
 # define CLR_BG 0x1b2437
 
-# define CLR_LOGO 0xb552a8
+# define CLR_LOGO 0x2ea491
 # define CLR_INFO_WIN 0x1c243b
 # define CLR_UP_WIN 0x242b47
-
-# define SIZE_MAP(n)
-
-#define H printf("HERE\n")
 
 typedef struct		s_pnt
 {
@@ -91,6 +87,7 @@ typedef struct		s_vis
 	SDL_Rect		size_text;
 	SDL_Rect		info_win[4];
 	SDL_Rect		up_win[5];
+	SDL_Rect		fin_win;
 	SDL_Color		color_text;
 	SDL_Event		e;
 	SDL_Rect		bgrnd_board;
@@ -106,6 +103,7 @@ typedef struct		s_game
 {
 	char			*p1;
 	char			*p2;
+	char			*p_win;
 	char			*p1_score;
 	char			*p2_score;
 	int				p1_tokens;
@@ -136,6 +134,7 @@ SDL_Texture			*create_texture(TTF_Font *font, char *text,\
 										SDL_Renderer *ren, SDL_Color color);
 void				score(t_vis *vis, t_game *game);
 void				ren_score(t_vis *vis, t_game *game, t_step *stp);
-SDL_Color			get_color(int clr, int clr_cof);
+SDL_Color			get_color(int clr, int clr_cof, int fin);
+void				ren_fin(t_vis *vis, t_game *game);
 
 # endif
