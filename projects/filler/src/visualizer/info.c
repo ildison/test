@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 13:53:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 19:58:16 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 14:49:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ SDL_Texture		*create_texture(TTF_Font *font, char *text, SDL_Renderer *ren,\
 
 void			head(t_vis *vis)
 {
-	vis->color_text = get_color(CLR_P, 1);
+	vis->color_text = get_color(CLR_P, 1, 0);
 	vis->head[0] = create_texture(vis->font_text, INFO, vis->ren,\
 													vis->color_text);
 	vis->head[1] = create_texture(vis->font_text, KEYS, vis->ren,\

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 20:07:49 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 18:13:15 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ static void		logo(t_vis *vis)
 	SDL_Surface	*text;
 	SDL_Color	color;
 
-	color.r = CLR_LOGO >> 16 & 0xff;
-	color.g = CLR_LOGO >> 8 & 0xff;
-	color.b = CLR_LOGO & 0xff;
+	color = get_color(CLR_LOGO, 1, 0);
 	TTF_SizeText(vis->font_logo, LOGO, &vis->size_logo.w, &vis->size_logo.h);
 	vis->size_logo.x = 30;
 	vis->size_logo.y = 20;
@@ -75,17 +73,28 @@ static void		wins_for_info(t_vis *vis)
 	vis->info_win[0].w = vis->size_logo.w + 20;
 	vis->info_win[0].h = size_text.y * 5;
 	vis->info_win[1].x = vis->info_win[0].x;
-	vis->info_win[1].y = vis->info_win[0].y + vis->info_win[0].h + 40;
+	vis->info_win[1].y = vis->info_win[0].y + vis->info_win[0].h + 50;
 	vis->info_win[1].w = vis->info_win[0].w;
 	vis->info_win[1].h = size_text.y * 6;
 	vis->info_win[2].x = vis->info_win[1].x;
-	vis->info_win[2].y = vis->info_win[1].y + vis->info_win[1].h + 40;
+	vis->info_win[2].y = vis->info_win[1].y + vis->info_win[1].h + 50;
 	vis->info_win[2].w = vis->info_win[0].w;
 	vis->info_win[2].h = size_text.y * 4;
 	vis->info_win[3].x = vis->info_win[2].x;
-	vis->info_win[3].y = vis->info_win[2].y + vis->info_win[2].h + 40;
+	vis->info_win[3].y = vis->info_win[2].y + vis->info_win[2].h + 50;
 	vis->info_win[3].w = vis->info_win[0].w;
 	vis->info_win[3].h = size_text.y * 4;
+}
+
+static void		fin_win(t_vis *vis)
+{
+	t_pnt		size_text;
+
+	TTF_SizeText(vis->font_logo, "cormund win", &size_text.x, &size_text.y);
+	vis->fin_win.h = size_text.y * 8;
+	vis->fin_win.w = size_text.x * 1.4;
+	vis->fin_win.x = (vis->bgrnd_board.w - vis->fin_win.w) / 2 + BG_BOARD_X;
+	vis->fin_win.y = (vis->bgrnd_board.h - vis->fin_win.h) / 2 + BG_BOARD_Y;
 }
 
 void			background(t_game *game, t_vis *vis)
@@ -99,4 +108,5 @@ void			background(t_game *game, t_vis *vis)
 	control_keys(vis);
 	progression(vis);
 	score(vis, game);
+	fin_win(vis);
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/19 19:33:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/20 18:11:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		events(t_vis *vis, t_step **step)
 		--vis->clr_cof;
 }
 
-SDL_Color		get_color(int clr, int clr_cof)
+SDL_Color		get_color(int clr, int clr_cof, int fin)
 {
 	SDL_Color	color;
 
@@ -46,6 +46,13 @@ SDL_Color		get_color(int clr, int clr_cof)
 	color.r = ((clr >> 16) & 0xff) * clr_cof;
 	color.g = ((clr >> 8) & 0xff) * clr_cof;
 	color.b = (clr & 0xff) * clr_cof;
+	color.a = 0xff;
+	if (fin && (clr == CLR_O || clr == CLR_X || clr == CLR_P))
+	{
+		color.r /= 5;
+		color.g /= 5;
+		color.b /= 5;
+	}
 	return (color);
 }
 
@@ -62,7 +69,7 @@ void		render_rects(t_game *game, t_vis *vis, t_step *stp)
 	n = 0;
 	while (rect.y < (vis->bgrnd_board.h + BG_BOARD_Y))
 	{
-		color = get_color(stp->clrs[n], vis->clr_cof);
+		color = get_color(stp->clrs[n], vis->clr_cof, stp->fin);
 		SDL_SetRenderDrawColor(vis->ren, color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 		SDL_RenderFillRect(vis->ren, &rect);
 		++n;
@@ -82,8 +89,8 @@ void		render_update(t_game *game, t_vis *vis, t_step *step)
 	SDL_RenderClear(vis->ren);
 	if (step)
 	{
-		render_bgrnd(game, vis, step);
 		render_rects(game, vis, step);
+		render_bgrnd(game, vis, step);
 	}
 	SDL_RenderPresent(vis->ren);
 }
