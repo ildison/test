@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 18:28:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 18:11:07 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/21 21:40:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void		events(t_vis *vis, t_step **step)
 {
-	if (vis->e.type == SDL_QUIT || vis->keyState[SDL_SCANCODE_ESCAPE])
+	if (SDL_EVENT == SDL_QUIT || SDL_KEYSTATE[SDL_ESCAPE])
 		vis->quit = SDL_TRUE;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_SPACE])
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_SPACE])
 		vis->pause ^= SDL_TRUE;
-	else if (vis->pause && vis->e.type == SDL_KEYDOWN &&\
-		vis->keyState[SDL_SCANCODE_RIGHT] && *step && (*step)->next)
+	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
+			SDL_KEYSTATE[SDL_RIGHT] && *step && (*step)->next)
 		*step = (*step)->next;
-	else if (vis->pause && vis->e.type == SDL_KEYDOWN &&\
-		vis->keyState[SDL_SCANCODE_LEFT] && *step && (*step)->prev)
+	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
+			SDL_KEYSTATE[SDL_LEFT] && *step && (*step)->prev)
 		*step = (*step)->prev;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_PLUS] &&\
-															vis->delay < 100)
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_PLUS] &&\
+													vis->delay < 100)
 		++vis->delay;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_KP_MINUS] &&\
-																vis->delay > 0)
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_MINUS] &&\
+													vis->delay > 0)
 		--vis->delay;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_UP])
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_UP])
 		++vis->clr_cof;
-	else if (vis->e.type == SDL_KEYDOWN && vis->keyState[SDL_SCANCODE_DOWN]
-															&& vis->clr_cof > 1)
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_DOWN] &&\
+													vis->clr_cof > 1)
 		--vis->clr_cof;
 }
 
