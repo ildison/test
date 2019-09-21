@@ -6,11 +6,41 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:16:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 19:55:48 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:25:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fl_visualizer.h"
+
+void			cleaning_up(t_game *game)
+{
+	char		*line;
+	t_step		*stp;
+	t_step		*tmp;
+
+	if (get_next_line(STD_OUT, &line))
+	{
+		ft_printf("Wait for the VM to finish.\n");
+		free(line);
+		while (get_next_line(STD_OUT, &line))
+			free(line);
+		ft_printf("VM finished.\n");
+	}
+	if ((stp = *game->start_step))
+		while ((tmp = stp))
+		{
+			stp = stp->next;
+			ft_memdel((void *)&tmp->clrs);
+			ft_memdel((void *)tmp);
+		}
+	ft_memdel((void *)*game->start_step);
+	ft_memdel((void *)&game->vis);
+	ft_memdel((void *)&game->p1);
+	ft_memdel((void *)&game->p2);
+	ft_memdel((void *)&game->p_win);
+	ft_memdel((void *)&game->p1_score);
+	ft_memdel((void *)&game->p2_score);
+}
 
 void			print_vm_error()
 {
@@ -42,6 +72,7 @@ void			visualizer()
 	init(game);
 	loop(game, game->vis, step);
 	destroy_init(game->vis);
+	cleaning_up(game);
 }
 
 int				main()

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 19:51:53 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/21 21:37:28 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 # define P2 'X'
 # define LOWER_P1 'o'
 # define LOWER_P2 'x'
+
+# define SDL_EVENT vis->e.type
+# define SDL_KEYSTATE vis->keyState
+# define SDL_ESCAPE SDL_SCANCODE_ESCAPE
+# define SDL_SPACE SDL_SCANCODE_SPACE
+# define SDL_RIGHT SDL_SCANCODE_RIGHT
+# define SDL_LEFT SDL_SCANCODE_LEFT
+# define SDL_PLUS SDL_SCANCODE_KP_PLUS
+# define SDL_MINUS SDL_SCANCODE_KP_MINUS
+# define SDL_UP SDL_SCANCODE_UP
+# define SDL_DOWN SDL_SCANCODE_DOWN
 
 # define LOGO "FILLER"
 # define INFO "INFORMATION"
