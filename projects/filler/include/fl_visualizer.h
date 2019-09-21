@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/21 21:37:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/21 22:28:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "libft.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
+
+# define SCREEN_WIDTH 1420
+# define SCREEN_HEIGHT 800
+
+# define BG_BOARD_X SCREEN_WIDTH / 5
+# define BG_BOARD_Y SCREEN_HEIGHT / 12
 
 # define STD_OUT 0
 # define P1 'O'
@@ -44,12 +50,6 @@
 # define PREV_NEXT "Prev/next  :  left/right"
 # define EDIT_CLR "Edir color  :  up/down"
 # define SPEED "Speed  :  plus/minus"
-
-# define SCREEN_WIDTH 1420
-# define SCREEN_HEIGHT 800
-
-# define BG_BOARD_X SCREEN_WIDTH / 5
-# define BG_BOARD_Y SCREEN_HEIGHT / 12
 
 # define CLR_BG_R 19
 # define CLR_BG_G 26
