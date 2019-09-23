@@ -6,11 +6,11 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:24:43 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 16:58:18 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 13:33:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fl_visualizer.h"
+#include "fl_visualizer.h"
 
 static void		ren_info_win(t_vis *vis)
 {
@@ -53,7 +53,7 @@ static void		ren_logo(t_vis *vis)
 	SDL_RenderCopy(vis->ren, vis->logo, NULL, &vis->size_logo);
 }
 
-void		render_bgrnd(t_game *game, t_vis *vis, t_step *step)
+void			render_bgrnd(t_game *game, t_vis *vis, t_step *step)
 {
 	ren_info_win(vis);
 	ren_head(vis);

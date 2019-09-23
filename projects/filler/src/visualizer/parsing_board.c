@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 20:09:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 13:31:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	parsing_plrs(t_game *game)
 	char	*line;
 	char	*tmp;
 
-	while(get_next_line(STD_OUT, &line) && *line != '$' && *line != 'e' &&\
+	while (get_next_line(STD_OUT, &line) && *line != '$' && *line != 'e' &&\
 																*line != 'r')
 		free(line);
 	if (*line == 'e' || *line == 'r')
@@ -48,97 +48,6 @@ static void	parsing_size(t_pnt *size)
 		++tmp;
 	size->x = ft_atoi(tmp + 1);
 	free(line);
-}
-
-t_step		*new_lst_step(t_game *game)
-{
-	t_step	*new_step;
-	int		square;
-
-	new_step = (t_step *)ft_memalloc(sizeof(t_step));
-	if (!new_step)
-		error(strerror(errno));
-	square = game->size_board.x * game->size_board.y;
-	new_step->clrs = (int *)ft_memalloc(sizeof(int) * square);
-	if (!new_step->clrs)
-		error(strerror(errno));
-	return (new_step);
-}
-
-void		add_top_step(t_step **beg, t_step *step)
-{
-	t_step	*lst;
-
-	if (!*beg)
-		*beg = step;
-	else
-	{
-		lst = *beg;
-		while (lst->next)
-			lst = lst->next;
-		step->prev = lst;
-		lst->next = step;
-	}
-}
-
-void 		parsing_step(t_game *game, t_step *stp, char *board, int y)
-{
-	while (*board)
-	{
-
-		if (*board == P1)
-			stp->clrs[stp->n_clrs] = CLR_O;
-		else if (*board == P2)
-			stp->clrs[stp->n_clrs] = CLR_X;
-		else if (ft_islower(*board))
-		{
-			stp->clrs[stp->n_clrs] = CLR_P;
-			if (!game->token_flag)
-			{
-				if (*board == LOWER_P1)
-					++game->p1_tokens;
-				else
-					++game->p2_tokens;
-				++game->token_flag;
-			}
-		}
-		else
-			stp->clrs[stp->n_clrs] = CLR_BG;
-		++stp->n_clrs;
-		++board;
-	}
-}
-
-static t_step	*parsing_board(t_game *game)
-{
-	t_step		*stp;
-	char		*line;
-	int			y;
-
-	stp = new_lst_step(game);
-	add_top_step(game->start_step, stp);
-	while (get_next_line(STD_OUT, &line) > 0 && (*line != ' ' || *line == '='))
-		ft_memdel((void *)&line);
-	if (!line)
-	{
-		ft_memcpy(stp, stp->prev, sizeof(t_step) - sizeof(t_step *) * 2);
-		stp->fin = SDL_TRUE;
-		return (stp);
-	}
-	else
-		free(line);
-	game->token_flag = 0;
-	y = 0;
-	while (y < game->size_board.y && get_next_line(STD_OUT, &line) > 0)
-	{
-		parsing_step(game, stp, line + 4, y);
-		ft_memdel((void *)&line);
-		++y;
-	}
-	stp->n_stp = ++game->n_stp;
-	stp->p1_tokens = game->p1_tokens;
-	stp->p2_tokens = game->p2_tokens;
-	return(stp);
 }
 
 t_step		*next_step(t_game *game, t_step *step)
