@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:37:05 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 18:13:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 17:25:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,6 @@ static void		bgrnt_board(t_vis *vis, t_game *game)
 	game->size_rect.y = (SCREEN_HEIGHT - BG_BOARD_Y - 25) / game->size_board.y;
 	vis->bgrnd_board.w = game->size_rect.x * game->size_board.x;
 	vis->bgrnd_board.h = game->size_rect.y * game->size_board.y;
-}
-
-static void		logo(t_vis *vis)
-{
-	SDL_Surface	*text;
-	SDL_Color	color;
-
-	color = get_color(CLR_LOGO, 1, 0);
-	TTF_SizeText(vis->font_logo, LOGO, &vis->size_logo.w, &vis->size_logo.h);
-	vis->size_logo.x = 30;
-	vis->size_logo.y = 20;
-	text = TTF_RenderText_Blended(vis->font_logo, LOGO, color);
-	vis->logo = SDL_CreateTextureFromSurface(vis->ren, text);
-	SDL_FreeSurface(text);
 }
 
 static void		head_wins(t_vis *vis)

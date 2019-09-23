@@ -6,23 +6,11 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 13:53:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/20 14:49:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 17:25:59 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fl_visualizer.h"
-
-SDL_Texture		*create_texture(TTF_Font *font, char *text, SDL_Renderer *ren,\
-															SDL_Color color)
-{
-	SDL_Texture	*tex;
-	SDL_Surface	*surf;
-
-	surf = TTF_RenderText_Blended(font, text, color);
-	tex = SDL_CreateTextureFromSurface(ren, surf);
-	SDL_FreeSurface(surf);
-	return (tex);
-}
+#include "fl_visualizer.h"
 
 void			head(t_vis *vis)
 {
@@ -72,8 +60,6 @@ void			control_keys(t_vis *vis)
 
 void			progression(t_vis *vis)
 {
-	t_pnt		indent;
-
 	TTF_SizeText(vis->font_text, "Current step  :  ", &vis->progress[0].x,\
 														&vis->progress[0].y);
 	vis->progress[0].x = vis->up_win[3].x + vis->up_win[3].w / 2 -\
@@ -88,8 +74,6 @@ void			progression(t_vis *vis)
 
 void			score(t_vis *vis, t_game *game)
 {
-	t_pnt		indent;
-
 	game->p1_score = ft_strjoin(game->p1, "  :  ");
 	game->p2_score = ft_strjoin(game->p2, "  :  ");
 	TTF_SizeText(vis->font_text, game->p1_score, &vis->score[0].x,\

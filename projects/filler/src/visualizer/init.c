@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:16 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/21 21:41:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 12:34:36 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void		destroy_init(t_vis *vis)
 
 static void	open_font(t_vis *vis)
 {
-	vis->font_logo = TTF_OpenFont("/font/filler_logo.ttf", 40);
+	vis->font_logo = TTF_OpenFont("/src/visualizer/font/filler_logo.ttf", 40);
 	if (!vis->font_logo)
 		error(TTF_GetError());
-	vis->font_text = TTF_OpenFont("/font/FuturaPT-Light.ttf", 18);
+	vis->font_text = TTF_OpenFont("/src/visualizer/font/FuturaPT-Light.ttf",\
+																		18);
 	if (!vis->font_logo)
 		error(TTF_GetError());
 }
