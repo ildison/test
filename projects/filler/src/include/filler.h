@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/09 17:58:49 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 18:17:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # define FL_PLAYER_NAME "cormund"
 # define FL_FD 0
 
-# define check_size(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
+# define CHECK_SIZE(size, x, y) (x >= 0 && y >= 0 && y < size.y && x < size.x)
+# define ISMYBOT(plr, c) (ft_toupper(plr) == ft_toupper(c))
 
 typedef struct		s_pnt
 {
 	short				y;
 	short				x;
 }					t_pnt;
-
 
 typedef struct		s_fl
 {
@@ -41,7 +41,9 @@ typedef struct		s_fl
 	short			fl_exit;
 }					t_fl;
 
+void				error(const char *err_msg);
 void				read_board(t_fl *fl);
+void				malloc_heat_map_and_piece(t_fl *fl);
 void				prep_heat_map(t_fl *fl, char *line, int y);
 void				heat_map(t_fl *fl);
 void				sort(t_fl *fl);
