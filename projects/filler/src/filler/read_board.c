@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/09 18:27:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 18:23:59 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	parsing_size(t_pnt *size)
 	while (!ft_isdigit(*s))
 		++s;
 	size->y = ft_atoi(s);
-	while(ft_isdigit(*s))
+	while (ft_isdigit(*s))
 		++s;
 	size->x = ft_atoi(s + 1);
 	free(line);
@@ -34,28 +34,15 @@ static void	parsing_plr(t_fl *fl)
 	char	*line;
 
 	while (get_next_line(FL_FD, &line) > 0 && *line != '$')
-		free(line);
+		ft_memdel((void *)line);
 	if (ft_strstr(line, "p1"))
 		fl->plr = 'o';
 	else
 		fl->plr = 'x';
 	free(line);
-}
-
-void		malloc_heat_map_and_piece(t_fl *fl)
-{
-	int		i;
-
-	fl->piece = (t_pnt *)malloc(sizeof(t_pnt) * fl->size_board.y * fl->size_board.x);
-	fl->heat_map = (int **)malloc(sizeof(int *) * (fl->size_board.y + 1));
-	i = 0;
-	while (i < fl->size_board.y)
-	{
-		fl->heat_map[i] = (int *)malloc(sizeof(int) *fl->size_board.x);
-		ft_bzero(fl->heat_map[i], sizeof(int) *fl->size_board.x);
-		++i;
-	}
-	fl->heat_map[fl->size_board.y] = NULL;
+	if (get_next_line(FL_FD, &line) == 0)
+		exit(0);
+	free(line);
 }
 
 static void	parsing_board(t_fl *fl)
@@ -102,12 +89,12 @@ static void	parsing_piece(t_fl *fl)
 
 void		read_board(t_fl *fl)
 {
-	if(!fl->plr)
+	if (!fl->plr)
 	{
 		parsing_plr(fl);
 		parsing_size(&fl->size_board);
 		malloc_heat_map_and_piece(fl);
 	}
-		parsing_board(fl);
-		parsing_piece(fl);
+	parsing_board(fl);
+	parsing_piece(fl);
 }

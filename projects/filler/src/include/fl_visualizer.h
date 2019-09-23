@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/23 17:25:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/23 18:20:28 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define LOWER_P2 'x'
 
 # define SDL_EVENT vis->e.type
-# define SDL_KEYSTATE vis->keyState
+# define SDL_KEYSTATE vis->keystate
 # define SDL_ESCAPE SDL_SCANCODE_ESCAPE
 # define SDL_SPACE SDL_SCANCODE_SPACE
 # define SDL_RIGHT SDL_SCANCODE_RIGHT
@@ -107,7 +107,7 @@ typedef struct		s_vis
 	SDL_bool		pause;
 	int				clr_cof;
 	int				delay;
-	const Uint8 	*keyState;
+	const Uint8		*keystate;
 	int				n_ltc;
 }					t_vis;
 
@@ -130,10 +130,10 @@ typedef struct		s_game
 
 void				print_vm_error();
 void				error(const char *err_msg);
-void        		loop(t_game *game, t_vis *vis, t_step *step);
+void				loop(t_game *game, t_vis *vis, t_step *step);
 t_step				*next_step(t_game *game, t_step *step);
 t_step				*parsing_board(t_game *game);
-void        		background(t_game *game, t_vis *vis);
+void				background(t_game *game, t_vis *vis);
 void				init(t_game *game);
 void				destroy_init(t_vis *vis);
 void				render_bgrnd(t_game *game, t_vis *vis, t_step *step);
@@ -152,4 +152,4 @@ void				ren_score(t_vis *vis, t_game *game, t_step *stp);
 SDL_Color			get_color(int clr, int clr_cof, int fin);
 void				ren_fin(t_vis *vis, t_game *game);
 
-# endif
+#endif
