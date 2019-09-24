@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 11:31:00 by cormund           #+#    #+#              #
-#    Updated: 2019/09/23 17:30:46 by cormund          ###   ########.fr        #
+#    Updated: 2019/09/24 12:18:12 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ all: $(NAME) $(VISUAL)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/$(NAME)/, $(OBJ)) -lft -L $(DIR_LIBFT) -o $@
+	@printf "\r\e[J\e[32m$@\e[0m done!\n\e[?25h"
 
 $(VISUAL): $(LIBFT) $(OBJ_VIS)
 	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/$(VISUAL)/, $(OBJ_VIS)) -lft -L $(DIR_LIBFT) $(SDL_LIBS) -o $@
