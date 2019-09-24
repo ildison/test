@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:40:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/23 13:31:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/24 12:25:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	parsing_plrs(t_game *game)
 
 	while (get_next_line(STD_OUT, &line) && *line != '$' && *line != 'e' &&\
 																*line != 'r')
-		free(line);
-	if (*line == 'e' || *line == 'r')
+		ft_memdel((void *)&line);
+	if (!line || *line == 'e' || *line == 'r')
 		print_vm_error();
 	tmp = ft_strrchr(line, '/');
 	game->p1 = ft_strcut(tmp + 1, '.');

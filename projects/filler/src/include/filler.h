@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 16:57:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/23 18:17:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/24 11:15:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct		s_fl
 }					t_fl;
 
 void				error(const char *err_msg);
-void				read_board(t_fl *fl);
+int					read_board(t_fl *fl);
 void				malloc_heat_map_and_piece(t_fl *fl);
 void				prep_heat_map(t_fl *fl, char *line, int y);
 void				heat_map(t_fl *fl);

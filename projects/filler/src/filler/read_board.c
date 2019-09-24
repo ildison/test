@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 17:26:50 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/23 18:23:59 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/24 13:02:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ static void	parsing_size(t_pnt *size)
 	while (get_next_line(FL_FD, &line) > 0 && *line != 'P')
 		free(line);
 	s = line;
-	while (!ft_isdigit(*s))
+	while (*s && !ft_isdigit(*s))
 		++s;
-	size->y = ft_atoi(s);
-	while (ft_isdigit(*s))
+	if (*s)
+		size->y = ft_atoi(s);
+	while (*s && ft_isdigit(*s))
 		++s;
-	size->x = ft_atoi(s + 1);
+	if (*s)
+		size->x = ft_atoi(s + 1);
 	free(line);
 }
 
@@ -33,16 +35,13 @@ static void	parsing_plr(t_fl *fl)
 {
 	char	*line;
 
-	while (get_next_line(FL_FD, &line) > 0 && *line != '$')
-		ft_memdel((void *)line);
+	while (get_next_line(FL_FD, &line) && *line != '$')
+		free(line);
 	if (ft_strstr(line, "p1"))
 		fl->plr = 'o';
 	else
 		fl->plr = 'x';
-	free(line);
-	if (get_next_line(FL_FD, &line) == 0)
-		exit(0);
-	free(line);
+	ft_memdel((void *)&line);
 }
 
 static void	parsing_board(t_fl *fl)
@@ -84,17 +83,21 @@ static void	parsing_piece(t_fl *fl)
 			++x;
 		}
 		++y;
+		free(line);
 	}
 }
 
-void		read_board(t_fl *fl)
+int			read_board(t_fl *fl)
 {
 	if (!fl->plr)
 	{
 		parsing_plr(fl);
 		parsing_size(&fl->size_board);
+		if (fl->size_board.x == 0)
+			return (1);
 		malloc_heat_map_and_piece(fl);
 	}
 	parsing_board(fl);
 	parsing_piece(fl);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 15:16:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/23 17:19:30 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/24 12:25:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ void			print_vm_error(void)
 {
 	char		*line;
 
-	get_next_line(STD_OUT, &line);
-	ft_printf("error:\n%s\n", line);
-	free(line);
+	if (get_next_line(STD_OUT, &line))
+	{
+		ft_printf("error:\n%s\n", line);
+		free(line);
+	}
 	exit(-1);
 }
 
