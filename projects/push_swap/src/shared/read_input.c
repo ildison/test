@@ -6,25 +6,20 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/30 19:27:23 by cormund          ###   ########.fr       */
+/*   Updated: 2019/09/30 20:10:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_shared.h"
 
-void			error(char *error)
-{
-	if (error)
-		write(1, error, ft_strlen(error));
-	exit(-1);
-}
-
-void		valid_correctly_format(char *s, int *num_int)
+static void	valid_correctly_format(char *s, int *num_int)
 {
 	char	*num_alph;
 
 	*num_int = ft_atoi(s);
 	num_alph = ft_itoa(*num_int);
+	if (*num_alph == '-' && *s != '-')
+		error(ERROR);
 	if (*num_alph == '-' || *num_alph == '0')
 		++num_alph;
 	if (*s == '-' || *s == '+')
@@ -37,7 +32,7 @@ void		valid_correctly_format(char *s, int *num_int)
 		error(ERROR);
 }
 
-void		check_dublicate(t_stack **a, int num)
+static void	check_dublicate(t_stack **a, int num)
 {
 	t_stack	*lst;
 
@@ -77,7 +72,7 @@ void		add_int_to_stack(t_stack **a, int num)
 	}
 }
 
-int			parsing_flag(char *s, char *flags)
+static int	parsing_flag(char *s, char *flags)
 {
 	char	flag_collector;
 
@@ -100,7 +95,7 @@ int			parsing_flag(char *s, char *flags)
 	return (1);
 }
 
-void		validation_and_create_stack(t_stack **a, char **mas, char *flags)
+static void	validation_and_create_stack(t_stack **a, char **mas, char *flags)
 {
 	int		num;
 
@@ -119,6 +114,7 @@ void		validation_and_create_stack(t_stack **a, char **mas, char *flags)
 void		read_arg(t_stack **a, int n_arg, char **arg, char *flags)
 {
 	char	**mas;
+
 
 	while (n_arg)
 	{

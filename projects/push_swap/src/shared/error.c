@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_checker.h                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/27 14:30:32 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/30 20:30:51 by cormund          ###   ########.fr       */
+/*   Created: 2019/09/30 19:48:47 by cormund           #+#    #+#             */
+/*   Updated: 2019/09/30 19:49:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_CHECKER_H
-# define PS_CHECKER_H
+#include "ps_shared.h"
 
-# include "ps_shared.h"
-
-# define PS_STDIN 0
-
-typedef struct		s_checker
+void			error(char *error)
 {
-	t_stack			*a;
-	t_stack			*b;
-	char			flags;
-}					t_checker;
-
-# endif
+	if (error)
+		write(1, error, ft_strlen(error));
+	exit(-1);
+}
