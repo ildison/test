@@ -3,5 +3,10 @@
 		{
 			"path": "/Users/cormund/git_clones/work/projects/push_swap"
 		}
-	]
+	],
+	"settings": {
+		"files.associations": {
+			"algorithm": "c"
+		}
+	}
 }
