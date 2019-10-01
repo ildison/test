@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:36:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 15:50:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ static int	parsing_flag(char *s, char *flags)
 	if (*s == '-')
 		++s;
 	else
-		return(0);
+		return (0);
 	if (ft_isdigit(*s))
-		return(0);
+		return (0);
 	flag_collector = 0;
 	while (*s)
 	{
@@ -114,7 +114,6 @@ static void	validation_and_create_stack(t_stack **a, char **mas, char *flags)
 void		read_arg(t_stack **a, int n_arg, char **arg, char *flags)
 {
 	char	**mas;
-
 
 	while (n_arg)
 	{

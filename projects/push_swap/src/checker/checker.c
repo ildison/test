@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:07:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:47:05 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 15:49:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				check_sorted(t_stack *a, t_stack *b)
 	t_stack		*top;
 
 	if (b)
-		return(1);
+		return (1);
 	top = a;
 	while (a->next != top)
 	{
@@ -40,7 +40,7 @@ void			checker(int n_arg, char **arg)
 	check_sorted(chkr->a, chkr->b) ? PS_KO : PS_OK;
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	if (ac > 1)
 		checker(ac - 1, av + 1);
