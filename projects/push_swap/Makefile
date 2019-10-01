@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 14:26:39 by cormund           #+#    #+#              #
-#    Updated: 2019/10/01 16:39:00 by cormund          ###   ########.fr        #
+#    Updated: 2019/10/01 19:01:54 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ vpath %.a $(DIR_LIBFT)
 
 SRC_SHARED := read_input.c\
 				error.c\
-				operations.c
+				operations.c\
+				stack_funs.c
 
 SRC_CHECKER := checker.c\
 				read_operations.c
