@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/09/30 20:10:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 15:36:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static void	valid_correctly_format(char *s, int *num_int)
 	*num_int = ft_atoi(s);
 	num_alph = ft_itoa(*num_int);
 	if (*num_alph == '-' && *s != '-')
-		error(ERROR);
+		error(PS_ERROR);
 	if (*num_alph == '-' || *num_alph == '0')
 		++num_alph;
 	if (*s == '-' || *s == '+')
 		++s;
 	if (!*s)
-		error(ERROR);
+		error(PS_ERROR);
 	while (*s && *s == '0')
 		++s;
 	if (!ft_strequ(s, num_alph))
-		error(ERROR);
+		error(PS_ERROR);
 }
 
 static void	check_dublicate(t_stack **a, int num)
@@ -40,10 +40,10 @@ static void	check_dublicate(t_stack **a, int num)
 	if (lst)
 	{
 		if (lst->num == num)
-			error(ERROR);
+			error(PS_ERROR);
 		while ((lst = lst->next) != *a)
 			if (lst->num == num)
-				error(ERROR);
+				error(PS_ERROR);
 	}
 }
 
@@ -55,16 +55,16 @@ void		add_int_to_stack(t_stack **a, int num)
 	if (!lst)
 	{
 		if (!(*a = (t_stack *)ft_memalloc(sizeof(t_stack))))
-			error(ERROR_MALLOC);
+			error(PS_ERROR_MALLOC);
 		(*a)->num = num;
-		(*a)->next = (*a);
+		(*a)->next = *a;
 	}
 	else
 	{
 		while (lst->next != *a)
 			lst = lst->next;
 		if (!(lst->next = (t_stack *)ft_memalloc(sizeof(t_stack))))
-			error(ERROR_MALLOC);
+			error(PS_ERROR_MALLOC);
 		lst->next->num = num;
 		lst->next->next = *a;
 		lst->next->prev = lst;
@@ -88,7 +88,7 @@ static int	parsing_flag(char *s, char *flags)
 		if (*s == 'v')
 			flag_collector |= VISUAL_FLAG;
 		else
-			error(ERROR);
+			error(PS_ERROR);
 		++s;
 	}
 	*flags |= flag_collector;
