@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 13:03:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 19:00:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ typedef struct		s_stack
 
 void				error(char *error);
 void				read_arg(t_stack **a, int n_arg, char **arg, char *flags);
+void				add_int_to_stack(t_stack **a, int num);
 void				swap(t_stack **top);
 void				push(t_stack **dst, t_stack **src);
 void				rotate(t_stack **top);
 void				reverse(t_stack **top);
+int					size_stack(t_stack *s);
 
 # endif

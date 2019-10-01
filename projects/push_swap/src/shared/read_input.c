@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:50:18 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 18:55:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,6 @@ static void	check_dublicate(t_stack **a, int num)
 		while ((lst = lst->next) != *a)
 			if (lst->num == num)
 				error(PS_ERROR);
-	}
-}
-
-void		add_int_to_stack(t_stack **a, int num)
-{
-	t_stack	*lst;
-
-	lst = *a;
-	if (!lst)
-	{
-		if (!(*a = (t_stack *)ft_memalloc(sizeof(t_stack))))
-			error(PS_ERROR_MALLOC);
-		(*a)->num = num;
-		(*a)->next = *a;
-	}
-	else
-	{
-		while (lst->next != *a)
-			lst = lst->next;
-		if (!(lst->next = (t_stack *)ft_memalloc(sizeof(t_stack))))
-			error(PS_ERROR_MALLOC);
-		lst->next->num = num;
-		lst->next->next = *a;
-		lst->next->prev = lst;
-		(*a)->prev = lst->next;
 	}
 }
 

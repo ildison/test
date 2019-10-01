@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 16:52:51 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/01 19:02:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		push_swap(int n_arg, char **arg)
 	if (!ps)
 		error(PS_ERROR_MALLOC);
 	read_arg(&ps->a, n_arg, arg, 0);
-	
+	printf("size = %d\n", size_stack(ps->a));
 }
 
 int		main(int ac, char **av)
