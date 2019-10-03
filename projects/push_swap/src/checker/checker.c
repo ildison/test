@@ -6,13 +6,13 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:07:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:49:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 10:20:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_checker.h"
 
-int				check_sorted(t_stack *a, t_stack *b)
+static int				check_sorted(t_stack *a, t_stack *b)
 {
 	t_stack		*top;
 

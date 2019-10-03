@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 19:00:02 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 10:43:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct		s_stack
 {
 	int				num;
+	short			i;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
@@ -36,5 +37,6 @@ void				push(t_stack **dst, t_stack **src);
 void				rotate(t_stack **top);
 void				reverse(t_stack **top);
 int					size_stack(t_stack *s);
+void				indexation(t_stack *stk);
 
 # endif
