@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/03 10:56:36 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 18:44:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ void		push_swap(int n_arg, char **arg)
 	if (!ps)
 		error(PS_ERROR_MALLOC);
 	read_arg(&ps->a, n_arg, arg, 0);
-	indexation(ps->a);
-
-	//stdout indexs
-	int size = size_stack(ps->a);
-	while (size--)
+	ps->sz_a = size_stack(ps->a);
+	if (ps->sz_a > 1 && check_sorted(ps->a, 0, ps->sz_a))
 	{
-		printf("%d %d\n", ps->a->num, ps->a->i);
+		indexation(ps->a, ps->sz_a);
+		sort(ps);
+	}
+
+	int i = 0;
+	while (i < ps->sz_a)
+	{
+		printf("%d ", ps->a->num);
+		++i;
 		ps->a = ps->a->next;
 	}
 }

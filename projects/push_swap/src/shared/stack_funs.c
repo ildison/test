@@ -6,11 +6,28 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:55:11 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 18:59:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 19:10:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_shared.h"
+
+int				check_sorted(t_stack *a, t_stack *b, int sz)
+{
+	int			i;
+
+	if (b)
+		return (1);
+	i = 1;
+	while (i < sz)
+	{
+		if (a->num > a->next->num)
+			return (1);
+		a = a->next;
+		++i;
+	}
+	return (0);
+}
 
 int			size_stack(t_stack *s)
 {

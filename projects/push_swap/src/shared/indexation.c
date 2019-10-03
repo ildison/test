@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 19:52:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/03 10:53:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 11:48:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,11 @@ static void	q_sort(t_stack **mas, int left, int right)
 	}
 }
 
-void		indexation(t_stack *stk)
+void		indexation(t_stack *stk, int size)
 {
 	t_stack	**mas;
-	int		size;
 	int		i;
 
-	size = size_stack(stk);
 	mas = (t_stack **)malloc(sizeof(t_stack *) * size);
 	if (!mas)
 		error(PS_ERROR_MALLOC);
@@ -84,6 +82,6 @@ void		indexation(t_stack *stk)
 	}
 	q_sort(mas, 0, size - 1);
 	while (size--)
-		mas[size]->i = size + 1;
+		mas[size]->i = i--;
 	free(mas);
 }

@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 14:26:39 by cormund           #+#    #+#              #
-#    Updated: 2019/10/03 10:43:47 by cormund          ###   ########.fr        #
+#    Updated: 2019/10/03 14:32:06 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC_SHARED := read_input.c\
 SRC_CHECKER := checker.c\
 				read_operations.c
 
-SRC_PUSH_SWAP := push_swap.c
+SRC_PUSH_SWAP := push_swap.c\
+				sort.c 
 
 # SRC_VIS := 
 
