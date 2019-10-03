@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 16:46:41 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 18:47:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ typedef struct		s_ps
 {
 	t_stack			*a;
 	t_stack			*b;
-	t_oper			**opers;
+	int				sz_a;
+	int				sz_b;
+	t_oper			*opers;
 }					t_ps;
+
+void				sort(t_ps *ps);
 
 # endif

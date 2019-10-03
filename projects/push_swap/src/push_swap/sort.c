@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/27 15:07:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/03 18:45:43 by cormund          ###   ########.fr       */
+/*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
+/*   Updated: 2019/10/03 19:11:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_checker.h"
+#include <push_swap.h>
 
-void			checker(int n_arg, char **arg)
+static void	sort_three_elem(t_stack **stk, int sz)
 {
-	t_checker	*chkr;
-
-	chkr = (t_checker *)ft_memalloc(sizeof(t_checker));
-	if (!chkr)
-		error(PS_ERROR_MALLOC);
-	read_arg(&chkr->a, n_arg, arg, &chkr->flags);
-	read_operations(chkr);
-	check_sorted(chkr->a, chkr->b, size_stack(chkr->a)) ? PS_KO : PS_OK;
+	while (check_sorted(*stk, 0, sz))
+	{
+		printf("here\n");
+		if ((*stk)->i < (*stk)->next->i || sz == 2)
+			reverse(stk);
+		else if ((*stk)->i < (*stk)->next->next->i)
+			swap(stk);
+		else
+			rotate(stk);
+	}
 }
 
-int				main(int ac, char **av)
+void		sort(t_ps *ps)
 {
-	if (ac > 1)
-		checker(ac - 1, av + 1);
-	return (0);
+	if (ps->sz_a <= 3)
+		sort_three_elem(&ps->a, ps->sz_a);
 }

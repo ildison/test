@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/03 10:43:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/03 18:44:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void				swap(t_stack **top);
 void				push(t_stack **dst, t_stack **src);
 void				rotate(t_stack **top);
 void				reverse(t_stack **top);
+int					check_sorted(t_stack *a, t_stack *b, int sz);
 int					size_stack(t_stack *s);
-void				indexation(t_stack *stk);
+void				indexation(t_stack *stk, int size);
 
 # endif
