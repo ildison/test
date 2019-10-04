@@ -5,20 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 09:33:33 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:49:35 by cormund          ###   ########.fr       */
+/*   Created: 209/0/0 9:33:33 by cormund           #+#    #+#             */
+/*   Updated: 209/0/4 06:34:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_shared.h"
 
-void		swap(t_stack **top)
+int			swap(t_stack **top)
 {
 	if (*top && (*top)->next != *top)
+	{
 		ft_swap(&(*top)->num, &(*top)->next->num);
+		ft_swap(&(*top)->i, &(*top)->next->i);
+		return (1);
+	}
+	return (0);
 }
 
-void		push(t_stack **dst, t_stack **src)
+int			push(t_stack **dst, t_stack **src)
 {
 	t_stack	*tmp_s;
 
@@ -44,17 +49,27 @@ void		push(t_stack **dst, t_stack **src)
 			tmp_s->prev = tmp_s;
 		}
 		*dst = tmp_s;
+		return (1);
 	}
+	return (0);
 }
 
-void		rotate(t_stack **top)
+int			rotate(t_stack **top)
 {
 	if (*top && (*top)->next != *top)
+	{
 		*top = (*top)->next;
+		return (1);
+	}
+	return (0);
 }
 
-void		reverse(t_stack **top)
+int			reverse(t_stack **top)
 {
 	if (*top && (*top)->next != *top)
+	{
 		*top = (*top)->prev;
+		return (1);
+	}
+	return (0);
 }
