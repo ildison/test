@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/03 18:47:18 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/04 12:48:30 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ typedef struct		s_ps
 }					t_ps;
 
 void				sort(t_ps *ps);
+void				ps_swap(t_ps *ps, t_stack **top);
+void				ps_push(t_ps *ps, t_stack **dst, t_stack **src);
+void				ps_rotate(t_ps *ps, t_stack **top);
+void				ps_reverse(t_ps *ps, t_stack **top);
 
 # endif
