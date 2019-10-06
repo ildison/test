@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/04 18:57:39 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/06 20:38:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,19 @@
 # define PS_ERROR "Error\n"
 # define PS_ERROR_OPER "Error: unvalid operation\n"
 # define PS_ERROR_MALLOC "Error: malloc\n"
-# define PS_FIRST_INDEX 1
-# define PS_MAX_INDEX_IN_STACK_B ps->sz_a - 3
-# define PS_PREVIOUS_MAX PS_MAX_INDEX_IN_STACK_B - 1
-# define PS_COUNT_MIN_AT_BOTTOM 0
+
+# define PS_OPERATIONS "sa/sb/ss/pa/pb/ra/rb/rr/rra/rrb/rrr"
+# define SA "sa"
+# define SB "sb"
+# define SS "ss"
+# define PA "pa"
+# define PB "pb"
+# define RA "ra"
+# define RB "rb"
+# define RR "rr"
+# define RRA "rra"
+# define RRB "rrb"
+# define RRR "rrr"
 
 # define VISUAL_FLAG 1
 

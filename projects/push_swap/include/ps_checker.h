@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 14:30:32 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:28:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/06 20:38:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ps_shared.h"
 
 # define PS_STDIN 0
-# define PS_OPERATIONS "sa/sb/ss/pa/pb/ra/rb/rr/rra/rrb/rrr"
+
 # define PS_OK ft_printf("OK\n")
 # define PS_KO ft_printf("KO\n")
 

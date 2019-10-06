@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 12:30:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:49:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/06 18:18:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void	validation_operation(char *oper)
 {
 	if (!ft_strstr(PS_OPERATIONS, oper))
+	{
+		printf("\n%s\n", oper);
 		error(PS_ERROR_OPER);
+	}
 }
 
 static void	application_operations(t_stack **a, t_stack **b, char *oper)
