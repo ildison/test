@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/04 16:55:46 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/06 19:48:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@ static void	add_oper(t_oper **op, char *oper)
 {
 	t_oper	*tmp;
 
-	if (!*op)
+	if (!(tmp = *op))
 	{
-		*op = (t_oper *)ft_memalloc(sizeof(t_oper));
-		if (!oper)
+		if (!(*op = (t_oper *)ft_memalloc(sizeof(t_oper))))
 			error(PS_ERROR_MALLOC);
 		ft_strcpy((*op)->oper, oper);
 	}
 	else
 	{
-		tmp = *op;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = (t_oper *)ft_memalloc(sizeof(t_oper));
-		if (!oper)
+		if (!(tmp = tmp->next))
 			error(PS_ERROR_MALLOC);
-		ft_strcpy(tmp->next->oper, oper);
+		ft_strcpy(tmp->oper, oper);
 	}
 }
 

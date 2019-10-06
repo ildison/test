@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/04 13:00:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/06 21:44:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,27 @@ static void		push_swap(int n_arg, char **arg)
 	{
 		indexation(ps->a, ps->sz_a);
 		sort(ps);
+		// print_opers(ps->opers);
+		// printf("---------------\n");
+		optimization_opers(ps->opers);
 		print_opers(ps->opers);
 	}
 
-	int i = 0;
-	while (i < ps->sz_a)
-	{
-		printf("%d ", ps->a->num);
-		++i;
-		ps->a = ps->a->next;
-	}
+	// int i = 0;
+	// while (i < ps->sz_a)
+	// {
+	// 	printf("%d ", ps->a->num);
+	// 	++i;
+	// 	ps->a = ps->a->next;
+	// }
+	// printf("\n");
+	// i = 0;
+	// while (i < ps->sz_b)
+	// {
+	// 	printf("%d ", ps->b->num);
+	// 	++i;
+	// 	ps->b = ps->b->next;
+	// }
 }
 
 int				main(int ac, char **av)

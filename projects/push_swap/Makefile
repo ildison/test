@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 14:26:39 by cormund           #+#    #+#              #
-#    Updated: 2019/10/04 12:48:59 by cormund          ###   ########.fr        #
+#    Updated: 2019/10/06 20:58:42 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ SRC_CHECKER := checker.c\
 
 SRC_PUSH_SWAP := push_swap.c\
 				sort.c\
-				collection_opers.c
+				collection_opers.c\
+				sort_first_hyndred.c\
+				optimization_opers.c
 
 # SRC_VIS := 
 
