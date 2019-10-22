@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 12:30:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/06 18:18:14 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/22 15:40:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	validation_operation(char *oper)
 	}
 }
 
-static void	application_operations(t_stack **a, t_stack **b, char *oper)
+static void	application_operation(t_stack **a, t_stack **b, char *oper)
 {
 	if (ft_strequ(oper, "sa") || ft_strequ(oper, "sb"))
 		*(oper + 1) == 'a' ? swap(a) : swap(b);
@@ -48,14 +48,17 @@ static void	application_operations(t_stack **a, t_stack **b, char *oper)
 	}
 }
 
-void		read_operations(t_checker *chkr)
+int			read_operations(t_checker *chkr, char flag_vis)
 {
 	char	*oper;
 
 	while (get_next_line(PS_STDIN, &oper))
 	{
 		validation_operation(oper);
-		application_operations(&chkr->a, &chkr->b, oper);
+		application_operation(&chkr->a, &chkr->b, oper);
 		free(oper);
+		if (flag_vis)
+			return (1);
 	}
+	return (0);
 }

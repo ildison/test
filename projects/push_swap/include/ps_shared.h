@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/06 20:38:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/22 11:27:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # define RRA "rra"
 # define RRB "rrb"
 # define RRR "rrr"
-
-# define VISUAL_FLAG 1
 
 typedef struct		s_stack
 {
