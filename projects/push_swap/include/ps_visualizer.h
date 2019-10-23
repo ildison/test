@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 16:03:31 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 15:57:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PS_VISUALIZER_H
 
 # include "ps_checker.h"
-# include "libft.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
 
@@ -34,6 +33,9 @@
 
 # define CLR_TEXT 0xf09e62
 # define CLR_BG 0x313131
+# define CLR_RECT 0x664cf6
+
+// typedef struct		s_checker t_checker;
 
 typedef struct		s_pnt
 {
@@ -58,6 +60,7 @@ typedef struct		s_vis
 	TTF_Font		*font_text;
 	SDL_Color		color_text;
 	SDL_Color		bgrnd_clr;
+	SDL_Color		rect_clr;
 	SDL_Event		e;
 	SDL_bool		quit;
 	SDL_bool		pause;
@@ -66,11 +69,17 @@ typedef struct		s_vis
 	SDL_Rect		sz_st_a;
 	SDL_Rect		sz_st_b;
 	t_step			*first_step;
+	t_pnt			rect;
 	int				clr_cof;
 	int				delay;
 	const Uint8		*keystate;
-	t_pnt			rect;
 	int				between_rect;
 }					t_vis;
+
+t_step				*next_step(t_vis *vis, t_step *step, t_checker *chkr);
+t_step				*new_step(t_checker *chkr, t_step **first_stp);
+void				loop(t_vis *vis, t_checker *chkr);
+void				background(t_vis *vis, t_checker *chkr);
+void				render_rects(t_vis *vis, t_step *stp);
 
 #endif

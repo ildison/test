@@ -6,13 +6,13 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 19:48:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 15:49:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 15:56:23 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_shared.h"
 
-void			error(char *error)
+void			error(const char *error)
 {
 	if (error)
 		write(1, error, ft_strlen(error));

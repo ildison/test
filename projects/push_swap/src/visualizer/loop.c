@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 15:12:48 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 13:21:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ static void		events(t_vis *vis, t_step **step)
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_MINUS] &&\
 													vis->delay > 0)
 		--vis->delay;
-	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_UP])
-		++vis->clr_cof;
-	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_DOWN] &&\
-													vis->clr_cof > 1)
-		--vis->clr_cof;
 }
 
 static void		render_update(t_vis *vis, t_step *step)
@@ -43,23 +38,26 @@ static void		render_update(t_vis *vis, t_step *step)
 										vis->bgrnd_clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
 	render_rects(vis, step);
-	render_bgrnd(vis, step);
+	// render_bgrnd(vis, step);
 	SDL_RenderPresent(vis->ren);
 }
 
-void			loop(t_vis *vis)
+void			loop(t_vis *vis, t_checker *chkr)
 {
+	t_step		*step;
 	int			delay;
 
-	delay = 0;
+	step = new_step(chkr, &vis->first_step);
+	vis->delay = 10;
+	delay = vis->delay;
 	while (!vis->quit)
 	{
 		SDL_Delay(2);
-		if (!vis->pause && !delay)
-			step = next_step(game, step);
-		delay += delay ? -1 : vis->delay;
 		while (SDL_PollEvent(&vis->e))
 			events(vis, &step);
-		render_update(game, vis, step);
+		render_update(vis, step);
+		if (!vis->pause && !delay)
+			step = next_step(vis, step, chkr);
+		delay += delay ? -1 : vis->delay;
 	}
 }
