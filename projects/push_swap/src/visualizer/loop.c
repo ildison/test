@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 13:21:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 18:00:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		render_update(t_vis *vis, t_step *step)
 										vis->bgrnd_clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
 	render_rects(vis, step);
-	// render_bgrnd(vis, step);
+	render_texts(vis);
 	SDL_RenderPresent(vis->ren);
 }
 

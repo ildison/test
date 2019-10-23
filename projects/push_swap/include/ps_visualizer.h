@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 15:57:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 18:14:23 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "SDL_ttf.h"
 
 # define SCREEN_WIDTH 1420
-# define SCREEN_HEIGHT 800
+# define SCREEN_HEIGHT 840
 
 # define SDL_EVENT vis->e.type
 # define SDL_KEYSTATE vis->keystate
@@ -34,8 +34,6 @@
 # define CLR_TEXT 0xf09e62
 # define CLR_BG 0x313131
 # define CLR_RECT 0x664cf6
-
-// typedef struct		s_checker t_checker;
 
 typedef struct		s_pnt
 {
@@ -66,8 +64,8 @@ typedef struct		s_vis
 	SDL_bool		pause;
 	SDL_Texture		*stack_a;
 	SDL_Texture		*stack_b;
-	SDL_Rect		sz_st_a;
-	SDL_Rect		sz_st_b;
+	SDL_Rect		stack_a_rect;
+	SDL_Rect		stack_b_rect;
 	t_step			*first_step;
 	t_pnt			rect;
 	int				clr_cof;
@@ -81,5 +79,6 @@ t_step				*new_step(t_checker *chkr, t_step **first_stp);
 void				loop(t_vis *vis, t_checker *chkr);
 void				background(t_vis *vis, t_checker *chkr);
 void				render_rects(t_vis *vis, t_step *stp);
+void				render_texts(t_vis *vis);
 
 #endif
