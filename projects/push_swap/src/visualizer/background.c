@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 15:06:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 12:52:00 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void			text(t_vis *vis)
 void			background(t_vis *vis, t_checker *chkr)
 {
 	vis->bgrnd_clr = get_color(CLR_BG);
+	vis->rect_clr = get_color(CLR_RECT);
 	rect_size(vis, chkr);
 	text(vis);
 }

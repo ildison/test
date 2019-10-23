@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 11:27:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 15:56:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define RRB "rrb"
 # define RRR "rrr"
 
+# define VISUAL_FLAG 1
+
 typedef struct		s_stack
 {
 	int				num;
@@ -40,7 +42,7 @@ typedef struct		s_stack
 	struct s_stack	*prev;
 }					t_stack;
 
-void				error(char *error);
+void				error(const char *error);
 void				read_arg(t_stack **a, int n_arg, char **arg, char *flags);
 void				add_int_to_stack(t_stack **a, int num);
 int					swap(t_stack **top);

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 14:30:32 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 11:48:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 15:11:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define PS_CHECKER_H
 
 # include "ps_shared.h"
-# include "ps_visualizer.h"
 
 # define PS_STDIN 0
-# define VISUAL_FLAG 1
 # define VISUALIZATION_MODE chkr->flags & VISUAL_FLAG
 
 # define PS_OK ft_printf("OK\n")
@@ -30,6 +28,7 @@ typedef struct	s_checker
 	char		flags;
 }				t_checker;
 
+void			visualiser(t_checker *chkr);
 int				read_operations(t_checker *chkr, char flag_vis);
 
 # endif

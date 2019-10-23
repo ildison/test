@@ -52,7 +52,7 @@ void		visualiser(t_checker *chkr)
 		error(PS_ERROR_MALLOC);
 	init(vis);
 	background(vis, chkr);
-	loop(vis);
+	loop(vis, chkr);
 	destroy_init(vis);
-	cleaning_up(vis);
+	// cleaning_up(vis);
 }
