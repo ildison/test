@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:13:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 15:58:59 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 17:17:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ t_step		*next_step(t_vis *vis, t_step *step, t_checker *chkr)
 		return (step->next);
 	else if (step && step->fin)
 		return (step);
-	else if (!read_operations(chkr, VISUAL_FLAG))
-		new_step(chkr, &vis->first_step);
+	else if (read_operations(chkr, VISUAL_FLAG))
+		step = new_step(chkr, &vis->first_step);
+	else
+		step->fin = 1;
 	return (step);
 }

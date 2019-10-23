@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:07:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 14:33:56 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 16:33:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void			checker(int n_arg, char **arg)
 		error(PS_ERROR_MALLOC);
 	read_arg(&chkr->a, n_arg, arg, &chkr->flags);
 	if (VISUALIZATION_MODE)
+	{
+		indexation(chkr->a, size_stack(chkr->a));
 		visualiser(chkr);
-	else
+	}
+	else if (chkr->a)
 		read_operations(chkr, !VISUAL_FLAG);
 	check_sorted(chkr->a, chkr->b, size_stack(chkr->a)) ? PS_KO : PS_OK;
 

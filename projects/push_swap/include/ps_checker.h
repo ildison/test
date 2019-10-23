@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 14:30:32 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 15:11:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/23 16:07:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ps_shared.h"
 
 # define PS_STDIN 0
-# define VISUALIZATION_MODE chkr->flags & VISUAL_FLAG
+# define VISUALIZATION_MODE (chkr->flags & VISUAL_FLAG) && chkr->a
 
 # define PS_OK ft_printf("OK\n")
 # define PS_KO ft_printf("KO\n")
