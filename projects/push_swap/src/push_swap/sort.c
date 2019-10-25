@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/06 14:06:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/24 13:37:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void		sort(t_ps *ps)
 	if (SIZE_A <= 3)
 		sort_three_elem(ps, &ps->a, SIZE_A);
 	else if (SIZE_A <= 100)
+		sort_first_hundred(ps, &ps->a, &ps->b);
+	else
 		sort_first_hundred(ps, &ps->a, &ps->b);
 }
