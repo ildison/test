@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 09:52:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/25 13:58:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ typedef struct		s_vis
 	int				between_rect;
 }					t_vis;
 
-t_step				*next_step(t_vis *vis, t_step *step, t_checker *chkr);
-t_step				*new_step(t_checker *chkr, t_vis *vis, char *oper);
 void				loop(t_vis *vis, t_checker *chkr);
-void				background(t_vis *vis, t_checker *chkr);
-void				render_rects(t_vis *vis, t_step *stp);
 void				render_texts(t_vis *vis, t_step *stp);
+void				render_rects(t_vis *vis, t_step *stp);
+void				background(t_vis *vis, t_checker *chkr);
+t_step				*new_step(t_checker *chkr, t_vis *vis, char *oper);
+t_step				*next_step(t_vis *vis, t_step *step, t_checker *chkr);
 SDL_Texture			*create_texture(TTF_Font *font, char *text,\
 										SDL_Renderer *ren, SDL_Color color);
 

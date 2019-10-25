@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 13:18:29 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/06 19:42:02 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/25 14:01:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static void		throwing_in_stack_b(t_ps *ps, t_stack **a, t_stack **b,\
 			ps_push(ps, b, a);
 		else if (TOP_A > m.max)
 			ps_rotate(ps, a);
-		if (SIZE_B > 1 && (TOP_B == m.max || TOP_B == m.pmax) && SIZE_A > 4)
+		if (SIZE_B > 1 && TOP_B < m.mid)
 			ps_rotate(ps, b);
 	}
 }
+
+// (TOP_B == m.max || TOP_B == m.pmax) && SIZE_A > 4
 
 static int		depth_max_in_stack(t_stack *st, t_max_min m)
 {
@@ -34,14 +36,14 @@ static int		depth_max_in_stack(t_stack *st, t_max_min m)
 
 	tmp = st;
 	depth_rotate = 0;
-	while (tmp->i != m.max && tmp->i != m.pmax && tmp->i != m.min && tmp->next != st)
+	while (tmp->i != m.max && tmp->i != m.pmax && tmp->next != st)
 	{
 		++depth_rotate;
 		tmp = tmp->next;
 	}
 	tmp = st->prev;
 	depth_reverse = 1;
-	while (tmp->i != m.max && tmp->i != m.pmax && tmp->i != m.min && tmp->prev != st)
+	while (tmp->i != m.max && tmp->i != m.pmax && tmp->prev != st)
 	{
 		++depth_reverse;
 		tmp = tmp->prev;
@@ -69,6 +71,7 @@ void			sort_first_hundred(t_ps *ps, t_stack **a, t_stack **b)
 	m.max = PS_MAX_INDEX_IN_STACK_B;
 	m.pmax = PS_PREVIOUS_MAX;
 	m.min = PS_FIRST_INDEX;
+	m.mid = SIZE_A / 2;
 	throwing_in_stack_b(ps, a, b, m);
 	sort_three_elem(ps, &ps->a, 3);
 	while (SIZE_B)
@@ -85,9 +88,9 @@ void			sort_first_hundred(t_ps *ps, t_stack **a, t_stack **b)
 		else if (TOP_A == m.min && m.min < m.pmax)
 		{
 			ps_rotate(ps, a);
-			if (SIZE_B > 2 && TOP_B != m.max && (SECOND_B == m.max || SECOND_B == m.pmax))
-				ps_rotate(ps, b);
 			++m.min;
+			if (SIZE_B > 2 && TOP_B != m.max && (SECOND_B == m.max || SECOND_B == m.pmax || SECOND_B == m.min))
+				ps_rotate(ps, b);
 		}
 		if (TOP_A > SECOND_A)
 		{
