@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 12:30:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/22 15:40:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/25 09:49:23 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	application_operation(t_stack **a, t_stack **b, char *oper)
 	}
 }
 
-int			read_operations(t_checker *chkr, char flag_vis)
+char		*read_operations(t_checker *chkr, char flag_vis)
 {
 	char	*oper;
 
@@ -56,9 +56,9 @@ int			read_operations(t_checker *chkr, char flag_vis)
 	{
 		validation_operation(oper);
 		application_operation(&chkr->a, &chkr->b, oper);
-		free(oper);
 		if (flag_vis)
-			return (1);
+			return (oper);
+		free(oper);
 	}
-	return (0);
+	return (NULL);
 }

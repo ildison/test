@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 14:30:32 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 16:07:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/25 09:30:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ typedef struct	s_checker
 }				t_checker;
 
 void			visualiser(t_checker *chkr);
-int				read_operations(t_checker *chkr, char flag_vis);
+char			*read_operations(t_checker *chkr, char flag_vis);
 
 # endif

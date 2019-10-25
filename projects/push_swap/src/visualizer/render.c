@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 12:33:37 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 18:00:23 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/25 09:28:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void		render_rects(t_vis *vis, t_step *stp)
 			}
 }
 
-void		render_texts(t_vis *vis)
+void		render_texts(t_vis *vis, t_step *stp)
 {
 	SDL_RenderCopy(vis->ren, vis->stack_a, NULL, &vis->stack_a_rect);
 	SDL_RenderCopy(vis->ren, vis->stack_b, NULL, &vis->stack_b_rect);
+	SDL_RenderCopy(vis->ren, stp->oper, NULL, &stp->oper_rect);
 }
