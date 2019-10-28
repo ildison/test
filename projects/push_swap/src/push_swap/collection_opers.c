@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/06 19:48:46 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/28 13:11:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,18 @@ void		ps_swap(t_ps *ps, t_stack **top)
 void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
 {
 	if (push(dst, src))
-		*dst == ps->a ? add_oper(&ps->opers, "pa") : add_oper(&ps->opers, "pb");
+		if (*dst == ps->a)
+		{
+			add_oper(&ps->opers, "pa");
+			++SIZE_A;
+			--SIZE_B;
+		}
+		else
+		{
+			add_oper(&ps->opers, "pb");
+			--SIZE_A;
+			++SIZE_B;
+		}
 }
 
 void		ps_rotate(t_ps *ps, t_stack **top)

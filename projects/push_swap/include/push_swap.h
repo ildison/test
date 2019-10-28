@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 10:31:18 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/28 12:44:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@
 # define SIZE_B						ps->sz_b
 # define TOP_A						(*a)->i
 # define SECOND_A					(*a)->next->i
+# define LAST_A						(*a)->prev->i
+# define PRELAST_A					(*a)->prev->prev->i
 # define TOP_B						(*b)->i
 # define SECOND_B					(*b)->next->i
+# define LAST_B						(*b)->prev->i
+# define PRELAST_B					(*b)->prev->prev->i
 # define IS_OPER_OF_STACK_A			(op->next->oper[1] == 'a' || op->next->oper[2] == 'a')
 # define IS_OPER_OF_STACK_B			(op->next->oper[1] == 'b' || op->next->oper[2] == 'b')
+
+# define IS_NEIGHBOURS(a, b)		(a - b) == 1
 
 typedef struct		s_oper
 {
