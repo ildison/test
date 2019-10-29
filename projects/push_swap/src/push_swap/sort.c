@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/28 16:59:36 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 13:53:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,21 @@ void	sort_three_elem(t_ps *ps, t_stack **stk, int sz)
 
 void		sort(t_ps *ps)
 {
-	t_max_min	m;
+	t_splitter	s;
 
 
 	if (SIZE_A <= 3)
 		sort_three_elem(ps, STACK_A, SIZE_A);
 	else if (SIZE_A <= 100)
 	{
-		m.max = PS_MAX_INDEX_IN_STACK_B;
-		m.split = m.max / 2 + m.max % 2;
-		m.min = PS_FIRST_INDEX;
-		sort_first_hundred(ps, m);
+		s.split = PS_MAX_INDEX_IN_STACK_B / 2;
+		s.min = PS_FIRST_INDEX;
+		sort_first_hundred(ps, s, PS_MAX_INDEX_IN_STACK_B);
 	}
 	else
 	{
-		m.max = PS_MAX_INDEX_IN_STACK_B;
-		m.split = m.max / 2 + m.max % 2;
-		m.min = PS_FIRST_INDEX;
-		sort_first_hundred(ps, m);
+		s.split = PS_MAX_INDEX_IN_STACK_B / 2;
+		s.min = PS_FIRST_INDEX;
+		sort_first_hundred(ps, s, PS_MAX_INDEX_IN_STACK_B);
 	}
 }

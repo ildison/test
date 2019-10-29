@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/28 16:47:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 16:25:20 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 # define PS_FIRST_INDEX				1
 # define PS_SECOND_INDEX			2
-# define PS_MAX_INDEX_IN_STACK_B	ps->sz_a - 3
-# define PS_PREVIOUS_MAX			PS_MAX_INDEX_IN_STACK_B - 1
+# define PS_MAX_INDEX_IN_STACK_B	(ps->sz_a - 3)
+# define PS_PREVIOUS_MAX			(PS_MAX_INDEX_IN_STACK_B - 1)
 # define PS_MEDIAN					PS_MAX_INDEX_IN_STACK_B / 2
 # define PS_COUNT_MIN_AT_BOTTOM		0
 # define STACK_A					&ps->a
@@ -37,6 +37,8 @@
 # define IS_OPER_OF_STACK_B			(op->next->oper[1] == 'b' || op->next->oper[2] == 'b')
 
 # define IS_NEIGHBOURS(a, b)		(a - b) == 1
+# define INCREMENT_MIN(m, pm)		++m && ++pm
+# define DECREMENT_MAX(m, pm)		--m && --pm
 
 typedef struct		s_oper
 {
@@ -53,20 +55,27 @@ typedef struct		s_ps
 	t_oper			*opers;
 }					t_ps;
 
+typedef struct		s_splitter
+{
+	int				split;
+	int				min;
+}					t_splitter;
+
 typedef struct		s_max_min
 {
 	int				max;
-	int				split;
+	int				pmax;
 	int				min;
+	int				pmin;
 }					t_max_min;
 
 void				sort(t_ps *ps);
-void				ps_swap(t_ps *ps, t_stack **top);
+int					ps_swap(t_ps *ps, t_stack **top);
 void				ps_push(t_ps *ps, t_stack **dst, t_stack **src);
 void				ps_rotate(t_ps *ps, t_stack **top);
 void				ps_reverse(t_ps *ps, t_stack **top);
 void				sort_three_elem(t_ps *ps, t_stack **stk, int sz);
-void				sort_first_hundred(t_ps *ps, t_max_min m);
+void				sort_first_hundred(t_ps *ps, t_splitter s, int max);
 void				optimization_opers(t_oper *op);
 
 # endif
