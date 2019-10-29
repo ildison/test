@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/28 14:32:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 16:24:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ static void	add_oper(t_oper **op, char *oper)
 	}
 }
 
-void		ps_swap(t_ps *ps, t_stack **top)
+int			ps_swap(t_ps *ps, t_stack **top)
 {
 	if (swap(top))
+	{
 		*top == ps->a ? add_oper(&ps->opers, "sa") : add_oper(&ps->opers, "sb");
+		return (1);
+	}
+	return (0);
 }
 
 void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
