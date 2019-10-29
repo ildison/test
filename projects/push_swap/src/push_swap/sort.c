@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/24 13:37:18 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 13:53:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	sort_three_elem(t_ps *ps, t_stack **stk, int sz)
 {
 	while (check_sorted(*stk, 0, sz))
 	{
-		if ((*stk)->i < (*stk)->next->i || sz == 2)
+		if ((*stk)->i < (*stk)->next->i && sz != 2)
 			ps_reverse(ps, stk);
-		else if ((*stk)->i < (*stk)->next->next->i)
+		else if (sz == 2 || (*stk)->i < (*stk)->next->next->i)
 			ps_swap(ps, stk);
 		else
 			ps_rotate(ps, stk);
@@ -27,10 +27,21 @@ void	sort_three_elem(t_ps *ps, t_stack **stk, int sz)
 
 void		sort(t_ps *ps)
 {
+	t_splitter	s;
+
+
 	if (SIZE_A <= 3)
-		sort_three_elem(ps, &ps->a, SIZE_A);
+		sort_three_elem(ps, STACK_A, SIZE_A);
 	else if (SIZE_A <= 100)
-		sort_first_hundred(ps, &ps->a, &ps->b);
+	{
+		s.split = PS_MAX_INDEX_IN_STACK_B / 2;
+		s.min = PS_FIRST_INDEX;
+		sort_first_hundred(ps, s, PS_MAX_INDEX_IN_STACK_B);
+	}
 	else
-		sort_first_hundred(ps, &ps->a, &ps->b);
+	{
+		s.split = PS_MAX_INDEX_IN_STACK_B / 2;
+		s.min = PS_FIRST_INDEX;
+		sort_first_hundred(ps, s, PS_MAX_INDEX_IN_STACK_B);
+	}
 }
