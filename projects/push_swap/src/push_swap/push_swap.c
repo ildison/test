@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 10:53:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/28 11:01:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void		push_swap(int n_arg, char **arg)
 	{
 		indexation(ps->a, ps->sz_a);
 		sort(ps);
-		// print_opers(ps->opers);
-		// printf("---------------\n");
 		optimization_opers(ps->opers);
 		print_opers(ps->opers);
 	}
