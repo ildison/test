@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/29 13:53:41 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/30 14:31:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void		sort(t_ps *ps)
 	}
 	else
 	{
-		s.split = PS_MAX_INDEX_IN_STACK_B / 2;
+		s.split = SIZE_A / 3;
 		s.min = PS_FIRST_INDEX;
-		sort_first_hundred(ps, s, PS_MAX_INDEX_IN_STACK_B);
+		sort_five_hundred(ps, s, SIZE_A);
+			while (TOP_A != PS_FIRST_INDEX)
+		ps_reverse(ps, STACK_A);
 	}
 }

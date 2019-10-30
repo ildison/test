@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/28 11:01:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/30 11:47:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,16 @@ static void		push_swap(int n_arg, char **arg)
 	ps = (t_ps *)ft_memalloc(sizeof(t_ps));
 	if (!ps)
 		error(PS_ERROR_MALLOC);
-	read_arg(&ps->a, n_arg, arg, 0);
-	ps->sz_a = size_stack(ps->a);
-	if (ps->sz_a > 1 && check_sorted(ps->a, 0, ps->sz_a))
+	read_arg(STACK_A, n_arg, arg, 0);
+	SIZE_A = size_stack(ps->a);
+	SIZE_B = 0;
+	if (SIZE_A > 1 && check_sorted(ps->a, 0, SIZE_A))
 	{
-		indexation(ps->a, ps->sz_a);
+		indexation(ps->a, SIZE_A);
 		sort(ps);
 		optimization_opers(ps->opers);
 		print_opers(ps->opers);
 	}
-
-	// int i = 0;
-	// while (i < ps->sz_a)
-	// {
-	// 	printf("%d ", ps->a->num);
-	// 	++i;
-	// 	ps->a = ps->a->next;
-	// }
-	// printf("\n");
-	// i = 0;
-	// while (i < ps->sz_b)
-	// {
-	// 	printf("%d ", ps->b->num);
-	// 	++i;
-	// 	ps->b = ps->b->next;
-	// }
 }
 
 int				main(int ac, char **av)

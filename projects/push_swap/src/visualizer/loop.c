@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 09:52:49 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 19:44:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void		events(t_vis *vis, t_step **step)
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_DOWN] &&\
 													vis->delay > 0)
 		--vis->delay;
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_R])
+		*step = vis->first_step;
 }
 
 static void		render_update(t_vis *vis, t_step *step)
