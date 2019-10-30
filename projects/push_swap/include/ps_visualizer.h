@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:42:22 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 13:58:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/29 19:36:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SDL_LEFT SDL_SCANCODE_LEFT
 # define SDL_UP SDL_SCANCODE_UP
 # define SDL_DOWN SDL_SCANCODE_DOWN
+# define SDL_R SDL_SCANCODE_R
 
 # define FIRST_STEP "begin"
 

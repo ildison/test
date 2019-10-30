@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 13:18:29 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/29 16:38:26 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/30 10:16:51 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ static void		push_max_min(t_ps *ps, t_max_min m)
 	ps_push(ps, STACK_A, STACK_B);
 }
 
-static void		back_to_a(t_ps *ps, t_max_min m)
+static void		back_to_a(t_ps *ps, t_max_min m, int min)
 {
 	int			count_hiden;
 
 	count_hiden = 0;
-	while (m.pmax >= m.pmin)
+	while (SIZE_B >= min)
 	{
 		push_max_min(ps, m);
 		if (TOP_A == m.max)
@@ -117,6 +117,6 @@ void			sort_first_hundred(t_ps *ps, t_splitter s, int max)
 		throwing_in_stack_b(ps, s);
 		next_split = s.split + s.split / 2 > max ? max : s.split + s.split / 2;
 		sort_first_hundred(ps, (t_splitter){next_split, s.split + 1}, max);
-		back_to_a(ps, (t_max_min){s.split, s.split - 1, s.min, s.min + 1});
+		back_to_a(ps, (t_max_min){s.split, s.split - 1, s.min, s.min + 1}, s.min);
 	}
 }
