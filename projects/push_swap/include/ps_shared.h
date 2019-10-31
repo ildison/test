@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/23 15:56:10 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/31 13:30:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define RRA "rra"
 # define RRB "rrb"
 # define RRR "rrr"
-
 # define VISUAL_FLAG 1
 
 typedef struct		s_stack
@@ -50,6 +49,7 @@ int					push(t_stack **dst, t_stack **src);
 int					rotate(t_stack **top);
 int					reverse(t_stack **top);
 int					check_sorted(t_stack *a, t_stack *b, int sz);
+int					check_des_sorted(t_stack *a, t_stack *b, int sz);
 int					size_stack(t_stack *s);
 void				indexation(t_stack *stk, int size);
 

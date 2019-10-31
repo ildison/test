@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/30 11:46:59 by cormund          ###   ########.fr       */
+/*   Updated: 2019/10/31 20:32:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,33 @@ static void	add_oper(t_oper **op, char *oper)
 	{
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = (t_oper *)ft_memalloc(sizeof(t_oper));
-		if (!(tmp = tmp->next))
-			error(PS_ERROR_MALLOC);
-		ft_strcpy(tmp->oper, oper);
+		if (!(*tmp->oper == 'p' && *oper == 'p' && !ft_strequ(tmp->oper, oper))
+		&& !(*tmp->oper == 'r' && *oper == 'r' && (tmp->oper[1] == oper[2]
+												|| oper[1] == tmp->oper[2])))
+		{
+			tmp->next = (t_oper *)ft_memalloc(sizeof(t_oper));
+			if (!tmp->next)
+				error(PS_ERROR_MALLOC);
+			ft_strcpy(tmp->next->oper, oper);
+			tmp->next->prev = tmp;
+		}
+		else
+			ft_memdel((void *)&tmp->prev->next);
 	}
-	// printf("%s\n", oper); //debug mode
+	printf("%s\n", oper);
 }
 
 void		ps_swap(t_ps *ps, t_stack **top)
 {
 	if (swap(top))
-		*top == ps->a ? add_oper(&ps->opers, "sa") : add_oper(&ps->opers, "sb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "sa") : add_oper(&ps->opers, "sb");
 }
 
 void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
 {
 	if (push(dst, src))
 	{
-		if (*dst == ps->a)
+		if (IS_STACK_A(dst))
 		{
 			add_oper(&ps->opers, "pa");
 			++SIZE_A;
@@ -62,11 +70,11 @@ void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
 void		ps_rotate(t_ps *ps, t_stack **top)
 {
 	if (rotate(top))
-		*top == ps->a ? add_oper(&ps->opers, "ra") : add_oper(&ps->opers, "rb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "ra") : add_oper(&ps->opers, "rb");
 }
 
 void		ps_reverse(t_ps *ps, t_stack **top)
 {
 	if (reverse(top))
-		*top == ps->a ? add_oper(&ps->opers, "rra") : add_oper(&ps->opers, "rrb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "rra") : add_oper(&ps->opers, "rrb");
 }

@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 14:26:39 by cormund           #+#    #+#              #
-#    Updated: 2019/10/30 09:52:52 by cormund          ###   ########.fr        #
+#    Updated: 2019/10/31 18:15:13 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ VISUAL := visual
 LIBFT := libft.a
 HEADERS := libft.h ps_checker.h ps_shared.h push_swap.h ps_visualizer.h SDL.h SDL_ttf.h
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror -g #delete -g
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
