@@ -12,46 +12,117 @@
 
 #include "push_swap.h"
 
-static void		throwing_in_stack_b(t_ps *ps, t_splitter s, char flag)
+static int		low_i(t_stack *s, int size)
 {
-	int			splt;
+	int			min;
 
-	if (flag)
-		splt = (s.min + s.split) / 2;
-	while (SIZE_B < (s.split - 1))
+	min = 0;
+	if (s)
 	{
-		if (TOP_A <= s.split && TOP_A != PS_FIRST_INDEX)
+		min = s->i;
+		while (size)
 		{
-			ps_push(ps, STACK_B, STACK_A);
-			if (flag && TOP_B < splt)
-				ps_rotate(ps, STACK_B);
+			s = s->next;
+			if (s->i < min)
+				min = s->i;
+			--size;
+		}
+	}
+	return(min);
+}
+
+static int		high_i(t_stack *s, int size)
+{
+	int			max;
+
+	max = 0;
+	if (s)
+	{
+		max = s->i;
+		while (size)
+		{
+			s = s->next;
+			if (s->i > max)
+				max = s->i;
+			--size;
+		}
+	}
+	return(max);
+}
+
+void	sort_three_elem_des(t_ps *ps, t_stack **stk, int sz)
+{
+	if (size_stack(*stk) <= 3)
+		while (check_des_sorted(*stk, 0, sz))
+		{
+			if ((*stk)->i > (*stk)->next->i  && sz != 2)
+				ps_reverse(ps, stk);
+			else if (sz == 2 || (*stk)->i > (*stk)->next->next->i)
+				ps_swap(ps, stk);
+			else
+				ps_rotate(ps, stk);
+		}
+	else
+		while (check_des_sorted(*stk, 0, sz))
+			if ((*stk)->i < (*stk)->next->i)
+				ps_swap(ps, stk);
+			else if ((*stk)->i > (*stk)->next->i)
+			{
+				ps_rotate(ps, stk);
+				ps_swap(ps, stk);
+				ps_reverse(ps, stk);
+			}
+			else
+			{
+				ps_reverse(ps, stk);
+				ps_swap(ps, stk);
+				ps_rotate(ps, stk);
+			}
+}
+
+static int		throwing_in_stack_b(t_ps *ps, t_stack **a, t_stack **b, int size)
+{
+	int pivot;
+	int count_push;
+	int count_rotate;
+
+	pivot = ps->a == *a ? low_i(*a, size) : high_i(*a, size);
+	pivot += ps->a == *a ? size / 2 : -(size / 2);
+	count_push = 0;
+	count_rotate = 0;
+	while (size--)
+		if ((ps->a == *a && (*a)->i <= pivot) || (ps->b == *a && (*a)->i >= pivot))
+		{
+			ps_push(ps, b, a);
+			(*b)->i == pivot ? ps_rotate(ps, b) : ++count_push;
 		}
 		else
-			ps_rotate(ps, STACK_A);
-	}
+		{
+			ps_rotate(ps, a);
+			++count_rotate;
+		}
+	if (size_stack(*a) > count_rotate)
+		while (count_rotate--)
+			ps_reverse(ps, a);
+	return (count_push);
 }
 
-static void		back_to_a(t_ps *ps, int min)
+void			sort_five_hundred(t_ps *ps, t_stack **a, t_stack **b, int size)
 {
-	while (SIZE_B >= min)
-	{
-		while (TOP_B < TOP_A && TOP_B < LAST_A)
-			ps_reverse(ps, STACK_A);
-		while (TOP_B > TOP_A)
-			ps_rotate(ps, STACK_A);
-		ps_push(ps, STACK_A, STACK_B);
-	}
-}
+	int			count_push;
 
-void			sort_five_hundred(t_ps *ps, t_splitter s, int max)
-{
-	int			next_split;
-
-	if (SIZE_A > 2)
+	if (size == 2 && ((ps->a == *a && (*a)->i > (*a)->next->i) || (ps->b == *a && (*a)->i < (*a)->next->i)))
+		ps_swap(ps, a);
+	else if (size == 3)
+		ps->a == *a ? sort_three_elem(ps, a, 3) : sort_three_elem_des(ps, a, 3);
+	else if (size > 3)
 	{
-		throwing_in_stack_b(ps, s, (s.split <= (max + 1) / 3) ? 1 : 0);
-		next_split = s.split + s.split / 2 >= max ? max - 1 : s.split + s.split / 2;
-		sort_five_hundred(ps, (t_splitter){next_split, s.split + 1}, max);
-		back_to_a(ps, s.min);
+		count_push = throwing_in_stack_b(ps, a, b, size);
+		sort_five_hundred(ps, a, b, size - count_push - 1);
+		ps_reverse(ps, b);
+		ps_push(ps, a, b);
+		sort_five_hundred(ps, b, a, count_push);
+		while (count_push--)
+			ps_push(ps, a, b);
 	}
 }

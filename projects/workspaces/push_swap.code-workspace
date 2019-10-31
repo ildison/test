@@ -5,12 +5,19 @@
 		},
 		{
 			"path": "/Users/cormund/git_clones/git_filler"
+		},
+		{
+			"path": "/Users/cormund/git_clones/ps_smorty"
 		}
 	],
 	"settings": {
 		"files.associations": {
 			"algorithm": "c",
-			"ps_shared.h": "c"
+			"ps_shared.h": "c",
+			"chrono": "c",
+			"limits": "c",
+			"ratio": "c",
+			"functional": "c"
 		}
 	}
 }
