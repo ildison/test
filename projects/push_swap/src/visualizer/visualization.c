@@ -12,6 +12,24 @@
 
 #include "ps_visualizer.h"
 
+static void	cleaning_up(t_vis *vis, t_step *stp)
+{
+	t_step	*tmp;
+
+	while (stp)
+	{
+		free(stp->a);
+		free(stp->b);
+		SDL_DestroyTexture(stp->oper);
+		tmp = stp;
+		stp = stp->next;
+		free(tmp);
+	}
+	SDL_DestroyTexture(vis->stack_a);
+	SDL_DestroyTexture(vis->stack_b);
+	free(vis);
+}
+
 static void	destroy_init(t_vis *vis)
 {
 	TTF_CloseFont(vis->font_text);
@@ -54,5 +72,5 @@ void		visualiser(t_checker *chkr)
 	background(vis, chkr);
 	loop(vis, chkr);
 	destroy_init(vis);
-	// cleaning_up(vis);
+	cleaning_up(vis, vis->first_step);
 }

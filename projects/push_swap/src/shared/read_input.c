@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/01 18:55:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 12:21:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static void	valid_correctly_format(char *s, int *num_int)
 {
 	char	*num_alph;
+	char	*tmp;
 
 	*num_int = ft_atoi(s);
 	num_alph = ft_itoa(*num_int);
+	tmp = num_alph;
 	if (*num_alph == '-' && *s != '-')
 		error(PS_ERROR);
 	if (*num_alph == '-' || *num_alph == '0')
@@ -30,6 +32,7 @@ static void	valid_correctly_format(char *s, int *num_int)
 		++s;
 	if (!ft_strequ(s, num_alph))
 		error(PS_ERROR);
+	free(tmp);
 }
 
 static void	check_dublicate(t_stack **a, int num)

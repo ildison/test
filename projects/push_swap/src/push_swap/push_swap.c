@@ -6,18 +6,28 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:07 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/31 18:15:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 11:35:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		print_opers(t_oper *opers)
+static void		cleaning_up(t_ps *ps)
 {
+	clean_stacks(STK_A, STK_B, SIZE_A, SIZE_B);
+	free(ps);
+}
+
+static void		print_and_clean_opers(t_oper *opers)
+{
+	t_oper		*tmp;
+
 	while (opers)
 	{
 		printf("%s\n", opers->oper);
+		tmp = opers;
 		opers = opers->next;
+		free(tmp);
 	}
 }
 
@@ -36,8 +46,9 @@ static void		push_swap(int n_arg, char **arg)
 		indexation(ps->a, SIZE_A);
 		sort(ps);
 		optimization_opers(ps->opers);
-		print_opers(ps->opers);
+		print_and_clean_opers(ps->opers);
 	}
+	cleaning_up(ps);
 }
 
 int				main(int ac, char **av)
