@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/27 14:26:39 by cormund           #+#    #+#              #
-#    Updated: 2019/10/31 18:15:13 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/05 11:28:04 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC_SHARED := read_input.c\
 				error.c\
 				operations.c\
 				stack_funs.c\
-				indexation.c
+				indexation.c\
+				cleaning.c
 
 SRC_CHECKER := checker.c\
 				read_operations.c
