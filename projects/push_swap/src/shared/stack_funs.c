@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 18:55:11 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/30 20:13:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 15:25:30 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int				check_des_sorted(t_stack *a, t_stack *b, int sz)
 	return (0);
 }
 
-int			size_stack(t_stack *s)
+int				size_stack(t_stack *s)
 {
-	int		size;
-	t_stack	*top;
+	int			size;
+	t_stack		*top;
 
 	size = 0;
 	if (s)
@@ -65,9 +65,9 @@ int			size_stack(t_stack *s)
 	return (size);
 }
 
-void		add_int_to_stack(t_stack **a, int num)
+void			add_int_to_stack(t_stack **a, int num)
 {
-	t_stack	*lst;
+	t_stack		*lst;
 
 	lst = *a;
 	if (!lst)

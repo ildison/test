@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:55:15 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/05 11:26:02 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 15:44:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int					check_sorted(t_stack *a, t_stack *b, int sz);
 int					check_des_sorted(t_stack *a, t_stack *b, int sz);
 int					size_stack(t_stack *s);
 void				indexation(t_stack *stk, int size);
-void				clean_stacks(t_stack *a, t_stack *b, int size_a, int size_b);
+void				clean_stacks(t_stack *a, t_stack *b, int size_a,\
+																int size_b);
 
-# endif
+#endif

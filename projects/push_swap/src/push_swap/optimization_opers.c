@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 19:54:53 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/31 17:13:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 13:25:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ static void		delete_oper(t_oper *prev, t_oper *op)
 	prev->next = op->next;
 	free(op);
 }
-
-// static void		check_collision(t_oper *op, char *oper)
-// {
-// 	t_oper		*tmp;
-
-// 	tmp = op->next;
-// 	if (*oper == 'p' && IS_OPER_OF_STACK_A)
-// 		while (tmp->next && IS_OPER_OF_STACK_A && tmp->oper == 'p')
-// }
 
 static void		check_opers(t_oper *op, char *oper)
 {
@@ -62,10 +53,6 @@ void			optimization_opers(t_oper *op)
 {
 	while (op)
 	{
-		// if (op->next && *op->next->oper == 'p' || *op->next->oper == 'r')
-		// 	check_push_collision(op, op->next->oper);
-		// if (op->next && *op->next->oper == 'r')
-		// 	check_r_rr_collision(op, op->next->oper);
 		if (*op->oper == 's' || *op->oper == 'r')
 			check_opers(op, op->oper);
 		op = op->next;

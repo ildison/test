@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/05 10:35:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 13:25:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	add_oper(t_oper **op, char *oper)
 void		ps_swap(t_ps *ps, t_stack **top)
 {
 	if (swap(top))
-		IS_STACK_A(top) ? add_oper(&ps->opers, "sa") : add_oper(&ps->opers, "sb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "sa") :\
+							add_oper(&ps->opers, "sb");
 }
 
 void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
@@ -69,11 +70,13 @@ void		ps_push(t_ps *ps, t_stack **dst, t_stack **src)
 void		ps_rotate(t_ps *ps, t_stack **top)
 {
 	if (rotate(top))
-		IS_STACK_A(top) ? add_oper(&ps->opers, "ra") : add_oper(&ps->opers, "rb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "ra") :\
+							add_oper(&ps->opers, "rb");
 }
 
 void		ps_reverse(t_ps *ps, t_stack **top)
 {
 	if (reverse(top))
-		IS_STACK_A(top) ? add_oper(&ps->opers, "rra") : add_oper(&ps->opers, "rrb");
+		IS_STACK_A(top) ? add_oper(&ps->opers, "rra") :\
+							add_oper(&ps->opers, "rrb");
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:13:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 09:50:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 15:40:55 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_step		*new_step(t_checker *chkr, t_vis *vis, char *oper)
 {
 	t_step	*stp;
 
-
 	if (!(stp = (t_step *)ft_memalloc(sizeof(t_step))))
 		error(PS_ERROR_MALLOC);
 	stp->a = stack_cpy(chkr->a);
@@ -70,6 +69,7 @@ t_step		*new_step(t_checker *chkr, t_vis *vis, char *oper)
 t_step		*next_step(t_vis *vis, t_step *step, t_checker *chkr)
 {
 	char	*oper;
+
 	if (step && step->next && !step->fin)
 		return (step->next);
 	else if (step && step->fin)

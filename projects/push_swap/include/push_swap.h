@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:54:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/31 18:02:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 15:44:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void				ps_rotate(t_ps *ps, t_stack **top);
 void				ps_reverse(t_ps *ps, t_stack **top);
 void				sort_three_elem(t_ps *ps, t_stack **stk, int sz);
 void				sort_first_hundred(t_ps *ps, t_splitter s, int max);
-void				sort_five_hundred(t_ps *ps, t_stack **a, t_stack **b, int size);
-void				sort_three_elem_des(t_ps *ps, t_stack **stk, int sz);
+void				sort_five_hundred(t_ps *ps, t_stack **a, t_stack **b,\
+																int size);
 void				optimization_opers(t_oper *op);
 
-# endif
+#endif
