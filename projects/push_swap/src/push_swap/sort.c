@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/05 13:28:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 18:12:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			sort(t_ps *ps)
 	t_splitter	s;
 
 	if (SIZE_A <= 3)
-		sort_three_elem(ps, STACK_A, 3);
+		sort_three_elem(ps, STACK_A, SIZE_A);
 	else if (SIZE_A <= 5)
 		sort_first_hundred(ps, (t_splitter){2, 1}, PS_MAX_INDEX_IN_STACK_B);
 	else if (SIZE_A <= 100)
