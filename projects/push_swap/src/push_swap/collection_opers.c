@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 12:29:49 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/31 20:32:53 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 10:35:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	add_oper(t_oper **op, char *oper)
 		else
 			ft_memdel((void *)&tmp->prev->next);
 	}
-	printf("%s\n", oper);
 }
 
 void		ps_swap(t_ps *ps, t_stack **top)

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 13:18:29 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/31 19:21:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 10:18:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		depth_max_in_stack(t_ps *ps, t_max_min m)
 		++depth_reverse;
 		tmp = tmp->prev;
 	}
-	return (depth_reverse > depth_rotate ? 0 : 1);
+	return (depth_reverse >= depth_rotate ? 0 : 1);
 }
 
 static void		push_max_min(t_ps *ps, t_max_min m)
@@ -96,6 +96,7 @@ static void		back_to_a(t_ps *ps, t_max_min m, int min)
 			ps_swap(ps, STACK_B);
 		if (TOP_A > SECOND_A)
 			ps_swap(ps, STACK_A);
+		m.pmax = m.pmax < m.min ? m.min : m.pmax;
 
 	}
 	while (count_hiden--)
