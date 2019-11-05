@@ -6,13 +6,13 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 13:55:23 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/05 10:21:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 13:28:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	sort_three_elem(t_ps *ps, t_stack **stk, int sz)
+void			sort_three_elem(t_ps *ps, t_stack **stk, int sz)
 {
 	if (size_stack(*stk) <= 3)
 		while (check_sorted(*stk, 0, sz))
@@ -40,10 +40,9 @@ void	sort_three_elem(t_ps *ps, t_stack **stk, int sz)
 			}
 }
 
-void		sort(t_ps *ps)
+void			sort(t_ps *ps)
 {
 	t_splitter	s;
-
 
 	if (SIZE_A <= 3)
 		sort_three_elem(ps, STACK_A, 3);

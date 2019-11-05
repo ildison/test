@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_five_hundred.c                                 :+:      :+:    :+:   */
+/*   sort_five_hundred.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 18:10:53 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/29 18:12:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/05 15:16:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		low_i(t_stack *s, int size)
 			--size;
 		}
 	}
-	return(min);
+	return (min);
 }
 
 static int		high_i(t_stack *s, int size)
@@ -47,21 +47,19 @@ static int		high_i(t_stack *s, int size)
 			--size;
 		}
 	}
-	return(max);
+	return (max);
 }
 
-void	sort_three_elem_des(t_ps *ps, t_stack **stk, int sz)
+static void		sort_three_elem_des(t_ps *ps, t_stack **stk, int sz)
 {
 	if (size_stack(*stk) <= 3)
 		while (check_des_sorted(*stk, 0, sz))
-		{
-			if ((*stk)->i > (*stk)->next->i  && sz != 2)
+			if ((*stk)->i > (*stk)->next->i && sz != 2)
 				ps_reverse(ps, stk);
 			else if (sz == 2 || (*stk)->i > (*stk)->next->next->i)
 				ps_swap(ps, stk);
 			else
 				ps_rotate(ps, stk);
-		}
 	else
 		while (check_des_sorted(*stk, 0, sz))
 			if ((*stk)->i < (*stk)->next->i)
@@ -80,18 +78,20 @@ void	sort_three_elem_des(t_ps *ps, t_stack **stk, int sz)
 			}
 }
 
-static int		throwing_in_stack_b(t_ps *ps, t_stack **a, t_stack **b, int size)
+static int		throwing_in_stack_b(t_ps *ps, t_stack **a, t_stack **b,\
+																int size)
 {
-	int pivot;
-	int count_push;
-	int count_rotate;
+	int			pivot;
+	int			count_push;
+	int			count_rotate;
 
 	pivot = ps->a == *a ? low_i(*a, size) : high_i(*a, size);
 	pivot += ps->a == *a ? size / 2 : -(size / 2);
 	count_push = 0;
 	count_rotate = 0;
 	while (size--)
-		if ((ps->a == *a && (*a)->i <= pivot) || (ps->b == *a && (*a)->i >= pivot))
+		if ((ps->a == *a && (*a)->i <= pivot) || (ps->b == *a &&\
+														(*a)->i >= pivot))
 		{
 			ps_push(ps, b, a);
 			(*b)->i == pivot ? ps_rotate(ps, b) : ++count_push;
@@ -111,7 +111,8 @@ void			sort_five_hundred(t_ps *ps, t_stack **a, t_stack **b, int size)
 {
 	int			count_push;
 
-	if (size == 2 && ((ps->a == *a && (*a)->i > (*a)->next->i) || (ps->b == *a && (*a)->i < (*a)->next->i)))
+	if (size == 2 && ((ps->a == *a && (*a)->i > (*a)->next->i) ||\
+						(ps->b == *a && (*a)->i < (*a)->next->i)))
 		ps_swap(ps, a);
 	else if (size == 3)
 		ps->a == *a ? sort_three_elem(ps, a, 3) : sort_three_elem_des(ps, a, 3);

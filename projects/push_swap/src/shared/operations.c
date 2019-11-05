@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 209/0/0 9:33:33 by cormund           #+#    #+#             */
-/*   Updated: 209/0/4 06:34:40 by cormund          ###   ########.fr       */
+/*   Created: 2019/11/05 15:25:39 by cormund           #+#    #+#             */
+/*   Updated: 2019/11/05 15:25:45 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			push(t_stack **dst, t_stack **src)
 		{
 			tmp_s->next->prev = tmp_s->prev;
 			tmp_s->prev->next = tmp_s->next;
-			*src = tmp_s->next;
 		}
 		*src = tmp_s->next != tmp_s ? tmp_s->next : NULL;
 		if (*dst)
@@ -49,9 +48,8 @@ int			push(t_stack **dst, t_stack **src)
 			tmp_s->prev = tmp_s;
 		}
 		*dst = tmp_s;
-		return (1);
 	}
-	return (0);
+	return (tmp_s ? 1 : 0);
 }
 
 int			rotate(t_stack **top)
