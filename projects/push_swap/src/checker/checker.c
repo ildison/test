@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:07:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/05 17:08:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/06 10:30:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void		checker(int n_arg, char **arg)
 		visualiser(chkr);
 	}
 	else if (chkr->a)
+	{
 		read_operations(chkr, !VISUAL_FLAG);
-	check_sorted(chkr->a, chkr->b, size_stack(chkr->a)) ? PS_KO : PS_OK;
+		check_sorted(chkr->a, chkr->b, size_stack(chkr->a)) ? PS_KO : PS_OK;
+	}
 	cleaning_up(chkr);
 }
 
@@ -41,6 +43,5 @@ int				main(int ac, char **av)
 {
 	if (ac > 1)
 		checker(ac - 1, av + 1);
-	exit (0);
 	return (0);
 }

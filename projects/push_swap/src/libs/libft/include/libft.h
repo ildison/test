@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:17:44 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 15:54:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/06 09:57:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ size_t				ft_wcslen(const wchar_t *str);
 void				ft_ustrdel(unsigned char **str);
 char				*ft_skipfirst(char *str, int sym);
 void				ft_free_2x_mas(void **mas);
+char				*gnl(int fd);
 
 #endif
