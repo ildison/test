@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:17:44 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 15:54:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/06 10:02:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define MAXLLI 9223372036854775807
 # define FD_MAX 7198
-# define BUFF_SIZE 20
+# define BUFF_SIZE 4
 
 # define NUM_MOD(x)			((x) = (x > 0) ? x : -(x))
 # define CHECK_MOD(x)		((x) > 0) ? (x) : -(x)
@@ -138,5 +138,6 @@ size_t				ft_wcslen(const wchar_t *str);
 void				ft_ustrdel(unsigned char **str);
 char				*ft_skipfirst(char *str, int sym);
 void				ft_free_2x_mas(void **mas);
+char				*gnl(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 12:30:09 by cormund           #+#    #+#             */
-/*   Updated: 2019/10/25 09:49:23 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/06 10:20:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char		*read_operations(t_checker *chkr, char flag_vis)
 {
 	char	*oper;
 
-	while (get_next_line(PS_STDIN, &oper))
+	while ((oper = gnl(PS_STDIN)))
 	{
 		validation_operation(oper);
 		application_operation(&chkr->a, &chkr->b, oper);
