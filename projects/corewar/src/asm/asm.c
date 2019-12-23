@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/23 17:32:06 by cormund          ###   ########.fr       */
+/*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
+/*   Updated: 2019/12/23 17:06:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "asm.h"
 
-# include "libft.h"
-# include "op.h"
-
-# define ASM_SIZE_BUF 1024
-# define ASM_ERROR -1
-# define ASM_END_OF_STR '\0'
-
-typedef struct	s_champ
+int		main(int argc, char **argv)
 {
-	char		*input;
-	
-}				t_champ;
+	t_champ	*champ;
 
-char			*read_input(char *file);
-
-#endif
+	if (argc > 1)
+	{
+		champ = ft_memalloc(sizeof(t_champ));
+		if (!champ)
+			error(strerror(errno));
+		champ->input = read_input(argv[1]);
+	}
+	return(0);
+}
