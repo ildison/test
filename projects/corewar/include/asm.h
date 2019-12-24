@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/23 17:32:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/24 10:53:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct	s_champ
 }				t_champ;
 
 char			*read_input(char *file);
+void			clean_comments(char *input);
 
 #endif

@@ -6,11 +6,27 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:06:28 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/23 17:22:00 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/24 10:54:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void		clean_comments(char *input)
+{
+	int		in;
+
+	in = 0;
+	while (*input)
+	{
+		if (*input == '"')
+			in ^= 1;
+		if (!in && *input == '#')
+			while (*input && *input != '\n')
+				*input++ = ' ';
+		++input;
+	}
+}
 
 char		*read_input(char *file)
 {
@@ -35,6 +51,7 @@ char		*read_input(char *file)
 		free(tmp);
 	}
 	if (count_read == ASM_ERROR)
-		error(NULL);
+		error(strerror(errno));
+	close(fd);
 	return (input);
 }
