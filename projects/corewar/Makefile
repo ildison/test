@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/23 17:26:57 by cormund           #+#    #+#              #
-#    Updated: 2019/12/23 17:31:38 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/24 16:46:36 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ vpath %.h $(DIR_INCLUDE)
 vpath %.a $(DIR_LIBFT)
 
 SRC_NAME := asm.c\
-			read_input.c
+			read_input.c\
+			parser.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

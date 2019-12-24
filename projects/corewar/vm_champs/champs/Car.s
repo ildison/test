@@ -1,6 +1,7 @@
-#deassembler par msa 1.8, made by joe
-.name "Tching tching(Intercepteur), Bouh!Bouh!(bruits d'anti-jeu)"
-.comment ""
+#deassembler par msa 18, made by joe
+.comment "
+.name #deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe
+
 
 	 fork  %:label00          		# 3,0,281
 	 ld    %-272,r3           		# 7,3,278
@@ -61,7 +62,7 @@ label13: sti   r6,r2,r3           		# 5,225,56
 
 label05: ldi   r2,%:label14,r6    		# 6,233,48
 	 ld    %0,r4              		# 7,239,42
-	 live  %1                 		# 5,246,35
+	 live  %1                 		# 5,246,35#deassembler par msa 1.8, made by joe
 
 label14: sti   r6,r2,r3           		# 5,251,30
 	 zjmp  %-207              		# 3,256,25
@@ -72,4 +73,4 @@ label10: live  %1                 		# 5,259,22
 
 label11: live  %1                 		# 5,270,11
 	 fork  %:label11          		# 3,275,6
-	 zjmp  %:label11          		# 3,278,3
+	 zjmp  %:label11          		
