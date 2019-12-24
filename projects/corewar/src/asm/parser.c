@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/24 17:17:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/24 18:14:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static char	*cpy_name_or_header(char **name_or_comment, char *input, int len)
+static char	*cpy_name_or_header(t_champ *champ, char **name_or_comment, char *input, int len)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ static char	*cpy_name_or_header(char **name_or_comment, char *input, int len)
 	while (ft_isspace(*input))
 		++input;
 	if (*input != '"')
-		error("Syntax error: wrong title");
+		error_manager("Syntax error: wrong title", champ->input, input);
 	else
 		++input;
 	i = 0;
@@ -36,7 +36,7 @@ static char	*cpy_name_or_header(char **name_or_comment, char *input, int len)
 		while (*input && *input != '"')
 			++input;
 	if (!*input)
-		error("Syntax error: wrong title");
+		error_manager("Syntax error: wrong title", champ->input, input);
 	return (++input);
 }
 
@@ -47,11 +47,11 @@ static char	*pars_header(t_champ *champ, char *input)
 	while (ft_isspace(*input))
 		++input;
 	if (ft_strnequ(input, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
-		input = cpy_name_or_header(&champ->prog_name, input + ft_strlen(NAME_CMD_STRING), PROG_NAME_LENGTH);
+		input = cpy_name_or_header(champ, &champ->prog_name, input + ft_strlen(NAME_CMD_STRING), PROG_NAME_LENGTH);
 	else if (ft_strnequ(input, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) && !champ->comment)
-		input = cpy_name_or_header(&champ->comment, input + ft_strlen(COMMENT_CMD_STRING), COMMENT_LENGTH);
+		input = cpy_name_or_header(champ, &champ->comment, input + ft_strlen(COMMENT_CMD_STRING), COMMENT_LENGTH);
 	else
-		error("Syntax error: wrong title pars_header");
+		error_manager("Syntax error: wrong title pars_header", champ->input, input);
 	return (pars_header(champ, input));
 }
 

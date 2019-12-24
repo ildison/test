@@ -1,6 +1,6 @@
 #deassembler par msa 18, made by joe
-.comment "
-.name #deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe
+.comment "" d
+.name "#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"
 
 
 	 fork  %:label00          		# 3,0,281
