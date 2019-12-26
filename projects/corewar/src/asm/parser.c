@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 12:35:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/26 12:38:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ static char	*pars_header(t_champ *champ, char *data)
 		return (data);
 	while (ft_isspace(*data))
 		++data;
-	if (ft_strnequ(data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
-		data = cpy_name_or_header(champ, &champ->prog_name, data + ft_strlen(NAME_CMD_STRING), PROG_NAME_LENGTH);
-	else if (ft_strnequ(data, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) && !champ->comment)
-		data = cpy_name_or_header(champ, &champ->comment, data + ft_strlen(COMMENT_CMD_STRING), COMMENT_LENGTH);
+	if (ft_strnequ(data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) &&\
+														!champ->prog_name)
+		data = cpy_name_or_header(champ, &champ->prog_name, data +\
+							ft_strlen(NAME_CMD_STRING), PROG_NAME_LENGTH);
+	else if (ft_strnequ(data, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
+															&& !champ->comment)
+		data = cpy_name_or_header(champ, &champ->comment, data +\
+					ft_strlen(COMMENT_CMD_STRING), COMMENT_LENGTH);
 	else
 		error_manager("Syntax error: wrong title", champ->data, data);
 	return (pars_header(champ, data));
