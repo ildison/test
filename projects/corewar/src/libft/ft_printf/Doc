@@ -24,7 +24,7 @@
 **	l ll h hh z j t L (support undef. beh.)
 **
 **BONUS_PART:
-**	convert unicode to utf-8 and print to display(example: ft_printf("%ls", L"привет мир") input: привет мир)
+**	convert unicode to utf-8 and print to display(example: ft_printf("%ls", L"привет мир") data: привет мир)
 **
 **
 **	add color for text(example: ft_printf("{/red}hello world"), text will red(form for color "{/color}"))

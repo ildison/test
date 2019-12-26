@@ -1,5 +1,5 @@
 #deassembler par msa 18, made by joe
-.comment "" d
+.comment ""
 .name "#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"
 
 
