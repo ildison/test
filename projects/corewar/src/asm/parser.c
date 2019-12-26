@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 16:23:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/26 16:50:26 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ static char	*pars_header(t_champ *champ, char *data)
 {
 	if (champ->prog_name && champ->comment)
 		return (data);
-	while (ft_isspace(*data))
-		++data;
+	skip_spaces(&data);
 	if (ft_strnequ(data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) &&\
 														!champ->prog_name)
 		data = cpy_name_or_header(champ, &champ->prog_name, data +\
@@ -64,11 +63,20 @@ static char	*pars_header(t_champ *champ, char *data)
 	return (pars_header(champ, data));
 }
 
+int			is_operation(char *data)
+{
+	
+}
 
-// void		pars_opers(t_champ *champ, char *data)
-// {
-// 	skip_spaces(&data);
-// }
+void		pars_opers(t_champ *champ, char *data)
+{
+	while (*data)
+	{
+		skip_spaces(&data);
+		if ()
+		++data;
+	}
+}
 
 void		parsing_champ(t_champ *champ, char *data)
 {

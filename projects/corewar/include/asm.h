@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 16:18:26 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/26 16:44:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_arg
 
 typedef struct	s_oper
 {
-	char		code;
+	char		code_oper;
 	int			size;
 	int			offset;
 	
