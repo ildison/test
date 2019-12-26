@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 12:35:20 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/26 16:18:26 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 # define ASM_SIZE_BUF 1024
 # define ASM_ERROR -1
 # define ASM_END_OF_STR '\0'
+
+typedef struct	s_arg
+{
+	
+}				t_arg;
+
+typedef struct	s_oper
+{
+	char		code;
+	int			size;
+	int			offset;
+	
+}				t_oper;
 
 typedef struct	s_champ
 {

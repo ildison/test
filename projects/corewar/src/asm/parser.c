@@ -6,11 +6,17 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 12:38:12 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/26 16:23:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void		skip_spaces(char **data)
+{
+	while (ft_isspace(**data))
+		++*data;
+}
 
 static char	*cpy_name_or_header(t_champ *champ, char **name_or_comment, char *data, int len)
 {
@@ -19,8 +25,7 @@ static char	*cpy_name_or_header(t_champ *champ, char **name_or_comment, char *da
 	*name_or_comment = (char *)ft_memalloc(len);
 	if (!*name_or_comment)
 		error(strerror(errno));
-	while (ft_isspace(*data))
-		++data;
+	skip_spaces(&data);
 	if (*data != '"')
 		error_manager("Syntax error: wrong title", champ->data, data);
 	else
@@ -59,8 +64,14 @@ static char	*pars_header(t_champ *champ, char *data)
 	return (pars_header(champ, data));
 }
 
+
+// void		pars_opers(t_champ *champ, char *data)
+// {
+// 	skip_spaces(&data);
+// }
+
 void		parsing_champ(t_champ *champ, char *data)
 {
 	data = pars_header(champ, data);
-	// data = 
+	// data = pars_opers(champ, data);
 }
