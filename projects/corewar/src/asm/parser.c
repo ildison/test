@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 16:50:26 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/27 16:26:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,18 @@ int			is_operation(char *data)
 	
 }
 
+int			is_label(char *data)
+{
+	
+}
+
 void		pars_opers(t_champ *champ, char *data)
 {
+	skip_spaces(&data);
 	while (*data)
 	{
-		skip_spaces(&data);
 		if ()
-		++data;
+		skip_spaces(&data);
 	}
 }
 

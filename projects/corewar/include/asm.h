@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 16:44:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/27 16:40:30 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,58 @@
 # define ASM_ERROR -1
 # define ASM_END_OF_STR '\0'
 
-typedef struct	s_arg
+typedef enum		e_op_code
 {
-	
-}				t_arg;
+	asm_live,
+	asm_ld,
+	asm_st,
+	asm_add,
+	asm_sub,
+	asm_and,
+	asm_or,
+	asm_xor,
+	asm_zimp,
+	asm_ldi,
+	asm_sti,
+	asm_fork,
+	asm_lld,
+	asm_lldi,
+	asm_lfork,
+	asm_aff
+}					t_op_code;
 
-typedef struct	s_oper
+typedef struct		s_arg
 {
-	char		code_oper;
-	int			size;
-	int			offset;
-	
-}				t_oper;
+	char			*first;
+	char			*second;
+	char			*third;
+}					t_arg;
 
-typedef struct	s_champ
+typedef struct		s_label
 {
-	char		*data;
-	char		*prog_name;
-	char		*comment;
-}				t_champ;
+	char			*name;
+	int				offset;
+	struct s_label	*next;
+}					t_label;
 
-char			*read_data(char *file);
-void			clean_comments(char *data);
-void			parsing_champ(t_champ *champ, char *data);
-void			error_manager(char *error, char *data, char *ptr_error);
+typedef struct		s_oper
+{
+	t_op_code		op_code;
+	int				size;
+	int				offset;
+	struct s_oper	*next;
+}					t_oper;
+
+typedef struct		s_champ
+{
+	char			*data;
+	char			*prog_name;
+	char			*comment;
+}					t_champ;
+
+char				*read_data(char *file);
+void				clean_comments(char *data);
+void				parsing_champ(t_champ *champ, char *data);
+void				error_manager(char *error, char *data, char *ptr_error);
 
 #endif
