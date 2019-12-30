@@ -6,16 +6,24 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/30 14:43:58 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/30 15:18:51 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		skip_spaces()
+char		*skip_spaces()
 {
+	char	*ptr_end_of_str;
+
+	ptr_end_of_str = NULL;
 	while (ft_isspace(*ASM_DATA))
+	{
+		if (*ASM_DATA == '\n' && !ptr_end_of_str)
+			ptr_end_of_str = ASM_DATA;
 		++ASM_DATA;
+	}
+	return (ptr_end_of_str);
 }
 
 static char	*cpy_name_or_header(char **name_or_comment, int len)
@@ -50,14 +58,14 @@ static void	pars_header(t_champ *champ)
 	if (champ->prog_name && champ->comment)
 		return ;
 	skip_spaces();
-	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) &&\
-														!champ->prog_name)
+	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
+	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
 		ASM_DATA += ft_strlen(NAME_CMD_STRING);
 		cpy_name_or_header(&champ->prog_name, PROG_NAME_LENGTH);
 	}
-	else if (ft_strnequ(ASM_DATA, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
-															&& !champ->comment)
+	else if (ft_strnequ(ASM_DATA, COMMENT_CMD_STRING,\
+	ft_strlen(COMMENT_CMD_STRING)) && !champ->comment)
 	{
 		ASM_DATA += ft_strlen(COMMENT_CMD_STRING);
 		cpy_name_or_header(&champ->comment, COMMENT_LENGTH);
