@@ -31,7 +31,6 @@ void		clean_comments(char *data)
 char		*read_data(char *file)
 {
 	char	buf[ASM_SIZE_BUF + 1];
-	char	*data;
 	char	*tmp;
 	int		count_read;
 	int		fd;
@@ -39,19 +38,19 @@ char		*read_data(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == ASM_ERROR)
 		error(strerror(errno));
-	data = ft_strnew(0);
-	if (!data)
+	ASM_DATA = ft_strnew(0);
+	if (!ASM_DATA)
 		error(strerror(errno));
 	while((count_read = read(fd, buf, ASM_SIZE_BUF)) > 0)
 	{
 		buf[count_read] = ASM_END_OF_STR;
-		tmp = data;
-		if ((data = ft_strjoin(data, buf)) == 0)
+		tmp = ASM_DATA;
+		if ((ASM_DATA = ft_strjoin(ASM_DATA, buf)) == 0)
 			error(strerror(errno));
 		free(tmp);
 	}
 	if (count_read == ASM_ERROR)
 		error(strerror(errno));
 	close(fd);
-	return (data);
+	return (ASM_DATA);
 }

@@ -6,85 +6,89 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/27 16:26:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/30 14:43:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		skip_spaces(char **data)
+void		skip_spaces()
 {
-	while (ft_isspace(**data))
-		++*data;
+	while (ft_isspace(*ASM_DATA))
+		++ASM_DATA;
 }
 
-static char	*cpy_name_or_header(t_champ *champ, char **name_or_comment, char *data, int len)
+static char	*cpy_name_or_header(char **name_or_comment, int len)
 {
 	int		i;
 
 	*name_or_comment = (char *)ft_memalloc(len);
 	if (!*name_or_comment)
 		error(strerror(errno));
-	skip_spaces(&data);
-	if (*data != '"')
-		error_manager("Syntax error: wrong title", champ->data, data);
+	skip_spaces();
+	if (*ASM_DATA != '"')
+		error_manager("Syntax error: wrong title");
 	else
-		++data;
+		++ASM_DATA;
 	i = 0;
-	while (*data && *data != '"' && i < len)
+	while (*ASM_DATA && *ASM_DATA != '"' && i < len)
 	{
-		*(*name_or_comment + i) = *data;
+		*(*name_or_comment + i) = *ASM_DATA;
 		++i;
-		++data;
+		++ASM_DATA;
 	}
-	if (*data != '"')
-		while (*data && *data != '"')
-			++data;
-	if (!*data)
-		error_manager("Syntax error: wrong title", champ->data, data);
-	return (++data);
+	if (*ASM_DATA != '"')
+		while (*ASM_DATA && *ASM_DATA != '"')
+			++ASM_DATA;
+	if (!*ASM_DATA)
+		error_manager("Syntax error: wrong title");
+	return (++ASM_DATA);
 }
 
-static char	*pars_header(t_champ *champ, char *data)
+static void	pars_header(t_champ *champ)
 {
 	if (champ->prog_name && champ->comment)
-		return (data);
-	skip_spaces(&data);
-	if (ft_strnequ(data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) &&\
+		return ;
+	skip_spaces();
+	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) &&\
 														!champ->prog_name)
-		data = cpy_name_or_header(champ, &champ->prog_name, data +\
-							ft_strlen(NAME_CMD_STRING), PROG_NAME_LENGTH);
-	else if (ft_strnequ(data, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
-															&& !champ->comment)
-		data = cpy_name_or_header(champ, &champ->comment, data +\
-					ft_strlen(COMMENT_CMD_STRING), COMMENT_LENGTH);
-	else
-		error_manager("Syntax error: wrong title", champ->data, data);
-	return (pars_header(champ, data));
-}
-
-int			is_operation(char *data)
-{
-	
-}
-
-int			is_label(char *data)
-{
-	
-}
-
-void		pars_opers(t_champ *champ, char *data)
-{
-	skip_spaces(&data);
-	while (*data)
 	{
-		if ()
-		skip_spaces(&data);
+		ASM_DATA += ft_strlen(NAME_CMD_STRING);
+		cpy_name_or_header(&champ->prog_name, PROG_NAME_LENGTH);
 	}
+	else if (ft_strnequ(ASM_DATA, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
+															&& !champ->comment)
+	{
+		ASM_DATA += ft_strlen(COMMENT_CMD_STRING);
+		cpy_name_or_header(&champ->comment, COMMENT_LENGTH);
+	}
+	else
+		error_manager("Syntax error: wrong title");
+	pars_header(champ);
 }
 
-void		parsing_champ(t_champ *champ, char *data)
+// int			is_operation(char *data)
+// {
+	
+// }
+
+// int			is_label(char *data)
+// {
+	
+// }
+
+// void		pars_opers(t_champ *champ, char *data)
+// {
+// 	skip_spaces(&data);
+// 	while (*data)
+// 	{
+// 		if ()
+// 		skip_spaces(&data);
+// 	}
+// }
+
+void		parsing_champ(t_champ *champ)
 {
-	data = pars_header(champ, data);
+	pars_header(champ);
 	// data = pars_opers(champ, data);
 }

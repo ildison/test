@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/27 16:40:30 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/30 15:05:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define ASM_SIZE_BUF 1024
 # define ASM_ERROR -1
 # define ASM_END_OF_STR '\0'
+
+# define ASM_DATA g_data.data
+# define ASM_INPUT g_data.input
+struct s_data		g_data;
 
 typedef enum		e_op_code
 {
@@ -64,14 +68,20 @@ typedef struct		s_oper
 
 typedef struct		s_champ
 {
-	char			*data;
 	char			*prog_name;
 	char			*comment;
 }					t_champ;
 
+typedef struct		s_data
+{
+	char			*input;
+	char			*data;
+}					t_data;
+
+
 char				*read_data(char *file);
 void				clean_comments(char *data);
-void				parsing_champ(t_champ *champ, char *data);
-void				error_manager(char *error, char *data, char *ptr_error);
+void				parsing_champ(t_champ *champ);
+void				error_manager(char *error);
 
 #endif
