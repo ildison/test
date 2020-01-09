@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/09 18:18:09 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/09 18:30:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,90 +76,90 @@ static void	pars_header(t_champ *champ)
 	pars_header(champ);
 }
 
-// int			is_operation(char *data)
-// {
-// 	int		i;
-// 	char	*opers[17] = {"", "live", "ld", "st", "add", "sub", "and", "or", "xor",\
-// 			"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"};
+int			is_operation(char *data)
+{
+	int		i;
+	char	*opers[17] = {"", "live", "ld", "st", "add", "sub", "and", "or", "xor",\
+			"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"};
 
-// 	i = 16;
-// 	while (i > 0)
-// 	{
-// 		if (ft_strnequ(opers[i], data, ft_strlen(opers[i])))
-// 		{
-// 			ASM_DATA += ft_strlen(opers[i]);
-// 			return (i);
-// 		}
-// 		--i;
-// 	}
-// 	return (0);
-// }
+	i = 16;
+	while (i > 0)
+	{
+		if (ft_strnequ(opers[i], data, ft_strlen(opers[i])))
+		{
+			ASM_DATA += ft_strlen(opers[i]);
+			return (i);
+		}
+		--i;
+	}
+	return (0);
+}
 
 
 
-// int			is_label(char *data)
-// {
+int			is_label(char *data)
+{
 	
-// }
+}
 
-// void		
+void		
 
-// char		*get_arg()
-// {
-// 	char	*arg;
-// 	int		len;
+char		*get_arg()
+{
+	char	*arg;
+	int		len;
 
-// 	len = 0;
-// 	while (ASM_DATA[len] && ASM_DATA[len] != ' ' && ASM_DATA[len] != '\n'\
-// 			&& ASM_DATA[len] != SEPARATOR_CHAR)
-// 		++len;
-// 	arg = ft_strnew(len);
-// 	if (!arg)
-// 		error(strerror(errno));
-// 	ft_strncpy(arg, ASM_DATA, len);
-// 	ASM_DATA += len;
-// 	return (arg);
-// }
+	len = 0;
+	while (ASM_DATA[len] && ASM_DATA[len] != ' ' && ASM_DATA[len] != '\n'\
+			&& ASM_DATA[len] != SEPARATOR_CHAR)
+		++len;
+	arg = ft_strnew(len);
+	if (!arg)
+		error(strerror(errno));
+	ft_strncpy(arg, ASM_DATA, len);
+	ASM_DATA += len;
+	return (arg);
+}
 
-// t_arg		take_args()
-// {
-// 	t_arg	new_args;
+t_arg		take_args()
+{
+	t_arg	new_args;
 
-// 	ft_bzero(&new_args, sizeof(t_arg));
-// 	ASM_DATA = skip_spaces();
-// 	if (*ASM_DATA == '\n')
-// 		error_manager("Syntax error: ENDLINE");
-// 	new_args.first = get_arg();
-// 	skip_spaces();
-// 	if (*ASM_DATA == SEPARATOR_CHAR && (ASM_DATA = skip_spaces()) == '\n')
-// 		error_manager("Syntax error: ENDLINE");
+	ft_bzero(&new_args, sizeof(t_arg));
+	if (skip_spaces())
+		error_manager("Syntax error: ENDLINE");
+	new_args.first = get_arg();
+	skip_spaces();
+	if (*ASM_DATA == SEPARATOR_CHAR && ASM_EOL)
+		error_manager("Syntax error: ENDLINE");
 	
-// }
+	
+}
 
-// void		pars_opers(t_champ *champ)
-// {
-// 	int		oper_code;
-// 	t_arg	args;
+void		pars_opers(t_champ *champ)
+{
+	int		oper_code;
+	t_arg	args;
 
-// 	while (*ASM_DATA)
-// 	{
-// 		if ((oper_code = is_operation(ASM_DATA)))
-// 		{
-// 			args = take_args();
-// 			add_new_oper(champ, oper_code);
+	while (*ASM_DATA)
+	{
+		if ((oper_code = is_operation(ASM_DATA)))
+		{
+			args = take_args();
+			add_new_oper(champ, oper_code);
 			
-// 			printf("Yes\n");
-// 		}
+			printf("Yes\n");
+		}
 		
-// 		skip_spaces();
-// 		// ++ASM_DATA;
-// 	}
-// }
+		skip_spaces();
+		// ++ASM_DATA;
+	}
+}
 
 void		parsing_champ(t_champ *champ)
 {
 	pars_header(champ);
-	// if (skip_spaces())
-	// 	error_manager("Syntax error: ENDLINE");
-	// pars_opers(champ);
+	if (!skip_spaces())
+		error_manager("Syntax error: ENDLINE");
+	pars_opers(champ);
 }

@@ -1,10 +1,8 @@
 #deassembler par msa 18, made by joe
-.comment ""
-.name"#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"
-
-
-	 fork  %:label00          		# 3,0,281
-	 ld    %-272,r3           		# 7,3,278
+	.comment  "d" 
+	.name"#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"  
+	fork  %:label00        		# 3,0,281
+	 ld    %-272,   r3           		# 7,3,278
 	 live  %0                 		# 5,10,271
 	 fork  %:label01          		# 3,15,266
 	 ld    %-272,r3           		# 7,18,263
@@ -17,7 +15,7 @@ label02:ld%4, r2              		# 7,45,236
 	 ld    %0,r4              		# 7,52,229
 	 zjmp  %:label03          		# 3,59,222
 
-label01: ld    %-202,r3           		# 7,62,219
+label01: ld    %-202 ,r3
 	 fork  %:label04          		# 3,69,212
 	 ld    %0,r2              		# 7,72,209
 	 ld    %0,r4              		# 7,79,202
