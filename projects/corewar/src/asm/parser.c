@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/30 15:18:51 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/09 10:27:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,22 @@ char		*skip_spaces()
 			ptr_end_of_str = ASM_DATA;
 		++ASM_DATA;
 	}
-	return (ptr_end_of_str);
+	if (ptr_end_of_str)
+		return (ptr_end_of_str);
+	else
+		return (ASM_DATA);
 }
 
-static char	*cpy_name_or_header(char **name_or_comment, int len)
+static void	cpy_name_or_header(char **name_or_comment, int len)
 {
 	int		i;
 
 	*name_or_comment = (char *)ft_memalloc(len);
 	if (!*name_or_comment)
 		error(strerror(errno));
-	skip_spaces();
+	ASM_DATA = skip_spaces();
+	if (*ASM_DATA == '\n')
+		error_manager("Syntax error: ENDLINE");
 	if (*ASM_DATA != '"')
 		error_manager("Syntax error: wrong title");
 	else
@@ -50,14 +55,14 @@ static char	*cpy_name_or_header(char **name_or_comment, int len)
 			++ASM_DATA;
 	if (!*ASM_DATA)
 		error_manager("Syntax error: wrong title");
-	return (++ASM_DATA);
 }
 
 static void	pars_header(t_champ *champ)
 {
 	if (champ->prog_name && champ->comment)
 		return ;
-	skip_spaces();
+	if (!skip_spaces() && (champ->prog_name || champ->comment))
+		error_manager("Syntax error: ENDLINE");
 	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
 	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
@@ -72,6 +77,7 @@ static void	pars_header(t_champ *champ)
 	}
 	else
 		error_manager("Syntax error: wrong title");
+	++ASM_DATA;
 	pars_header(champ);
 }
 
