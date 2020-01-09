@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/30 15:05:50 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/09 17:51:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
+# define ASM_EOL g_data.eol
 struct s_data		g_data;
 
 typedef enum		e_op_code
 {
-	asm_live,
+	asm_live = 1,
 	asm_ld,
 	asm_st,
 	asm_add,
@@ -34,7 +35,7 @@ typedef enum		e_op_code
 	asm_and,
 	asm_or,
 	asm_xor,
-	asm_zimp,
+	asm_zjmp,
 	asm_ldi,
 	asm_sti,
 	asm_fork,
@@ -70,12 +71,14 @@ typedef struct		s_champ
 {
 	char			*prog_name;
 	char			*comment;
+	t_oper			*first_oper;
 }					t_champ;
 
 typedef struct		s_data
 {
 	char			*input;
 	char			*data;
+	char			*eol;
 }					t_data;
 
 
