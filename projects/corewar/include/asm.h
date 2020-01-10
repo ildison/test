@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/09 18:21:41 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:12:09 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ASM_INPUT g_data.input
 # define ASM_EOL g_data.eol
 struct s_data		g_data;
+t_op    op_tab[17];
 
 typedef enum		e_op_code
 {
@@ -62,6 +63,7 @@ typedef struct		s_label
 typedef struct		s_oper
 {
 	t_op_code		op_code;
+	char			*args[3];
 	int				size;
 	int				offset;
 	struct s_oper	*next;

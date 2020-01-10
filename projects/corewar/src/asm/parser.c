@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/09 18:30:04 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:30:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	pars_header(t_champ *champ)
 		return ;
 	if (!skip_spaces() && (champ->prog_name || champ->comment))
 		error_manager("Syntax error: ENDLINE");
-		printf("<%s>\n", ft_strndup(ASM_DATA, 1));
 	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
 	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
@@ -79,15 +78,15 @@ static void	pars_header(t_champ *champ)
 int			is_operation(char *data)
 {
 	int		i;
-	char	*opers[17] = {"", "live", "ld", "st", "add", "sub", "and", "or", "xor",\
-			"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"};
+	// char	*opers[17] = {"", "live", "ld", "st", "add", "sub", "and", "or", "xor",\
+	// 		"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"};
 
 	i = 16;
 	while (i > 0)
 	{
-		if (ft_strnequ(opers[i], data, ft_strlen(opers[i])))
+		if (ft_strnequ(op_tab[i].name, data, ft_strlen(op_tab[i].name)))
 		{
-			ASM_DATA += ft_strlen(opers[i]);
+			ASM_DATA += ft_strlen(op_tab[i].name);
 			return (i);
 		}
 		--i;
@@ -97,12 +96,12 @@ int			is_operation(char *data)
 
 
 
-int			is_label(char *data)
-{
+// int			is_label(char *data)
+// {
 	
-}
+// }
 
-void		
+// void		
 
 char		*get_arg()
 {
@@ -110,8 +109,8 @@ char		*get_arg()
 	int		len;
 
 	len = 0;
-	while (ASM_DATA[len] && ASM_DATA[len] != ' ' && ASM_DATA[len] != '\n'\
-			&& ASM_DATA[len] != SEPARATOR_CHAR)
+	while (ASM_DATA[len] && !ft_isspace(ASM_DATA[len]) &&\
+							ASM_DATA[len] != SEPARATOR_CHAR)
 		++len;
 	arg = ft_strnew(len);
 	if (!arg)
@@ -121,36 +120,48 @@ char		*get_arg()
 	return (arg);
 }
 
-t_arg		take_args()
+char		**take_args(unsigned char code)
 {
-	t_arg	new_args;
+	char	**args;
+	int		n_arg;
 
-	ft_bzero(&new_args, sizeof(t_arg));
-	if (skip_spaces())
+	if (!(args = (char **)malloc(sizeof(char *) * op_tab[code].args_num)))
+		error(strerror(errno));
+	n_arg = 0;
+	while (n_arg < op_tab[code].args_num)
+	{
+		if (skip_spaces())
+			error_manager("Invalid parameter count for instruction");
+		args[n_arg] = get_arg();
+		++n_arg;
+		if (n_arg < op_tab[code].args_num)
+		{
+			if (skip_spaces())
+				error_manager("Invalid parameter count for instruction");
+			if (*ASM_DATA == SEPARATOR_CHAR)
+				++ASM_DATA;
+			else
+				error_manager("Lexical error at ");
+		}
+	}
+	if (!skip_spaces())
 		error_manager("Syntax error: ENDLINE");
-	new_args.first = get_arg();
-	skip_spaces();
-	if (*ASM_DATA == SEPARATOR_CHAR && ASM_EOL)
-		error_manager("Syntax error: ENDLINE");
-	
-	
+	return (args);
 }
 
-void		pars_opers(t_champ *champ)
+void		pars_opers()
 {
 	int		oper_code;
-	t_arg	args;
+	char	**args;
 
 	while (*ASM_DATA)
 	{
 		if ((oper_code = is_operation(ASM_DATA)))
 		{
-			args = take_args();
-			add_new_oper(champ, oper_code);
-			
+			args = take_args(oper_code);
+			// add_new_oper(champ, oper_code);
 			printf("Yes\n");
 		}
-		
 		skip_spaces();
 		// ++ASM_DATA;
 	}
@@ -161,5 +172,5 @@ void		parsing_champ(t_champ *champ)
 	pars_header(champ);
 	if (!skip_spaces())
 		error_manager("Syntax error: ENDLINE");
-	pars_opers(champ);
+	pars_opers();
 }
