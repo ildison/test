@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:14:41 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/23 16:14:43 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 14:32:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,18 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct		s_op
+{
+	char				*name;
+	unsigned char		args_num;
+	unsigned char		args_types[3];
+	unsigned char		code;
+	unsigned int		delay;
+	char				*comment;
+	// int					(*f)();
+	int					need_types;
+	int 				dir_size;
+	// int					a; //to be defined
+	// int					b; //to be defined
+}					t_op;
