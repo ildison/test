@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 15:39:26 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:43:08 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define ASM_END_OF_STR '\0'
 
 # define ASM_ERROR -1
+# define ASM_ERR_ENDLINE "Syntax error: ENDLINE"
+# define ASM_ERR_WRONG_TITLE "Syntax error: wrong title"
+# define ASM_ERR_LEXICAL "Lexical error at"
+# define ASM_ERR_INVALID_PARAM "Invalid parameter count for instruction"
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input

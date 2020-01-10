@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 15:38:56 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:43:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 	if (!*name_or_comment)
 		error(strerror(errno));
 	if (skip_spaces())
-		error_manager("Syntax error: ENDLINE", ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
 	if (*ASM_DATA != '"')
-		error_manager("Syntax error: wrong title", ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
 	else
 		++ASM_DATA;
 	i = 0;
@@ -48,7 +48,7 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 		while (*ASM_DATA && *ASM_DATA != '"')
 			++ASM_DATA;
 	if (!*ASM_DATA)
-		error_manager("Syntax error: wrong title", ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
 }
 
 static void	pars_header(t_champ *champ)
@@ -56,7 +56,7 @@ static void	pars_header(t_champ *champ)
 	if (champ->prog_name && champ->comment)
 		return ;
 	if (!skip_spaces() && (champ->prog_name || champ->comment))
-		error_manager("Syntax error: ENDLINE", ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
 	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
 	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
@@ -70,7 +70,7 @@ static void	pars_header(t_champ *champ)
 		cpy_name_or_header(&champ->comment, COMMENT_LENGTH);
 	}
 	else
-		error_manager("Syntax error: wrong title", ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
 	++ASM_DATA;
 	pars_header(champ);
 }
@@ -131,21 +131,21 @@ char		**take_args(unsigned char code)
 	while (n_arg < op_tab[code].args_num)
 	{
 		if (skip_spaces())
-			error_manager("Invalid parameter count for instruction", code);
+			error_manager(ASM_ERR_INVALID_PARAM, code);
 		args[n_arg] = get_arg();
 		++n_arg;
 		if (n_arg < op_tab[code].args_num)
 		{
 			if (skip_spaces())
-				error_manager("Invalid parameter count for instruction", code);
+				error_manager(ASM_ERR_INVALID_PARAM, code);
 			if (*ASM_DATA == SEPARATOR_CHAR)
 				++ASM_DATA;
 			else
-				error_manager("Lexical error at ", ASM_NOT_OPER);
+				error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
 		}
 	}
 	if (!skip_spaces())
-		error_manager("Syntax error: ENDLINE", ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
 	return (args);
 }
 
@@ -171,6 +171,6 @@ void		parsing_champ(t_champ *champ)
 {
 	pars_header(champ);
 	if (!skip_spaces())
-		error_manager("Syntax error: ENDLINE", ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
 	pars_opers();
 }
