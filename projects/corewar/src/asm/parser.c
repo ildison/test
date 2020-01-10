@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 15:43:16 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 16:21:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,29 @@ char		**take_args(unsigned char code)
 	return (args);
 }
 
-void		pars_opers()
+void		add_new_oper(t_champ *champ, char **args, int oper_code)
+{
+	t_oper	*oper;
+
+	oper = (t_oper *)ft_memalloc(sizeof(t_oper));
+	if (!oper)
+		error(strerror(errno));
+	oper->args = args;
+	oper->op_code = oper_code;
+	if (!champ->first_oper)
+	{
+		champ->first_oper = oper;
+		champ->last_oper = oper;
+	}
+	else
+	{
+		oper->prev = champ->last_oper;
+		champ->last_oper->next = oper;
+		champ->last_oper = oper;
+	}
+}
+
+void		pars_opers(t_champ *champ)
 {
 	int		oper_code;
 	char	**args;
@@ -159,10 +181,10 @@ void		pars_opers()
 		if ((oper_code = is_operation(ASM_DATA)))
 		{
 			args = take_args(oper_code);
-			// add_new_oper(champ, oper_code);
+			add_new_oper(champ, args, oper_code);
 			printf("Yes\n");
 		}
-		skip_spaces();
+		// skip_spaces();
 		// ++ASM_DATA;
 	}
 }
@@ -172,5 +194,5 @@ void		parsing_champ(t_champ *champ)
 	pars_header(champ);
 	if (!skip_spaces())
 		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
-	pars_opers();
+	pars_opers(champ);
 }
