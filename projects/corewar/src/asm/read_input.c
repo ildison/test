@@ -21,7 +21,7 @@ void		clean_comments(char *data)
 	{
 		if (*data == '"')
 			in ^= 1;
-		if (!in && *data == '#')
+		if (!in && (*data == COMMENT_CHAR || *data == ALT_COMMENT_CHAR))
 			while (*data && *data != '\n')
 				*data++ = ' ';
 		++data;
