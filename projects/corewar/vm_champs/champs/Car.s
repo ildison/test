@@ -1,8 +1,9 @@
 #deassembler par msa 18, made by joe
 	.comment  "d" 
-	.name"#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"  
+	.name"#deassembler par msa 1.8, made by joe#deassembler par msa 1.8, made by joe"
+
 	fork  %:label00        		# 3,0,281
-	 ld    %-272,   r3           		# 7,3,278
+	 ld    %-272 ,   r3           		# 7,3,278
 	 live  %0                 		# 5,10,271
 	 fork  %:label01          		# 3,15,266
 	 ld    %-272,r3           		# 7,18,263

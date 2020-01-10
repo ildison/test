@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 16:21:25 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 18:03:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,8 @@ void		pars_opers(t_champ *champ)
 		{
 			args = take_args(oper_code);
 			add_new_oper(champ, args, oper_code);
-			printf("Yes\n");
 		}
 		// skip_spaces();
-		// ++ASM_DATA;
 	}
 }
 
