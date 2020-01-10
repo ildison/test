@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:28:36 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/09 18:17:33 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:35:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ void	check_ln_col(int *ln, int *col, char *data, char *ptr_error)
 	}
 }
 
-void	error_manager(char *error)
+void	error_manager(char *error, unsigned char oper_code)
 {
 	int	ln;
 	int	col;
 
-	check_ln_col(&ln, &col, ASM_INPUT, ASM_EOL ? ASM_EOL : ASM_DATA);
-	ft_printf("%s [%d:%d]\n", error, ln, col);
+	if (oper_code)
+		ft_printf("%s %s\n", error, op_tab[oper_code].name);
+	else
+	{
+		check_ln_col(&ln, &col, ASM_INPUT, ASM_EOL ? ASM_EOL : ASM_DATA);
+		ft_printf("%s [%d:%d]\n", error, ln, col);
+	}
 	exit(-1);
 }

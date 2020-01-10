@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 15:12:09 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:39:26 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include "op.h"
 
 # define ASM_SIZE_BUF 1024
-# define ASM_ERROR -1
+# define ASM_NOT_OPER 0
 # define ASM_END_OF_STR '\0'
+
+# define ASM_ERROR -1
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
@@ -87,6 +89,6 @@ typedef struct		s_data
 char				*read_data(char *file);
 void				clean_comments(char *data);
 void				parsing_champ(t_champ *champ);
-void				error_manager(char *error);
+void				error_manager(char *error, unsigned char oper_code);
 
 #endif
