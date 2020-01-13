@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 10:16:22 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 11:14:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,24 +120,21 @@ char		*get_arg()
 	return (arg);
 }
 
-char		* pars_args(unsigned char code)
+void		pars_args(t_oper *oper)
 {
-	char	**args;
 	int		n_arg;
 
-	if (!(args = (char **)malloc(sizeof(char *) * op_tab[code].args_num)))
-		error(strerror(errno));
 	n_arg = 0;
-	while (n_arg < op_tab[code].args_num)
+	while (n_arg < op_tab[oper->op_code].args_num)
 	{
 		if (skip_spaces())
-			error_manager(ASM_ERR_INVALID_PARAM, code);
-		args[n_arg] = get_arg();
+			error_manager(ASM_ERR_INVALID_PARAM, oper->op_code);
+		oper->args[n_arg] = get_arg();
 		++n_arg;
-		if (n_arg < op_tab[code].args_num)
+		if (n_arg < op_tab[oper->op_code].args_num)
 		{
 			if (skip_spaces())
-				error_manager(ASM_ERR_INVALID_PARAM, code);
+				error_manager(ASM_ERR_INVALID_PARAM, oper->op_code);
 			if (*ASM_DATA == SEPARATOR_CHAR)
 				++ASM_DATA;
 			else
@@ -146,18 +143,21 @@ char		* pars_args(unsigned char code)
 	}
 	if (!skip_spaces())
 		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
-	return (args);
 }
 
-void		add_new_oper(t_champ *champ, char **args, int oper_code)
+t_oper		*new_oper(int oper_code)
 {
 	t_oper	*oper;
 
 	oper = (t_oper *)ft_memalloc(sizeof(t_oper));
 	if (!oper)
 		error(strerror(errno));
-	oper->args = args;
 	oper->op_code = oper_code;
+	return (oper);
+}
+
+void		add_new_oper(t_champ *champ, t_oper *oper)
+{
 	if (!champ->first_oper)
 	{
 		champ->first_oper = oper;
@@ -171,17 +171,30 @@ void		add_new_oper(t_champ *champ, char **args, int oper_code)
 	}
 }
 
+// unsigned char	*validation_args_types(t_oper *oper)
+// {
+// 	int			n_arg;
+
+// 	n_arg = 0;
+// 	while (n_arg < op_tab[oper->op_code].args_num)
+// 	{
+// 		++n_arg;
+// 	}
+// }
+
 void		pars_opers(t_champ *champ)
 {
+	t_oper	*oper;
 	int		oper_code;
-	char	**args;
 
 	while (*ASM_DATA)
 	{
 		if ((oper_code = is_operation(ASM_DATA)))
 		{
-			args = pars_args(oper_code);
-			add_new_oper(champ, args, oper_code);
+			oper = new_oper(oper_code);
+			pars_args(oper);
+			// validation_args_types(oper);
+			add_new_oper(champ, oper);
 		}
 		// skip_spaces();
 	}
