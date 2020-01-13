@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 15:35:41 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 15:59:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,11 @@ void				clean_comments(char *data);
 char				*skip_spaces();
 void				parsing_champ(t_champ *champ);
 void				pars_header(t_champ *champ);
+void				pars_opers(t_champ *champ);
 void				pars_args(t_oper *oper);
 void				check_number(char *s);
 void				check_label(char *label);
+int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				error_manager(char *error, unsigned char oper_code);
 

@@ -24,3 +24,6 @@ aff r7
 aff r8
 aff r9
 aff r10
+
+live %0
+ld %0, r2
