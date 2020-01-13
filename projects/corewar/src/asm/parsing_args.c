@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 15:34:15 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 16:17:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void				validation_arg(char *arg)
 	if (*arg == 'r')
 	{
 		check_number(arg + 1);
-		if (ft_atoi(arg + 1) == 0)
+		if (ft_atoi(arg + 1) <= 0 || ft_atoi(arg + 1) > 16)
 			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
 		return ;
 	}
