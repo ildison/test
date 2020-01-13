@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/23 17:26:57 by cormund           #+#    #+#              #
-#    Updated: 2020/01/13 15:59:15 by cormund          ###   ########.fr        #
+#    Updated: 2020/01/13 17:17:47 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC_NAME := asm.c\
 			op.c\
 			parsing_header.c\
 			parsing_args.c\
-			parsing_oper.c
+			parsing_oper.c\
+			parsing_labels.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

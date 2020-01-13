@@ -15,7 +15,7 @@
 label02:ld%4, r2              		# 7,45,236
 	 ld    %0,r4              		# 7,52,229
 	 zjmp  %:label03          		# 3,59,222
-
+label:
 label01: ld    %-202 ,r3
 	 fork  %:label04          		# 3,69,212
 	 ld    %0,r2              		# 7,72,209

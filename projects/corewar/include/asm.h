@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 15:59:05 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 17:16:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ASM_ERR_LEXICAL "Lexical error at"
 # define ASM_ERR_INVALID_PARAM "Invalid parameter count for instruction"
 # define ASM_ERR_WRONG_TYPE "Syntax error: wrong type for instruction"
+# define ASM_ERR_WRONG_LABEL "Syntax error: wrong label"
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
@@ -116,6 +117,7 @@ void				pars_opers(t_champ *champ);
 void				pars_args(t_oper *oper);
 void				check_number(char *s);
 void				check_label(char *label);
+int					is_label(char *data);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				error_manager(char *error, unsigned char oper_code);

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 15:57:43 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 17:31:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,18 @@ static void		set_size_oper(t_oper *oper)
 void			pars_opers(t_champ *champ)
 {
 	t_oper		*oper;
+	int			len_label;
 	int			oper_code;
 
 	while (*ASM_DATA)
 	{
-		if ((oper_code = is_operation(ASM_DATA)))
+		if ((len_label = is_label(ASM_DATA)))
+		{
+			if (!ASM_EOL)
+				error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER);
+			check_label(ASM_DATA);
+		}
+		else if ((oper_code = is_operation(ASM_DATA)))
 		{
 			oper = new_oper(oper_code);
 			pars_args(oper);
