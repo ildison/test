@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 13:05:08 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 13:38:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,6 @@ void		add_new_oper(t_champ *champ, t_oper *oper)
 	}
 }
 
-
 void			validation_args_types(t_oper *oper)
 {
 	int			n_arg;
@@ -248,6 +247,8 @@ void			validation_args_types(t_oper *oper)
 	n_arg = 0;
 	while (n_arg < op_tab[oper->code].args_num)
 	{
+		if (!(oper->args_types[n_arg] & op_tab[oper->code].args_types[n_arg]))
+			error_manager(ASM_ERR_WRONG_TYPE, oper->code);
 		++n_arg;
 	}
 }
