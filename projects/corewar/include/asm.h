@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 16:20:59 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 13:02:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ASM_ERR_WRONG_TITLE "Syntax error: wrong title"
 # define ASM_ERR_LEXICAL "Lexical error at"
 # define ASM_ERR_INVALID_PARAM "Invalid parameter count for instruction"
+# define ASM_ERR_WRONG_TYPE "Syntax error: wrong type for instruction"
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
@@ -66,10 +67,24 @@ typedef struct		s_label
 	struct s_label	*next;
 }					t_label;
 
+typedef union		u_args_types
+{
+	unsigned char	code_types;
+	struct
+	{
+		uint8_t		nan:2;
+		uint8_t		third:2;
+		uint8_t		second:2;
+		uint8_t		first:2;
+	}				types;
+}					t_args_types;
+
 typedef struct		s_oper
 {
-	t_op_code		op_code;
-	char			**args;
+	t_op_code		code;
+	char			*args[3];
+	unsigned char	args_types[3];
+	unsigned char	code_types;
 	int				size;
 	int				offset;
 	struct s_oper	*next;

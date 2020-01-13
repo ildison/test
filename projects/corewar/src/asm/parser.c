@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 11:14:02 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 13:05:08 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,90 @@ char		*get_arg()
 	return (arg);
 }
 
+void		check_label(char *label)
+{
+	if (!*label)
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	while (*label)
+	{
+		if (!ft_strchr(LABEL_CHARS, *label))
+			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+		++label;
+	}
+}
+
+void		check_number(char *s)
+{
+	char    *num_alph;
+	char    *tmp;
+
+	num_alph = ft_itoa(ft_atoi(s));
+	tmp = num_alph;
+	if (*num_alph == '-' && *s != '-')
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	if (*num_alph == '-' || *num_alph == '0')
+	        ++num_alph;
+	if (*s == '-' || *s == '+')
+	        ++s;
+	if (!*s)
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	while (*s && *s == '0')
+	        ++s;
+	if (!ft_strequ(s, num_alph))
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	free(tmp);
+}
+
+void		validation_arg(char *arg)
+{
+	if (*arg == 'r')
+	{
+		check_number(arg + 1);
+		if (ft_atoi(arg + 1) == 0)
+			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+		return ;
+	}
+	if (*arg == DIRECT_CHAR)
+		++arg;
+	if (*arg == LABEL_CHAR)
+		check_label(arg + 1);
+	else
+		check_number(arg);
+}
+
+unsigned char		set_arg_type(char *arg, int code)
+{
+	unsigned char	type;
+
+	type = 0;
+	if (*arg == DIRECT_CHAR)
+		type = DIR_CODE;
+	else if (*arg == 'r')
+		type = REG_CODE;
+	else if (ft_isdigit((int)*arg) || *arg == LABEL_CHAR)
+		type = IND_CODE;
+	else
+		error_manager(ASM_ERR_WRONG_TYPE, code);
+	return (type);
+}
+
 void		pars_args(t_oper *oper)
 {
 	int		n_arg;
 
 	n_arg = 0;
-	while (n_arg < op_tab[oper->op_code].args_num)
+	while (n_arg < op_tab[oper->code].args_num)
 	{
 		if (skip_spaces())
-			error_manager(ASM_ERR_INVALID_PARAM, oper->op_code);
+			error_manager(ASM_ERR_INVALID_PARAM, oper->code);
 		oper->args[n_arg] = get_arg();
+		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->code);
+		validation_arg(oper->args[n_arg]);
 		++n_arg;
-		if (n_arg < op_tab[oper->op_code].args_num)
+		if (n_arg < op_tab[oper->code].args_num)
 		{
 			if (skip_spaces())
-				error_manager(ASM_ERR_INVALID_PARAM, oper->op_code);
+				error_manager(ASM_ERR_INVALID_PARAM, oper->code);
 			if (*ASM_DATA == SEPARATOR_CHAR)
 				++ASM_DATA;
 			else
@@ -152,7 +221,7 @@ t_oper		*new_oper(int oper_code)
 	oper = (t_oper *)ft_memalloc(sizeof(t_oper));
 	if (!oper)
 		error(strerror(errno));
-	oper->op_code = oper_code;
+	oper->code = oper_code;
 	return (oper);
 }
 
@@ -171,16 +240,17 @@ void		add_new_oper(t_champ *champ, t_oper *oper)
 	}
 }
 
-// unsigned char	*validation_args_types(t_oper *oper)
-// {
-// 	int			n_arg;
 
-// 	n_arg = 0;
-// 	while (n_arg < op_tab[oper->op_code].args_num)
-// 	{
-// 		++n_arg;
-// 	}
-// }
+void			validation_args_types(t_oper *oper)
+{
+	int			n_arg;
+
+	n_arg = 0;
+	while (n_arg < op_tab[oper->code].args_num)
+	{
+		++n_arg;
+	}
+}
 
 void		pars_opers(t_champ *champ)
 {
@@ -193,7 +263,7 @@ void		pars_opers(t_champ *champ)
 		{
 			oper = new_oper(oper_code);
 			pars_args(oper);
-			// validation_args_types(oper);
+			validation_args_types(oper);
 			add_new_oper(champ, oper);
 		}
 		// skip_spaces();
