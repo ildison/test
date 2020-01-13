@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/10 18:03:24 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/13 10:16:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char		*get_arg()
 	return (arg);
 }
 
-char		**take_args(unsigned char code)
+char		* pars_args(unsigned char code)
 {
 	char	**args;
 	int		n_arg;
@@ -180,7 +180,7 @@ void		pars_opers(t_champ *champ)
 	{
 		if ((oper_code = is_operation(ASM_DATA)))
 		{
-			args = take_args(oper_code);
+			args = pars_args(oper_code);
 			add_new_oper(champ, args, oper_code);
 		}
 		// skip_spaces();
