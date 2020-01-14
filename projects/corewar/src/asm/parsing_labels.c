@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:40:03 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 09:20:53 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:39:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int			is_label(char *data)
 	while (data[len] && !ft_isspace(data[len]))
 	{
 		if (data[len] == LABEL_CHAR)
+		{
+			if (!ASM_EOL)
+				error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER);
 			return (len);
+		}
 		++len;
 	}
 	return (0);
@@ -39,4 +43,15 @@ t_label		*new_label(int len_label)
 	if (!new->name)
 		error(strerror(errno));
 	return (new);
+}
+
+void		add_new_label(t_champ *champ, t_label *label)
+{
+	if (!champ->label)
+		champ->label = label;
+	else
+	{
+		label->next = champ->label;
+		champ->label = label;
+	}
 }

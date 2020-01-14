@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 09:21:14 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:39:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct		s_champ
 	char			*comment;
 	t_oper			*first_oper;
 	t_oper			*last_oper;
+	t_label			*label;
 }					t_champ;
 
 typedef struct		s_data
@@ -119,6 +120,7 @@ void				check_number(char *s);
 void				check_label(char *label);
 int					is_label(char *data);
 t_label				*new_label(int len_label);
+void				add_new_label(t_champ *champ, t_label *label);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				error_manager(char *error, unsigned char oper_code);

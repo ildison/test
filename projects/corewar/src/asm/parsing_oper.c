@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 09:14:53 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:39:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,14 @@ void			pars_opers(t_champ *champ)
 	int			len_label;
 
 	while (*ASM_DATA)
-	{
 		if ((len_label = is_label(ASM_DATA)))
 		{
-			if (!ASM_EOL)
-				error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER);
 			check_label(ASM_DATA);
 			label = new_label(len_label);
+			label->offset = set_offset(champ);
+			add_new_label(champ, label);
+			ASM_DATA += len_label + 1;
+			skip_spaces();
 		}
 		else if ((oper_code = is_operation(ASM_DATA)))
 		{
@@ -101,6 +102,6 @@ void			pars_opers(t_champ *champ)
 			oper->offset = set_offset(champ);
 			add_new_oper(champ, oper);
 		}
-		// skip_spaces();
-	}
+		else
+			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
 }
