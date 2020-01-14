@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:51:43 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 17:59:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		set_size_oper(t_oper *oper)
 		if (oper->args_types[n_arg] == REG_CODE)
 			oper->size += 1;
 		else if (oper->args_types[n_arg] == IND_CODE)
-			oper->size += 1;
+			oper->size += 2;
 		else
 			oper->size += op_tab[oper->code].dir_size ? 2 : 4;
 		++n_arg;
