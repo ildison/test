@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 14:10:51 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 14:11:29 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 12:45:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 	if (!*name_or_comment)
 		error(strerror(errno));
 	if (skip_spaces())
-		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	if (*ASM_DATA != '"')
-		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	else
 		++ASM_DATA;
 	i = 0;
@@ -36,7 +36,7 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 		while (*ASM_DATA && *ASM_DATA != '"')
 			++ASM_DATA;
 	if (!*ASM_DATA)
-		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
 }
 
 void		pars_header(t_champ *champ)
@@ -44,7 +44,7 @@ void		pars_header(t_champ *champ)
 	if (champ->prog_name && champ->comment)
 		return ;
 	if (!skip_spaces() && (champ->prog_name || champ->comment))
-		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
 	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
@@ -58,7 +58,7 @@ void		pars_header(t_champ *champ)
 		cpy_name_or_header(&champ->comment, COMMENT_LENGTH);
 	}
 	else
-		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	++ASM_DATA;
 	pars_header(champ);
 }

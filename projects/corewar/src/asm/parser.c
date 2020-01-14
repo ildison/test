@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 11:00:26 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 12:51:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,14 @@ char		*skip_spaces()
 	return (ASM_EOL);
 }
 
-// int			is_label(char *data)
-// {
-	
-// }
-
 void		check_label(char *label)
 {
 	if (!*label)
-		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	while (*label && *label != LABEL_CHAR)
 	{
 		if (!ft_strchr(LABEL_CHARS, *label))
-			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 		++label;
 	}
 }
@@ -49,17 +44,17 @@ void		check_number(char *s)
 	num_alph = ft_itoa(ft_atoi(s));
 	tmp = num_alph;
 	if (*num_alph == '-' && *s != '-')
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	if (*num_alph == '-' || *num_alph == '0')
 	        ++num_alph;
 	if (*s == '-' || *s == '+')
 	        ++s;
 	if (!*s)
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	while (*s && *s == '0')
 	        ++s;
 	if (!ft_strequ(s, num_alph))
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
+	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	free(tmp);
 }
 
@@ -75,8 +70,9 @@ void		parsing_champ(t_champ *champ)
 {
 	pars_header(champ);
 	if (!skip_spaces())
-		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
+		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	pars_opers(champ);
 	if (!champ->first_oper)
-		error_manager(ASM_ERR_END, ASM_NOT_OPER);
+		error_manager(ASM_ERR_END, ASM_NOT_OPER, ASM_NOT_LABEL);
+	replace_args2numbers(champ);
 }

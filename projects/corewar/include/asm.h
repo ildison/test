@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 11:00:10 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 12:45:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define ASM_SIZE_BUF 1024
 # define ASM_NOT_OPER 0
+# define ASM_NOT_LABEL 0
 # define ASM_END_OF_STR '\0'
 
 # define ASM_ERROR -1
@@ -87,6 +88,7 @@ typedef struct		s_oper
 	char			*args[3];
 	unsigned char	args_types[3];
 	unsigned char	code_types;
+	int				nums[3];
 	int				size;
 	int				offset;
 	struct s_oper	*next;
@@ -124,6 +126,7 @@ t_label				*new_label(int len_label);
 void				add_new_label(t_champ *champ, t_label *label);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
-void				error_manager(char *error, unsigned char oper_code);
+void				replace_args2numbers(t_champ *champ);
+void				error_manager(char *error, unsigned char oper_code, char *wrong_label);
 
 #endif
