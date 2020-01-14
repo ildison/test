@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 14:10:51 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:45:10 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 16:29:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 {
 	int		i;
 
-	*name_or_comment = (char *)ft_memalloc(len);
+	*name_or_comment = (char *)ft_memalloc(len + 4);
 	if (!*name_or_comment)
 		error(strerror(errno));
 	if (skip_spaces())

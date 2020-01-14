@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 14:56:07 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 16:23:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # define ASM_NOT_OPER 0
 # define ASM_NOT_LABEL 0
 # define ASM_END_OF_STR '\0'
+
+# define ASM_MAGIC_SIZE 4
+# define ASM_NULL_SIZE 4
+# define ASM_EXEC_CODE_SIZE 4
 
 # define ASM_ERROR -1
 # define ASM_ERR_ENDLINE "Syntax error: ENDLINE"

@@ -6,19 +6,77 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 15:32:36 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 19:08:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		translate_in_byte_code(t_champ *champ)
+static void			translate_num(unsigned char **byte_code, int num, int size)
 {
-	int		fd;
+	while (size > 0)
+	{
+		--size;
+		**byte_code = ((num >> (8 * size)) & 0xff);
+		++(*byte_code);
+	}
+}
 
-	fd = open(champ->file_name, O_WRONLY | O_APPEND | O_CREAT | O_TRUNC, S_IWRITE);
-	if (fd == -1)
+static int			get_type_args(t_oper *oper)
+{
+	return (oper->args_types[0] << 6 | oper->args_types[1] << 4 |\
+			oper->args_types[2] << 2);
+}
+
+static void			translate_opers(unsigned char *byte_code, t_oper *oper)
+{
+	int				n_arg;
+	int				size_arg;
+
+	while (oper)
+	{
+		translate_num(&byte_code, oper->code, 1);
+		if (op_tab[oper->code].need_types)
+			translate_num(&byte_code, get_type_args(oper), 1);
+		n_arg = 0;
+		while (n_arg < op_tab[oper->code].args_num)
+		{
+			if (oper->args_types[n_arg] == REG_CODE)
+				size_arg = 1;
+			else if (oper->args_types[n_arg] == IND_CODE)
+				size_arg = 2;
+			else
+				size_arg = op_tab[oper->code].dir_size ? 2 : 4;
+			translate_num(&byte_code, oper->nums[n_arg], size_arg);
+			++n_arg;
+		}
+		oper = oper->next;
+	}
+}
+
+void				translate_in_byte_code(t_champ *champ)
+{
+	unsigned char	*byte_code;
+	unsigned char	*tmp;
+	int				fd;
+	int				size_byte_code;
+
+	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC);
+	if (fd == ASM_ERROR)
 		error(strerror(errno));
-	
+	champ->code_size = champ->last_oper->offset + champ->last_oper->size;
+	size_byte_code = ASM_MAGIC_SIZE + PROG_NAME_LENGTH + COMMENT_LENGTH +\
+				ASM_NULL_SIZE * 2 + ASM_EXEC_CODE_SIZE + champ->code_size;
+	byte_code = ft_memalloc(size_byte_code);
+	if (!(tmp = byte_code))
+		error(strerror(errno));
+	translate_num(&tmp, COREWAR_EXEC_MAGIC, ASM_MAGIC_SIZE);
+	ft_strncpy((char *)tmp, champ->prog_name, PROG_NAME_LENGTH + ASM_NULL_SIZE);
+	tmp += PROG_NAME_LENGTH + ASM_NULL_SIZE;
+	translate_num(&tmp, champ->code_size, ASM_EXEC_CODE_SIZE);
+	ft_strncpy((char *)tmp, champ->comment, COMMENT_LENGTH + ASM_NULL_SIZE);
+	tmp += COMMENT_LENGTH + ASM_NULL_SIZE;
+	translate_opers(tmp, champ->first_oper);
+	write (fd, byte_code, size_byte_code);
 	close (fd);
 }

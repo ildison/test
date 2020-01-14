@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 12:14:54 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:52:37 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 17:56:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	replace_args(t_champ *champ, t_oper *oper)
 			oper->nums[n_arg] = replace_label(champ, arg + 1, oper->offset);
 		else
 			oper->nums[n_arg] = ft_atoi(arg);
-		ft_printf("%d\n", oper->nums[n_arg]);
 		++n_arg;
 	}
 }
