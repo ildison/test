@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:45:37 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 14:56:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,13 @@ typedef struct		s_oper
 
 typedef struct		s_champ
 {
+	char			*file_name;
 	char			*prog_name;
 	char			*comment;
 	t_oper			*first_oper;
 	t_oper			*last_oper;
 	t_label			*label;
+	int				code_size;
 }					t_champ;
 
 typedef struct		s_data
@@ -128,5 +130,6 @@ int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				replace_args2numbers(t_champ *champ);
 void				error_manager(char *error, unsigned char oper_code, char *wrong_label);
+void				translate_in_byte_code(t_champ *champ);
 
 #endif
