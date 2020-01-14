@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 16:20:20 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 11:00:26 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		check_label(char *label)
 {
 	if (!*label)
 		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
-	while (*label || *label != LABEL_CHAR)
+	while (*label && *label != LABEL_CHAR)
 	{
 		if (!ft_strchr(LABEL_CHARS, *label))
 			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER);
@@ -77,4 +77,6 @@ void		parsing_champ(t_champ *champ)
 	if (!skip_spaces())
 		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER);
 	pars_opers(champ);
+	if (!champ->first_oper)
+		error_manager(ASM_ERR_END, ASM_NOT_OPER);
 }
