@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 09:39:17 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 11:00:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ASM_ERR_INVALID_PARAM "Invalid parameter count for instruction"
 # define ASM_ERR_WRONG_TYPE "Syntax error: wrong type for instruction"
 # define ASM_ERR_WRONG_LABEL "Syntax error: wrong label"
+# define ASM_ERR_END "Syntax error: END"
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
