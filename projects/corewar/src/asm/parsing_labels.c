@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:40:03 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 17:16:56 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:20:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,17 @@ int			is_label(char *data)
 		++len;
 	}
 	return (0);
+}
+
+t_label		*new_label(int len_label)
+{
+	t_label	*new;
+
+	new = ft_memalloc(sizeof(t_label));
+	if (!new)
+		error(strerror(errno));
+	new->name = ft_strndup(ASM_DATA, len_label);
+	if (!new->name)
+		error(strerror(errno));
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/13 17:16:04 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 09:21:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void				pars_args(t_oper *oper);
 void				check_number(char *s);
 void				check_label(char *label);
 int					is_label(char *data);
+t_label				*new_label(int len_label);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				error_manager(char *error, unsigned char oper_code);
