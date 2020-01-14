@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 15:18:11 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:19:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int			main(int argc, char **argv)
 		if (!champ)
 			error(strerror(errno));
 		champ->file_name = new_filename(argv[1]);
-		ft_printf("%s\n", champ->file_name);
 		ASM_INPUT = read_data(argv[1]);
 		ASM_EOL = NULL;
 		clean_comments(ASM_INPUT);
 		parsing_champ(champ);
-		// translate_in_byte_code(champ);
-		ft_printf("name: %s\n", champ->prog_name);
-		ft_printf("comment: %s\n", champ->comment);
+		translate_in_byte_code(champ);
 	}
 	return(0);
 }
