@@ -6,11 +6,28 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 17:04:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static void				validation_arg(char *arg)
+{
+	if (*arg == 'r')
+	{
+		check_number(arg + 1);
+		if (ft_atoi(arg + 1) <= 0 || ft_atoi(arg + 1) > 16)
+			error_manager(ASM_ERR_REG_VALUE, ASM_NOT_OPER, ASM_NOT_LABEL);
+		return ;
+	}
+	if (*arg == DIRECT_CHAR)
+		++arg;
+	if (*arg == LABEL_CHAR)
+		check_label(arg + 1);
+	else
+		check_number(arg);
+}
 
 static char				*get_arg(void)
 {
@@ -25,6 +42,7 @@ static char				*get_arg(void)
 	if (!arg)
 		error(strerror(errno));
 	ft_strncpy(arg, ASM_DATA, len);
+	validation_arg(arg);
 	ASM_DATA += len;
 	return (arg);
 }
@@ -40,23 +58,6 @@ void					validation_args_types(t_oper *oper)
 			error_manager(ASM_ERR_WRONG_TYPE, oper->code, ASM_NOT_LABEL);
 		++n_arg;
 	}
-}
-
-static void				validation_arg(char *arg)
-{
-	if (*arg == 'r')
-	{
-		check_number(arg + 1);
-		if (ft_atoi(arg + 1) <= 0 || ft_atoi(arg + 1) > 16)
-			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-		return ;
-	}
-	if (*arg == DIRECT_CHAR)
-		++arg;
-	if (*arg == LABEL_CHAR)
-		check_label(arg + 1);
-	else
-		check_number(arg);
 }
 
 static unsigned char	set_arg_type(char *arg, int code)
@@ -88,7 +89,6 @@ void					pars_args(t_oper *oper)
 			error_manager(ASM_ERR_INVALID_PARAM, oper->code, ASM_NOT_LABEL);
 		oper->args[n_arg] = get_arg();
 		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->code);
-		validation_arg(oper->args[n_arg]);
 		++n_arg;
 		if (n_arg < g_op_tab[oper->code].args_num)
 		{
