@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/23 17:26:57 by cormund           #+#    #+#              #
-#    Updated: 2020/01/14 14:46:56 by cormund          ###   ########.fr        #
+#    Updated: 2020/01/15 14:38:09 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC_NAME := asm.c\
 			parsing_oper.c\
 			parsing_labels.c\
 			replace_args2numbers.c\
-			translator.c
+			translator.c\
+			options.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

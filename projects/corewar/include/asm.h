@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 16:23:03 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 14:38:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define ASM_ERR_WRONG_TYPE "Syntax error: wrong type for instruction"
 # define ASM_ERR_WRONG_LABEL "Syntax error: wrong label"
 # define ASM_ERR_END "Syntax error: END"
+
+# define ASM_DISASM_OPTION 'd'
+# define ASM_ON_DISASM_OPTION 1
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
@@ -133,7 +136,9 @@ void				add_new_label(t_champ *champ, t_label *label);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				replace_args2numbers(t_champ *champ);
-void				error_manager(char *error, unsigned char oper_code, char *wrong_label);
+void				error_manager(char *error, unsigned char oper_code,\
+														char *wrong_label);
 void				translate_in_byte_code(t_champ *champ);
+void				check_options(int argc, char **argv, char *flag);
 
 #endif
