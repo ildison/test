@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/23 17:26:57 by cormund           #+#    #+#              #
-#    Updated: 2020/01/15 16:00:47 by cormund          ###   ########.fr        #
+#    Updated: 2020/01/15 19:26:16 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := asm
 LIBFT := libft.a
 HEADERS := libft.h asm.h op.h
 CC := clang
-CFLAGS := -Wall -Wextra -Werror -O3
+CFLAGS :=  -O3
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
@@ -38,7 +38,8 @@ SRC_NAME := asm.c\
 			replace_args2numbers.c\
 			translator.c\
 			options.c\
-			cleanup.c
+			cleanup.c\
+			dissasembler.c
 
 OBJ_NAME := $(SRC_NAME:.c=.o)
 

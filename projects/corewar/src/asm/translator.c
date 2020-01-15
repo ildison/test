@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 19:10:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void				translate_in_byte_code(t_champ *champ)
 		error(strerror(errno));
 	champ->code_size = champ->last_oper->offset + champ->last_oper->size;
 	size_byte_code = ASM_MAGIC_SIZE + PROG_NAME_LENGTH + COMMENT_LENGTH +\
-				ASM_NULL_SIZE * 2 + ASM_EXEC_CODE_SIZE + champ->code_size;
+					ASM_NULL_SIZE * 2 + ASM_CODE_SIZE + champ->code_size;
 	byte_code = ft_memalloc(size_byte_code);
 	if (!(tmp = byte_code))
 		error(strerror(errno));
 	translate_num(&tmp, COREWAR_EXEC_MAGIC, ASM_MAGIC_SIZE);
 	ft_strncpy((char *)tmp, champ->prog_name, PROG_NAME_LENGTH + ASM_NULL_SIZE);
 	tmp += PROG_NAME_LENGTH + ASM_NULL_SIZE;
-	translate_num(&tmp, champ->code_size, ASM_EXEC_CODE_SIZE);
+	translate_num(&tmp, champ->code_size, ASM_CODE_SIZE);
 	ft_strncpy((char *)tmp, champ->comment, COMMENT_LENGTH + ASM_NULL_SIZE);
 	tmp += COMMENT_LENGTH + ASM_NULL_SIZE;
 	translate_opers(tmp, champ->first_oper);

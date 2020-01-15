@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 19:10:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define ASM_MAGIC_SIZE 4
 # define ASM_NULL_SIZE 4
-# define ASM_EXEC_CODE_SIZE 4
+# define ASM_CODE_SIZE 4
 
 # define ASM_ERROR -1
 # define ASM_ERR_ENDLINE "Syntax error: ENDLINE"
@@ -33,10 +33,12 @@
 # define ASM_ERR_WRONG_TYPE "Syntax error: wrong type for instruction"
 # define ASM_ERR_WRONG_LABEL "Syntax error: wrong label"
 # define ASM_ERR_END "Syntax error: END"
+# define ASM_ERR_REG_VALUE "Syntax error: wrong registry value"
+# define ASM_ERR_WRONG_FILENAME "Wrong filename (need .s or .cor with -d flag)"
 
 # define ASM_DISASM_OPTION 'd'
 # define ASM_HELP_OPTION 'h'
-# define ASM_ON_DISASM_OPTION 1
+# define ASM_ON_DISSASM_OPTION 1
 
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
@@ -103,5 +105,6 @@ void				error_manager(char *error, unsigned char oper_code,\
 void				translate_in_byte_code(t_champ *champ);
 void				check_options(int argc, char **argv, char *flag);
 void				clean_up(t_champ *champ);
+void				dissasembler(t_champ *champ);
 
 #endif
