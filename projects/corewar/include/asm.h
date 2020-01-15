@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:33:48 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:36:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ASM_ERR_END "Syntax error: END"
 
 # define ASM_DISASM_OPTION 'd'
+# define ASM_HELP_OPTION 'h'
 # define ASM_ON_DISASM_OPTION 1
 
 # define ASM_DATA g_data.data

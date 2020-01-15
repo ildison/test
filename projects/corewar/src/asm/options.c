@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:29:39 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 14:36:51 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:36:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void		parse_options(char *options, char *flag)
 	{
 		if (*options == ASM_DISASM_OPTION)
 			*flag |= ASM_ON_DISASM_OPTION;
+		else if (*options == ASM_HELP_OPTION)
+			asm_usage();
 		else
 			asm_usage();
 		++options;
