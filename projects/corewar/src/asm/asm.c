@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 10:31:31 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:11:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,44 @@ static void	check_filename(char *file)
 		error("Wrong filename (need .s)");
 }
 
+static void	check_files(int argc, char **argv)
+{
+	int		n_files;
+
+	n_files = 0;
+	while (argc > 0)
+	{
+		if (*argv[argc] != '-')
+		{
+			check_filename(argv[argc]);
+			++n_files;
+		}
+		--argc;
+	}
+	if (!n_files)
+		error("File not specified");
+}
+
 int			main(int argc, char **argv)
 {
 	t_champ	*champ;
+	char	flag;
 
-	if (argc > 1)
-	{
-		champ = ft_memalloc(sizeof(t_champ));
-		if (!champ)
-			error(strerror(errno));
-		check_filename(argv[1]);
-		champ->file_name = new_filename(argv[1]);
-		ASM_INPUT = read_data(argv[1]);
-		ASM_EOL = NULL;
-		clean_comments(ASM_INPUT);
-		parsing_champ(champ);
-		translate_in_byte_code(champ);
-		ft_printf("Writing output program to %s\n", champ->file_name);
-	}
+	check_options(argc - 1, argv + 1, &flag);
+	check_files(argc - 1, argv);
+	champ = ft_memalloc(sizeof(t_champ));
+	if (!champ)
+		error(strerror(errno));
+	while (--argc > 0)
+		if (*argv[argc] != '-')
+		{
+			champ->file_name = new_filename(argv[argc]);
+			ASM_INPUT = read_data(argv[argc]);
+			ASM_EOL = NULL;
+			clean_comments(ASM_INPUT);
+			parsing_champ(champ);
+			translate_in_byte_code(champ);
+			ft_printf("Writing output program to %s\n", champ->file_name);
+		}
 	return (0);
 }
