@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 14:16:09 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:30:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void				translate_in_byte_code(t_champ *champ)
 	tmp += COMMENT_LENGTH + ASM_NULL_SIZE;
 	translate_opers(tmp, champ->first_oper);
 	write(fd, byte_code, size_byte_code);
+	free(byte_code);
 	close(fd);
 }
