@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 19:08:13 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 08:55:28 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,33 @@ static int			get_type_args(t_oper *oper)
 			oper->args_types[2] << 2);
 }
 
-static void			translate_opers(unsigned char *byte_code, t_oper *oper)
+static void			translate_args(unsigned char **byte_code, t_oper *oper)
 {
 	int				n_arg;
 	int				size_arg;
 
+	n_arg = 0;
+	while (n_arg < op_tab[oper->code].args_num)
+	{
+		if (oper->args_types[n_arg] == REG_CODE)
+			size_arg = 1;
+		else if (oper->args_types[n_arg] == IND_CODE)
+			size_arg = 2;
+		else
+			size_arg = op_tab[oper->code].dir_size ? 2 : 4;
+		translate_num(byte_code, oper->nums[n_arg], size_arg);
+		++n_arg;
+	}
+}
+
+static void			translate_opers(unsigned char *byte_code, t_oper *oper)
+{
 	while (oper)
 	{
 		translate_num(&byte_code, oper->code, 1);
 		if (op_tab[oper->code].need_types)
 			translate_num(&byte_code, get_type_args(oper), 1);
-		n_arg = 0;
-		while (n_arg < op_tab[oper->code].args_num)
-		{
-			if (oper->args_types[n_arg] == REG_CODE)
-				size_arg = 1;
-			else if (oper->args_types[n_arg] == IND_CODE)
-				size_arg = 2;
-			else
-				size_arg = op_tab[oper->code].dir_size ? 2 : 4;
-			translate_num(&byte_code, oper->nums[n_arg], size_arg);
-			++n_arg;
-		}
+		translate_args(&byte_code, oper);
 		oper = oper->next;
 	}
 }
@@ -77,6 +82,6 @@ void				translate_in_byte_code(t_champ *champ)
 	ft_strncpy((char *)tmp, champ->comment, COMMENT_LENGTH + ASM_NULL_SIZE);
 	tmp += COMMENT_LENGTH + ASM_NULL_SIZE;
 	translate_opers(tmp, champ->first_oper);
-	write (fd, byte_code, size_byte_code);
-	close (fd);
+	write(fd, byte_code, size_byte_code);
+	close(fd);
 }
