@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 13:08:57 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:42:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@ char		*skip_spaces(void)
 
 void		check_number(char *s)
 {
-	// char	*num_alph;
-	// char	*tmp;
-
-	// num_alph = ft_itoa(ft_atoi(s));
-	// tmp = num_alph;
-	// if (*num_alph == '-' && *s != '-')
-	// 	error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-	// if (*num_alph == '-' || *num_alph == '0')
-	// 	++num_alph;
-	// if (*s == '-' || *s == '+')
-	// 	++s;
-	// if (!*s)
-	// 	error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-	// while (*s && *s == '0')
-	// 	++s;
-	// if (!ft_strequ(s, num_alph))
-	// 	error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-	// free(tmp);
 	if (*s == '-' || *s == '+')
 		++s;
 	if (!*s)
