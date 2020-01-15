@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:40:03 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 09:10:24 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:20:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			is_label(char *data)
 	len = 0;
 	if (*data == LABEL_CHAR)
 		error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER, ASM_NOT_LABEL);
-	while (data[len] && !ft_isspace(data[len]))
+	while (data[len] && !ft_isspace(data[len]) && data[len] != DIRECT_CHAR)
 	{
 		if (data[len] == LABEL_CHAR)
 		{

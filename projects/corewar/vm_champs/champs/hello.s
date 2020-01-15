@@ -26,4 +26,4 @@ aff r9
 aff r10
 
 live %0
-ld %0, r2
+ld %-100, r1

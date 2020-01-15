@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 08:55:28 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 12:16:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void				translate_in_byte_code(t_champ *champ)
 	int				fd;
 	int				size_byte_code;
 
-	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC);
+	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == ASM_ERROR)
 		error(strerror(errno));
 	champ->code_size = champ->last_oper->offset + champ->last_oper->size;

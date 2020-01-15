@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 09:06:35 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:09:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static unsigned char	set_arg_type(char *arg, int code)
 	unsigned char		type;
 
 	type = 0;
+	if (*arg == '-' || *arg == '+')
+		++arg;
 	if (*arg == DIRECT_CHAR)
 		type = DIR_CODE;
 	else if (*arg == 'r')
