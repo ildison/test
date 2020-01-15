@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 17:07:05 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:03:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int			main(int argc, char **argv)
 		parsing_champ(champ);
 		translate_in_byte_code(champ);
 	}
-	return(0);
+	return (0);
 }

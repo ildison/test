@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 12:14:54 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 17:56:33 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:08:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	replace_args(t_champ *champ, t_oper *oper)
 	while (n_arg < op_tab[oper->code].args_num)
 	{
 		arg = oper->args[n_arg];
-		if (oper->args_types[n_arg] == T_REG || oper->args_types[n_arg] == T_DIR)
+		if (oper->args_types[n_arg] == T_REG ||\
+			oper->args_types[n_arg] == T_DIR)
 			++arg;
 		if (*arg == LABEL_CHAR)
 			oper->nums[n_arg] = replace_label(champ, arg + 1, oper->offset);

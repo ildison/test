@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 17:59:34 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:09:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static int		is_operation(char *data)
 {
 	int			i;
-	// char	*opers[17] = {"", "live", "ld", "st", "add", "sub", "and", "or", "xor",\
-	// 		"zjmp", "ldi", "sti", "fork", "lld", "lldi", "lfork", "aff"};
 
 	i = 16;
 	while (i > 0)
@@ -86,7 +84,6 @@ void			pars_opers(t_champ *champ)
 	while (*ASM_DATA)
 		if ((len_label = is_label(ASM_DATA)))
 		{
-			check_label(ASM_DATA);
 			label = new_label(len_label);
 			label->offset = set_offset(champ);
 			add_new_label(champ, label);

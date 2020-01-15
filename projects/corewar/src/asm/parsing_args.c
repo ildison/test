@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:49:38 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:06:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static char				*get_arg()
+static char				*get_arg(void)
 {
 	char				*arg;
 	int					len;
@@ -31,7 +31,7 @@ static char				*get_arg()
 
 void					validation_args_types(t_oper *oper)
 {
-	int			n_arg;
+	int					n_arg;
 
 	n_arg = 0;
 	while (n_arg < op_tab[oper->code].args_num)

@@ -6,11 +6,23 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:40:03 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:45:10 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:10:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void		check_label(char *label)
+{
+	if (!*label)
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
+	while (*label && *label != LABEL_CHAR)
+	{
+		if (!ft_strchr(LABEL_CHARS, *label))
+			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
+		++label;
+	}
+}
 
 int			is_label(char *data)
 {
@@ -25,6 +37,7 @@ int			is_label(char *data)
 		{
 			if (!ASM_EOL)
 				error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER, ASM_NOT_LABEL);
+			check_label(ASM_DATA);
 			return (len);
 		}
 		++len;

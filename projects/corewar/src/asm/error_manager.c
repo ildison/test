@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:28:36 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:43:58 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:03:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	check_ln_col(int *ln, int *col, char *data, char *ptr_error)
 	while (*data)
 	{
 		*col += *data != '\t' ? 1 : 4;
-		// if (*data != '\t')
-		// 	*col += 4;
-		// ++*col;
 		if (data == ptr_error)
 			break ;
 		if (*data == '\n')

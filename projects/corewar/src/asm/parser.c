@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/14 12:51:25 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:10:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char		*skip_spaces()
+char		*skip_spaces(void)
 {
 	ASM_EOL = NULL;
 	while (ft_isspace(*ASM_DATA))
@@ -24,37 +24,25 @@ char		*skip_spaces()
 	return (ASM_EOL);
 }
 
-void		check_label(char *label)
-{
-	if (!*label)
-		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-	while (*label && *label != LABEL_CHAR)
-	{
-		if (!ft_strchr(LABEL_CHARS, *label))
-			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-		++label;
-	}
-}
-
 void		check_number(char *s)
 {
-	char    *num_alph;
-	char    *tmp;
+	char	*num_alph;
+	char	*tmp;
 
 	num_alph = ft_itoa(ft_atoi(s));
 	tmp = num_alph;
 	if (*num_alph == '-' && *s != '-')
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	if (*num_alph == '-' || *num_alph == '0')
-	        ++num_alph;
+		++num_alph;
 	if (*s == '-' || *s == '+')
-	        ++s;
+		++s;
 	if (!*s)
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	while (*s && *s == '0')
-	        ++s;
+		++s;
 	if (!ft_strequ(s, num_alph))
-	        error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
+		error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
 	free(tmp);
 }
 

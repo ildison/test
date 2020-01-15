@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_data.c                                       :+:      :+:    :+:   */
+/*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:06:28 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/26 12:29:13 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 09:05:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char		*read_data(char *file)
 	ASM_DATA = ft_strnew(0);
 	if (!ASM_DATA)
 		error(strerror(errno));
-	while((count_read = read(fd, buf, ASM_SIZE_BUF)) > 0)
+	while ((count_read = read(fd, buf, ASM_SIZE_BUF)) > 0)
 	{
 		buf[count_read] = ASM_END_OF_STR;
 		tmp = ASM_DATA;
