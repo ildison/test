@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:28:36 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 09:03:57 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	error_manager(char *error, unsigned char oper_code, char *wrong_label)
 	int	col;
 
 	if (oper_code)
-		ft_printf("%s %s\n", error, op_tab[oper_code].name);
+		ft_printf("%s %s\n", error, g_op_tab[oper_code].name);
 	else if (wrong_label)
 		ft_printf("%s: %s\n", error, wrong_label);
 	else

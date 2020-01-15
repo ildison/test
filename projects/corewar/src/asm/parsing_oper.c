@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 13:06:17 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		is_operation(char *data)
 	i = 16;
 	while (i > 0)
 	{
-		if (ft_strnequ(op_tab[i].name, data, ft_strlen(op_tab[i].name)))
+		if (ft_strnequ(g_op_tab[i].name, data, ft_strlen(g_op_tab[i].name)))
 		{
-			ASM_DATA += ft_strlen(op_tab[i].name);
+			ASM_DATA += ft_strlen(g_op_tab[i].name);
 			return (i);
 		}
 		--i;
@@ -60,16 +60,16 @@ static void		set_size_oper(t_oper *oper)
 	int			n_arg;
 
 	oper->size = 1;
-	oper->size += op_tab[oper->code].need_types ? 1 : 0;
+	oper->size += g_op_tab[oper->code].need_types ? 1 : 0;
 	n_arg = 0;
-	while (n_arg < op_tab[oper->code].args_num)
+	while (n_arg < g_op_tab[oper->code].args_num)
 	{
 		if (oper->args_types[n_arg] == REG_CODE)
 			oper->size += 1;
 		else if (oper->args_types[n_arg] == IND_CODE)
 			oper->size += 2;
 		else
-			oper->size += op_tab[oper->code].dir_size ? 2 : 4;
+			oper->size += g_op_tab[oper->code].dir_size ? 2 : 4;
 		++n_arg;
 	}
 }

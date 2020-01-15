@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 13:09:25 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void					validation_args_types(t_oper *oper)
 	int					n_arg;
 
 	n_arg = 0;
-	while (n_arg < op_tab[oper->code].args_num)
+	while (n_arg < g_op_tab[oper->code].args_num)
 	{
-		if (!(oper->args_types[n_arg] & op_tab[oper->code].args_types[n_arg]))
+		if (!(oper->args_types[n_arg] & g_op_tab[oper->code].args_types[n_arg]))
 			error_manager(ASM_ERR_WRONG_TYPE, oper->code, ASM_NOT_LABEL);
 		++n_arg;
 	}
@@ -82,7 +82,7 @@ void					pars_args(t_oper *oper)
 	int					n_arg;
 
 	n_arg = 0;
-	while (n_arg < op_tab[oper->code].args_num)
+	while (n_arg < g_op_tab[oper->code].args_num)
 	{
 		if (skip_spaces())
 			error_manager(ASM_ERR_INVALID_PARAM, oper->code, ASM_NOT_LABEL);
@@ -90,7 +90,7 @@ void					pars_args(t_oper *oper)
 		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->code);
 		validation_arg(oper->args[n_arg]);
 		++n_arg;
-		if (n_arg < op_tab[oper->code].args_num)
+		if (n_arg < g_op_tab[oper->code].args_num)
 		{
 			if (skip_spaces())
 				error_manager(ASM_ERR_INVALID_PARAM, oper->code, ASM_NOT_LABEL);

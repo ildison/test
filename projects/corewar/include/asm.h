@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:36:12 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@
 # define ASM_DATA g_data.data
 # define ASM_INPUT g_data.input
 # define ASM_EOL g_data.eol
+
 struct s_data		g_data;
-t_op    op_tab[17];
+t_op				g_op_tab[17];
 
 typedef struct		s_label
 {
@@ -81,7 +82,6 @@ typedef struct		s_data
 	char			*data;
 	char			*eol;
 }					t_data;
-
 
 char				*read_data(char *file);
 void				clean_comments(char *data);

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:14:13 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:27:47 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	clean_opers(t_oper *oper)
 		return ;
 	clean_opers(oper->next);
 	n_arg = 0;
-	while (n_arg < op_tab[oper->code].args_num)
+	while (n_arg < g_op_tab[oper->code].args_num)
 	{
 		free(oper->args[n_arg]);
 		++n_arg;
