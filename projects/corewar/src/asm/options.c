@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 14:29:39 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:36:52 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:39:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void		asm_usage(void)
 {
-	ft_printf("Usage: asm [-df] [file]\n");
+	ft_printf("Usage: asm [-dh] [file]\n\
+	-h Show help for all options\n");
 	exit (-1);
 }
 
