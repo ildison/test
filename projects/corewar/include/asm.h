@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:28:40 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/15 15:33:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,6 @@
 struct s_data		g_data;
 t_op    op_tab[17];
 
-typedef enum		e_op_code
-{
-	asm_live = 1,
-	asm_ld,
-	asm_st,
-	asm_add,
-	asm_sub,
-	asm_and,
-	asm_or,
-	asm_xor,
-	asm_zjmp,
-	asm_ldi,
-	asm_sti,
-	asm_fork,
-	asm_lld,
-	asm_lldi,
-	asm_lfork,
-	asm_aff
-}					t_op_code;
-
-typedef struct		s_arg
-{
-	char			*first;
-	char			*second;
-	char			*third;
-}					t_arg;
-
 typedef struct		s_label
 {
 	char			*name;
@@ -77,24 +50,12 @@ typedef struct		s_label
 	struct s_label	*next;
 }					t_label;
 
-typedef union		u_args_types
-{
-	unsigned char	code_types;
-	struct
-	{
-		uint8_t		nan:2;
-		uint8_t		third:2;
-		uint8_t		second:2;
-		uint8_t		first:2;
-	}				types;
-}					t_args_types;
-
 typedef struct		s_oper
 {
-	t_op_code		code;
-	char			*args[3];
+	unsigned char	code;
 	unsigned char	args_types[3];
 	unsigned char	code_types;
+	char			*args[3];
 	int				nums[3];
 	int				size;
 	int				offset;
