@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:06:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/16 17:05:04 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/16 17:11:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ char		*read_data(char *file)
 	if (count_read == ASM_ERROR)
 		error(strerror(errno));
 	close(fd);
+	ASM_EOL = NULL;
 	return (ASM_DATA);
 }

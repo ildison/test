@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/23 17:26:57 by cormund           #+#    #+#              #
-#    Updated: 2020/01/15 19:26:16 by cormund          ###   ########.fr        #
+#    Updated: 2020/01/16 11:21:08 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := asm
 LIBFT := libft.a
 HEADERS := libft.h asm.h op.h
 CC := clang
-CFLAGS :=  -O3
+CFLAGS := -Wall -Wextra -Werror -O3
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
