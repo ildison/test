@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 19:33:13 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/16 10:11:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 int			get_number(int size)
 {
-	int		code_size;
+	int		num;
 	int		shift;
 
-	code_size = 0;
+	num = 0;
 	shift = 8 * size;
 	while (shift)
 	{
 		shift -= 8;
-		code_size = (code_size >> shift) | *(ASM_DATA++);
+		num |= (((int)*(ASM_DATA++) & 0xff) << shift);
 	}
-	return (code_size);
+	return (num);
 }
 
 void		dissasembler(t_champ *champ)
@@ -44,6 +44,7 @@ void		dissasembler(t_champ *champ)
 	ft_printf(".name		\"%s\"\n", ASM_DATA + ASM_MAGIC_SIZE);
 	ASM_DATA += PROG_NAME_LENGTH + ASM_NULL_SIZE + ASM_MAGIC_SIZE;
 	code_size = get_number(4);
+	ft_printf("size = %d\n", code_size);
 	ft_printf(".comment	\"%s\"\n", ASM_DATA);
 	ASM_DATA += COMMENT_LENGTH + ASM_NULL_SIZE;
 	// write_asm_opers();
