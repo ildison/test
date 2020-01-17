@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:36:57 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 12:42:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void				dissasembler(t_champ *champ)
 	int				fd;
 	int				code_size;
 
-	champ->code_size = 0;
-	fd = open("champ->file_name.s", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
+	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
 											S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == ASM_ERROR)
 		error(strerror(errno));
