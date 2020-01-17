@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:08:07 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:36:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void			print_args(int op_code, int fd)
 
 	shift = 6;
 	code_types = (unsigned char)get_number(1);
-	n_arg = g_op_tab[op_code].args_num;
+	n_arg = g_op_tab[op_code - 1].args_num;
 	while (n_arg--)
 	{
 		if (((code_types >> shift) & 0x3) == REG_CODE)
 			ft_printf("%vr%hhd%s", fd, get_number(1), n_arg ? ", " : "\n");
 		else if (((code_types >> shift) & 0x3) == IND_CODE)
 			ft_printf("%v%hd%s", fd, get_number(2), n_arg ? ", " : "\n");
-		else if (g_op_tab[op_code].dir_size)
+		else if (g_op_tab[op_code - 1].dir_size)
 			ft_printf("%v%%%hd%s", fd, get_number(2), n_arg ? ", " : "\n");
 		else
 			ft_printf("%v%%%d%s", fd, get_number(4), n_arg ? ", " : "\n");
@@ -57,10 +57,10 @@ static void			print_asm_opers(char *end, int fd)
 	while (ASM_DATA < end)
 	{
 		op_code = get_number(1);
-		ft_printf("%v%s		", fd, g_op_tab[op_code].name);
-		if (g_op_tab[op_code].need_types)
+		ft_printf("%v%s		", fd, g_op_tab[op_code - 1].name);
+		if (g_op_tab[op_code - 1].need_types)
 			print_args(op_code, fd);
-		else if (g_op_tab[op_code].dir_size)
+		else if (g_op_tab[op_code - 1].dir_size)
 			ft_printf("%v%%%hd\n", fd, get_number(2));
 		else
 			ft_printf("%v%%%d\n", fd, get_number(4));
@@ -72,7 +72,8 @@ void				dissasembler(t_champ *champ)
 	int				fd;
 	int				code_size;
 
-	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
+	champ->code_size = 0;
+	fd = open("champ->file_name.s", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
 											S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == ASM_ERROR)
 		error(strerror(errno));

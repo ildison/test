@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:31:53 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 19:10:21 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:32:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void			translate_args(unsigned char **byte_code, t_oper *oper)
 	int				size_arg;
 
 	n_arg = 0;
-	while (n_arg < g_op_tab[oper->code].args_num)
+	while (n_arg < oper->op->args_num)
 	{
 		if (oper->args_types[n_arg] == REG_CODE)
 			size_arg = 1;
 		else if (oper->args_types[n_arg] == IND_CODE)
 			size_arg = 2;
 		else
-			size_arg = g_op_tab[oper->code].dir_size ? 2 : 4;
+			size_arg = oper->op->dir_size ? 2 : 4;
 		translate_num(byte_code, oper->nums[n_arg], size_arg);
 		++n_arg;
 	}
@@ -51,8 +51,8 @@ static void			translate_opers(unsigned char *byte_code, t_oper *oper)
 {
 	while (oper)
 	{
-		translate_num(&byte_code, oper->code, 1);
-		if (g_op_tab[oper->code].need_types)
+		translate_num(&byte_code, oper->op->code, 1);
+		if (oper->op->need_types)
 			translate_num(&byte_code, get_type_args(oper), 1);
 		translate_args(&byte_code, oper);
 		oper = oper->next;

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 12:14:54 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:30:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	replace_args(t_champ *champ, t_oper *oper)
 	int		n_arg;
 
 	n_arg = 0;
-	while (n_arg < g_op_tab[oper->code].args_num)
+	while (n_arg < oper->op->args_num)
 	{
 		arg = oper->args[n_arg];
 		if (oper->args_types[n_arg] == T_REG ||\

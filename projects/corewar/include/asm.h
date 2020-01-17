@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:03:37 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:31:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct		s_label
 
 typedef struct		s_oper
 {
-	unsigned char	code;
+	t_op			*op;
 	unsigned char	args_types[3];
 	unsigned char	code_types;
 	char			*args[3];
@@ -64,7 +64,6 @@ typedef struct		s_oper
 	int				size;
 	int				offset;
 	struct s_oper	*next;
-	struct s_oper	*prev; //!
 }					t_oper;
 
 typedef struct		s_champ

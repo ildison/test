@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 17:47:33 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:32:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void					validation_args_types(t_oper *oper)
 	int					n_arg;
 
 	n_arg = 0;
-	while (n_arg < g_op_tab[oper->code].args_num)
+	while (n_arg < oper->op->args_num)
 	{
-		if (!(oper->args_types[n_arg] & g_op_tab[oper->code].args_types[n_arg]))
-			error_manager(ASM_ERR_WRONG_TYPE, oper->code, ASM_NOT_LABEL);
+		if (!(oper->args_types[n_arg] & oper->op->args_types[n_arg]))
+			error_manager(ASM_ERR_WRONG_TYPE, oper->op->code, ASM_NOT_LABEL);
 		++n_arg;
 	}
 }
@@ -83,17 +83,17 @@ void					pars_args(t_oper *oper)
 	int					n_arg;
 
 	n_arg = 0;
-	while (n_arg < g_op_tab[oper->code].args_num)
+	while (n_arg < oper->op->args_num)
 	{
 		if (skip_spaces())
-			error_manager(ASM_ERR_INVALID_PARAM, oper->code, ASM_NOT_LABEL);
+			error_manager(ASM_ERR_INVALID_PARAM, oper->op->code, ASM_NOT_LABEL);
 		oper->args[n_arg] = get_arg();
-		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->code);
+		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->op->code);
 		++n_arg;
-		if (n_arg < g_op_tab[oper->code].args_num)
+		if (n_arg < oper->op->args_num)
 		{
 			if (skip_spaces())
-				error_manager(ASM_ERR_INVALID_PARAM, oper->code, ASM_NOT_LABEL);
+				error_manager(ASM_ERR_INVALID_PARAM, oper->op->code, ASM_NOT_LABEL);
 			if (*ASM_DATA == SEPARATOR_CHAR)
 				++ASM_DATA;
 			else
