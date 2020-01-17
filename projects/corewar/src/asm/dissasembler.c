@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/16 17:47:20 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:03:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int		get_number(int size)
+static int	get_number(int size)
 {
 	int		num;
 	int		shift;
@@ -24,7 +24,6 @@ static int		get_number(int size)
 		shift -= 8;
 		num |= (((int)*(ASM_DATA++) & 0xff) << shift);
 	}
-	// ft_printf("%vnum = %d\n", num);
 	return (num);
 }
 
@@ -36,7 +35,6 @@ static void	print_args(int op_code, int fd)
 
 	shift = 6;
 	code_types = (unsigned char)get_number(1);
-		// printf("%vcode_types = %u\n", ((code_types)));
 	n_arg = g_op_tab[op_code].args_num;
 	while (n_arg--)
 	{
@@ -69,16 +67,15 @@ static void	print_asm_opers(char *end, int fd)
 	}
 }
 
-void		dissasembler(void)
+void		dissasembler(t_champ *champ)
 {
 	int		fd;
 	int		code_size;
 
-	fd = open("new.s", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
+	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
 											S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == ASM_ERROR)
 		error(strerror(errno));
-	ft_printf("here\n");
 	ft_printf("%v.name		\"%s\"\n", fd, ASM_DATA + ASM_MAGIC_SIZE);
 	ASM_DATA += PROG_NAME_LENGTH + ASM_NULL_SIZE + ASM_MAGIC_SIZE;
 	code_size = get_number(4);

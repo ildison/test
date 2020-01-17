@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/16 17:44:44 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:03:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int				main(int argc, char **argv)
 				translate_in_byte_code(champ);
 			}
 			else
-				dissasembler();
+				dissasembler(champ);
 			ft_printf("Writing output program to %s\n", champ->file_name);
 			clean_up(champ);
 		}

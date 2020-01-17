@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/16 13:54:12 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:03:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ void				error_manager(char *error, unsigned char oper_code,\
 void				translate_in_byte_code(t_champ *champ);
 void				check_options(int argc, char **argv, char *flag);
 void				clean_up(t_champ *champ);
-void				dissasembler(void);
+void				dissasembler(t_champ *champ);
 
 #endif
