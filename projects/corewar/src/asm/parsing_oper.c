@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:44:52 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 12:40:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,5 @@ void			pars_opers(t_champ *champ)
 			add_new_oper(champ, oper);
 		}
 		else
-		{
-			ft_putstr(ASM_DATA);
 			error_manager(ASM_ERR_LEXICAL, ASM_NOT_OPER, ASM_NOT_LABEL);
-		}
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:31:50 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:32:44 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 12:41:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,14 @@ void					pars_args(t_oper *oper)
 		if (skip_spaces())
 			error_manager(ASM_ERR_INVALID_PARAM, oper->op->code, ASM_NOT_LABEL);
 		oper->args[n_arg] = get_arg();
-		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg], oper->op->code);
+		oper->args_types[n_arg] = set_arg_type(oper->args[n_arg],\
+												oper->op->code);
 		++n_arg;
 		if (n_arg < oper->op->args_num)
 		{
 			if (skip_spaces())
-				error_manager(ASM_ERR_INVALID_PARAM, oper->op->code, ASM_NOT_LABEL);
+				error_manager(ASM_ERR_INVALID_PARAM, oper->op->code,\
+														ASM_NOT_LABEL);
 			if (*ASM_DATA == SEPARATOR_CHAR)
 				++ASM_DATA;
 			else
