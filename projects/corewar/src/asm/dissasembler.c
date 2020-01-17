@@ -6,16 +6,16 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:03:19 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:08:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	get_number(int size)
+static int			get_number(int size)
 {
-	int		num;
-	int		shift;
+	int				num;
+	int				shift;
 
 	num = 0;
 	shift = 8 * size;
@@ -27,11 +27,11 @@ static int	get_number(int size)
 	return (num);
 }
 
-static void	print_args(int op_code, int fd)
+static void			print_args(int op_code, int fd)
 {
 	unsigned char	code_types;
-	int		shift;
-	int		n_arg;
+	int				shift;
+	int				n_arg;
 
 	shift = 6;
 	code_types = (unsigned char)get_number(1);
@@ -50,9 +50,9 @@ static void	print_args(int op_code, int fd)
 	}
 }
 
-static void	print_asm_opers(char *end, int fd)
+static void			print_asm_opers(char *end, int fd)
 {
-	int		op_code;
+	int				op_code;
 
 	while (ASM_DATA < end)
 	{
@@ -67,10 +67,10 @@ static void	print_asm_opers(char *end, int fd)
 	}
 }
 
-void		dissasembler(t_champ *champ)
+void				dissasembler(t_champ *champ)
 {
-	int		fd;
-	int		code_size;
+	int				fd;
+	int				code_size;
 
 	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
 											S_IWUSR | S_IRGRP | S_IROTH);

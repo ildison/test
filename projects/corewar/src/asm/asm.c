@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:03:49 by cormund          ###   ########.fr       */
+/*   Updated: 2020/01/17 10:09:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		check_files(int argc, char **argv, char flag)
 		error("File not specified");
 }
 
-static t_champ	*init_champ()
+static t_champ	*init_champ(void)
 {
 	t_champ	*champ;
 
@@ -82,6 +82,7 @@ int				main(int argc, char **argv)
 		{
 			champ->file_name = new_filename(argv[argc], flag);
 			ASM_INPUT = read_data(argv[argc]);
+			ASM_EOL = NULL;
 			if (!(flag & ASM_ON_DISSASM_OPTION))
 			{
 				clean_comments(ASM_INPUT);
