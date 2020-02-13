@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:14:13 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:30:11 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:01:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void		clean_up(t_champ *champ)
 	clean_opers(champ->first_oper);
 	clean_labels(champ->label);
 	ft_bzero(champ, sizeof(t_champ));
-	free(ASM_INPUT);
+	free(g_data.input);
 	ft_bzero(&g_data, sizeof(t_data));
 }

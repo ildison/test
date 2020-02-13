@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_oper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:53:02 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 12:40:05 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:12:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ static t_op		*is_operation(char *data)
 	{
 		if (ft_strnequ(g_op_tab[i].name, data, ft_strlen(g_op_tab[i].name)))
 		{
-			ASM_DATA += ft_strlen(g_op_tab[i].name);
+			g_data.data += ft_strlen(g_op_tab[i].name);
 			return (&g_op_tab[i]);
 		}
 		--i;
 	}
+	g_data.eol = NULL;
 	return (0);
 }
 
@@ -35,7 +36,7 @@ static t_oper	*new_oper(t_op *op)
 
 	oper = (t_oper *)ft_memalloc(sizeof(t_oper));
 	if (!oper)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	oper->op = op;
 	return (oper);
 }
@@ -58,9 +59,9 @@ static void		set_size_oper(t_oper *oper)
 	n_arg = 0;
 	while (n_arg < oper->op->args_num)
 	{
-		if (oper->args_types[n_arg] == REG_CODE)
+		if (oper->args_types[n_arg] == T_REG)
 			oper->size += 1;
-		else if (oper->args_types[n_arg] == IND_CODE)
+		else if (oper->args_types[n_arg] == T_IND)
 			oper->size += 2;
 		else
 			oper->size += oper->op->dir_size ? 2 : 4;
@@ -75,16 +76,16 @@ void			pars_opers(t_champ *champ)
 	t_label		*label;
 	int			len_label;
 
-	while (*ASM_DATA)
-		if ((len_label = is_label(ASM_DATA)))
+	while (*g_data.data)
+		if ((len_label = is_label(g_data.data)))
 		{
 			label = new_label(len_label);
 			label->offset = set_offset(champ);
 			add_new_label(champ, label);
-			ASM_DATA += len_label + 1;
+			g_data.data += len_label + 1;
 			skip_spaces();
 		}
-		else if ((op = is_operation(ASM_DATA)))
+		else if ((op = is_operation(g_data.data)))
 		{
 			oper = new_oper(op);
 			pars_args(oper);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_header.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 14:10:51 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 15:18:24 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:01:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ static void	cpy_name_or_header(char **name_or_comment, int len)
 
 	*name_or_comment = (char *)ft_memalloc(len + 4);
 	if (!*name_or_comment)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	if (skip_spaces())
 		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER, ASM_NOT_LABEL);
-	if (*ASM_DATA != '"')
+	if (*g_data.data != '"')
 		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
 	else
-		++ASM_DATA;
+		++g_data.data;
 	i = 0;
-	while (*ASM_DATA && *ASM_DATA != '"' && i < len)
+	while (*g_data.data && *g_data.data != '"' && i < len)
 	{
-		*(*name_or_comment + i) = *ASM_DATA;
+		*(*name_or_comment + i) = *g_data.data;
 		++i;
-		++ASM_DATA;
+		++g_data.data;
 	}
-	if (*ASM_DATA != '"')
-		while (*ASM_DATA && *ASM_DATA != '"')
-			++ASM_DATA;
-	if (!*ASM_DATA)
+	if (*g_data.data != '"')
+		while (*g_data.data && *g_data.data != '"')
+			++g_data.data;
+	if (!*g_data.data)
 		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
 }
 
@@ -45,20 +45,20 @@ void		pars_header(t_champ *champ)
 		return ;
 	if (!skip_spaces() && (champ->prog_name || champ->comment))
 		error_manager(ASM_ERR_ENDLINE, ASM_NOT_OPER, ASM_NOT_LABEL);
-	if (ft_strnequ(ASM_DATA, NAME_CMD_STRING,\
+	if (ft_strnequ(g_data.data, NAME_CMD_STRING,\
 	ft_strlen(NAME_CMD_STRING)) && !champ->prog_name)
 	{
-		ASM_DATA += ft_strlen(NAME_CMD_STRING);
+		g_data.data += ft_strlen(NAME_CMD_STRING);
 		cpy_name_or_header(&champ->prog_name, PROG_NAME_LENGTH);
 	}
-	else if (ft_strnequ(ASM_DATA, COMMENT_CMD_STRING,\
+	else if (ft_strnequ(g_data.data, COMMENT_CMD_STRING,\
 	ft_strlen(COMMENT_CMD_STRING)) && !champ->comment)
 	{
-		ASM_DATA += ft_strlen(COMMENT_CMD_STRING);
+		g_data.data += ft_strlen(COMMENT_CMD_STRING);
 		cpy_name_or_header(&champ->comment, COMMENT_LENGTH);
 	}
 	else
 		error_manager(ASM_ERR_WRONG_TITLE, ASM_NOT_OPER, ASM_NOT_LABEL);
-	++ASM_DATA;
+	++g_data.data;
 	pars_header(champ);
 }

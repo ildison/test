@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:06:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:09:16 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:43:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ char		*read_data(char *file)
 	int		fd;
 	int		n;
 
-	if ((fd = open(file, O_RDONLY)) == ASM_ERROR)
-		error(strerror(errno));
-	if (!(ASM_DATA = ft_strnew(1)))
-		error(strerror(errno));
+	if ((fd = open(file, O_RDONLY)) == ASM_ERROR ||\
+						!(g_data.data = ft_strnew(1)))
+		ERROR(strerror(errno));
 	n = 0;
 	while ((count_read = read(fd, buf, ASM_SIZE_BUF)) > 0)
 	{
 		buf[count_read] = ASM_END_OF_STR;
-		tmp = ASM_DATA;
-		ASM_DATA = ft_memnjoin(ASM_DATA, buf, ASM_SIZE_BUF * n, count_read + 1);
-		if (!ASM_DATA)
-			error(strerror(errno));
+		tmp = g_data.data;
+		g_data.data = ft_memnjoin(g_data.data, buf, ASM_SIZE_BUF * n,\
+														count_read + 1);
+		if (!g_data.data)
+			ERROR(strerror(errno));
 		free(tmp);
 		++n;
 	}
 	if (count_read == ASM_ERROR)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	close(fd);
-	return (ASM_DATA);
+	return (g_data.data);
 }

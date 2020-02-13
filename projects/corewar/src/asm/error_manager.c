@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 12:28:36 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 16:09:32 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:01:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void	check_ln_col(int *ln, int *col, char *data, char *ptr_error)
 	}
 }
 
-void	error_manager(char *error, unsigned char oper_code, char *wrong_label)
+void	error_manager(char *error, t_op *wrong_oper, char *wrong_label)
 {
 	int	ln;
 	int	col;
 
-	if (oper_code)
-		ft_printf("%s %s\n", error, g_op_tab[oper_code].name);
+	if (wrong_oper)
+		ft_printf("%s %s\n", error, wrong_oper->name);
 	else if (wrong_label)
 		ft_printf("%s: %s\n", error, wrong_label);
 	else
 	{
-		check_ln_col(&ln, &col, ASM_INPUT, ASM_EOL ? ASM_EOL : ASM_DATA);
+		check_ln_col(&ln, &col, g_data.input, g_data.eol ?\
+								g_data.eol : g_data.data);
 		ft_printf("%s [%d:%d]\n", error, ln, col);
 	}
 	exit(-1);

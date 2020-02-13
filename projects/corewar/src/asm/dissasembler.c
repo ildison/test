@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dissasembler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:48:28 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 12:42:25 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:01:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int			get_number(int size)
 	while (shift)
 	{
 		shift -= 8;
-		num |= (((int)*(ASM_DATA++) & 0xff) << shift);
+		num |= (((int)*(g_data.data++) & 0xff) << shift);
 	}
 	return (num);
 }
@@ -54,7 +54,7 @@ static void			print_asm_opers(char *end, int fd)
 {
 	int				op_code;
 
-	while (ASM_DATA < end)
+	while (g_data.data < end)
 	{
 		op_code = get_number(1);
 		ft_printf("%v%s		", fd, g_op_tab[op_code - 1].name);
@@ -75,12 +75,12 @@ void				dissasembler(t_champ *champ)
 	fd = open(champ->file_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |\
 											S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == ASM_ERROR)
-		error(strerror(errno));
-	ft_printf("%v.name		\"%s\"\n", fd, ASM_DATA + ASM_MAGIC_SIZE);
-	ASM_DATA += PROG_NAME_LENGTH + ASM_NULL_SIZE + ASM_MAGIC_SIZE;
+		ERROR(strerror(errno));
+	ft_printf("%v.name		\"%s\"\n", fd, g_data.data + ASM_MAGIC_SIZE);
+	g_data.data += PROG_NAME_LENGTH + ASM_NULL_SIZE + ASM_MAGIC_SIZE;
 	code_size = get_number(4);
-	ft_printf("%v.comment	\"%s\"\n\n", fd, ASM_DATA);
-	ASM_DATA += COMMENT_LENGTH + ASM_NULL_SIZE;
-	print_asm_opers(ASM_DATA + code_size, fd);
+	ft_printf("%v.comment	\"%s\"\n\n", fd, g_data.data);
+	g_data.data += COMMENT_LENGTH + ASM_NULL_SIZE;
+	print_asm_opers(g_data.data + code_size, fd);
 	close(fd);
 }

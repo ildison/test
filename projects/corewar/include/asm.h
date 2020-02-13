@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:15:42 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:31:53 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:01:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
+# include <fcntl.h>
+# include <string.h>
+# include <errno.h>
 # include "libft.h"
 # include "op.h"
+
+# define ERROR ft_error_exit
 
 # define ASM_SIZE_BUF 1024
 # define ASM_NOT_OPER 0
@@ -39,10 +44,6 @@
 # define ASM_DISASM_OPTION 'd'
 # define ASM_HELP_OPTION 'h'
 # define ASM_ON_DISSASM_OPTION 1
-
-# define ASM_DATA g_data.data
-# define ASM_INPUT g_data.input
-# define ASM_EOL g_data.eol
 
 struct s_data		g_data;
 t_op				g_op_tab[17];
@@ -99,8 +100,8 @@ void				add_new_label(t_champ *champ, t_label *label);
 int					set_offset(t_champ *champ);
 void				validation_args_types(t_oper *oper);
 void				replace_args2numbers(t_champ *champ);
-void				error_manager(char *error, unsigned char oper_code,\
-														char *wrong_label);
+void				error_manager(char *error, t_op *wrong_oper,\
+												char *wrong_label);
 void				translate_in_byte_code(t_champ *champ);
 void				check_options(int argc, char **argv, char *flag);
 void				clean_up(t_champ *champ);

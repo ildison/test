@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 10:59:25 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:41:11 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:02:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char		*skip_spaces(void)
 {
-	ASM_EOL = NULL;
-	while (ft_isspace(*ASM_DATA))
+	g_data.eol = NULL;
+	while (ft_isspace(*g_data.data))
 	{
-		if (*ASM_DATA == '\n' && !ASM_EOL)
-			ASM_EOL = ASM_DATA;
-		++ASM_DATA;
+		if (*g_data.data == '\n' && !g_data.eol)
+			g_data.eol = g_data.data;
+		++g_data.data;
 	}
-	return (ASM_EOL);
+	return (g_data.eol);
 }
 
 void		check_number(char *s)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 16:20:12 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/17 10:40:35 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:02:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char		*new_filename(char *file, char flag)
 	len_file = ft_strlen(file);
 	new = ft_strnew(len_file + (flag ? -2 : 2));
 	if (!new)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	ft_strncpy(new, file, len_file - (flag ? 3 : 1));
 	ft_strcat(new, flag ? "s" : "cor");
 	return (new);
@@ -35,10 +35,10 @@ static void		check_filename(char *file, char flag)
 	if (!(flag & ASM_ON_DISSASM_OPTION))
 	{
 		if (!len || file[len - 2] != '.' || file[len - 1] != 's')
-			error(ASM_ERR_WRONG_FILENAME);
+			ERROR(ASM_ERR_WRONG_FILENAME);
 	}
 	else if (!len || !ft_strstr(file, ".cor"))
-		error(ASM_ERR_WRONG_FILENAME);
+		ERROR(ASM_ERR_WRONG_FILENAME);
 }
 
 static void		check_files(int argc, char **argv, char flag)
@@ -56,7 +56,7 @@ static void		check_files(int argc, char **argv, char flag)
 		--argc;
 	}
 	if (!n_files)
-		error("File not specified");
+		ERROR("File not specified");
 }
 
 static t_champ	*init_champ(void)
@@ -65,7 +65,7 @@ static t_champ	*init_champ(void)
 
 	champ = ft_memalloc(sizeof(t_champ));
 	if (!champ)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	return (champ);
 }
 
@@ -81,11 +81,11 @@ int				main(int argc, char **argv)
 		if (*argv[argc] != '-')
 		{
 			champ->file_name = new_filename(argv[argc], flag);
-			ASM_INPUT = read_data(argv[argc]);
-			ASM_EOL = NULL;
+			g_data.input = read_data(argv[argc]);
+			g_data.eol = NULL;
 			if (!(flag & ASM_ON_DISSASM_OPTION))
 			{
-				clean_comments(ASM_INPUT);
+				clean_comments(g_data.input);
 				parsing_champ(champ);
 				translate_in_byte_code(champ);
 			}

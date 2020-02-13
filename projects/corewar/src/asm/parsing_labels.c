@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_labels.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:40:03 by cormund           #+#    #+#             */
-/*   Updated: 2020/01/15 13:20:22 by cormund          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:04:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int			is_label(char *data)
 	{
 		if (data[len] == LABEL_CHAR)
 		{
-			if (!ASM_EOL)
+			if (!g_data.eol)
 				error_manager(ASM_ERR_WRONG_LABEL, ASM_NOT_OPER, ASM_NOT_LABEL);
-			check_label(ASM_DATA);
+			g_data.eol = NULL;
+			check_label(g_data.data);
 			return (len);
 		}
 		++len;
@@ -51,10 +52,10 @@ t_label		*new_label(int len_label)
 
 	new = ft_memalloc(sizeof(t_label));
 	if (!new)
-		error(strerror(errno));
-	new->name = ft_strndup(ASM_DATA, len_label);
+		ERROR(strerror(errno));
+	new->name = ft_strndup(g_data.data, len_label);
 	if (!new->name)
-		error(strerror(errno));
+		ERROR(strerror(errno));
 	return (new);
 }
 
